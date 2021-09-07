@@ -10,27 +10,27 @@ int Compra::getMonto(){
 }
 
 string Compra::getComprador(){
-    return persona->getNombre();
+    return persona.getNombre();
 }
 
-Persona* Compra::getDireccionComprador(){
+Persona Compra::getDireccionComprador(){
     return persona;
 }
 
 string Compra::getVehiculoComprado(){
-    return vehiculo->getMarca();
+    return vehiculo.getMarca();
 }
 
-Vehiculo* Compra::getDireccionVehiculoComprado(){
+Vehiculo Compra::getDireccionVehiculoComprado(){
     return vehiculo;
 }
 
 int Compra::getAnio(){
-    return vehiculo->getModelo();
+    return vehiculo.getModelo();
 }
 
 int Compra::getKilometraje(){
-    return vehiculo->getKilometraje();
+    return vehiculo.getKilometraje();
 }
 
 bool Compra::compara_anio_asc(Compra a, Compra b){
@@ -58,8 +58,8 @@ bool Compra::compara_kilometraje_eq(Compra a, Compra b){
 }
 
 ostream & operator<<(ostream & os, const Compra & compra){
-    os << compra.vehiculo << " (";
-    os << compra.persona << "). ";
+    os << compra.vehiculo;
+    os << compra.persona << " ";
     os << endl;
     
     return os;

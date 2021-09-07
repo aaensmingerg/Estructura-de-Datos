@@ -19,7 +19,7 @@ string Persona::getIne(){
 ostream & operator<<(ostream & os, const Persona & persona)
 {
     os << persona.nombre << ", ";
-    os << persona.apellido << ". ( ";
+    os << persona.apellido << ". (";
     os << persona.ine << "). ";
     os << endl;
     

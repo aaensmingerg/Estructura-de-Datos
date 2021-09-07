@@ -3,7 +3,7 @@
 #include <iostream>
 #include <vector>
 #include "C:/Users/aaens/Desktop/C++/ObjectOrientedThinking/CodeSamples/tc1031/Tema_5_Ordenamiento/ordenamiento_generico/ordenamiento_generico/Ordenamiento.hpp"
-#include "listadoCompras.hpp"
+#include "listadoCompras.cpp"
 
 void menu(ListadoCompras &);
 
@@ -13,7 +13,7 @@ int main(int argc, const char * argv[]) {
     ListadoCompras listadoCompras;
     Persona persona1("Aquiles","Ensminger","1ER1F");
     Vehiculo vehiculo1(01,"Ferrari",2021,2000);
-    Compra c1(5,&persona1,&vehiculo1);
+    Compra c1(5,persona1,vehiculo1);
     listadoCompras.agregarCompra(c1);
     
     /* Invocar la menú de opciones */
@@ -33,18 +33,18 @@ Compra crearCompra()
 
     string nombre;
     cout << "Nombre: ";
-    getline(cin, nombre);
+    cin >> nombre;
     
     string apellido;
     cout << "Apellido: ";
-    getline(cin, apellido);
+    cin >> apellido;
     
     string ine;
-    cout << "Editorial: ";
-    getline(cin, ine);
+    cout << "INE: ";
+    cin >> ine;
     
     int codigo;
-    cout << "Código del vehiculo: ";
+    cout << "Codigo del vehiculo: ";
     cin >> codigo;
     
     string marca;
@@ -62,7 +62,7 @@ Compra crearCompra()
     Persona p1(nombre, apellido, ine);
     Vehiculo v1(codigo,marca,modelo,kilometraje);
 
-    return Compra(monto,&p1,&v1);
+    return Compra(monto,p1,v1);
 }
 
 void mostrarResultados(vector<Compra> & compras, string msg)
@@ -176,19 +176,19 @@ void menu(ListadoCompras & listadoCompras)
     
     
     do {
-        cout << "--- Menú de opciones ---" << endl;
+        cout << "--- Menu de opciones ---" << endl;
         cout << "1 - Adicionar compra" << endl;
         cout << "2 - Eliminar compra" << endl;
-        cout << "3 - Buscar menores que un año" << endl;
-        cout << "4 - Buscar mayores a un año" << endl;
-        cout << "5 - Buscar en un rango de años" << endl;
+        cout << "3 - Buscar menores que un anio" << endl;
+        cout << "4 - Buscar mayores a un anio" << endl;
+        cout << "5 - Buscar en un rango de anios" << endl;
         cout << "6 - Buscar menores que un kilometraje" << endl;
         cout << "7 - Buscar mayores que un kilometraje" << endl;
         cout << "8 - Ordenar" << endl;
         cout << "9 - Mostrar compras en la lista" << endl;
         cout << "10 - Salir" << endl;
         
-        cout << "Ingresa la opción deseada: ";
+        cout << "Ingresa la opcion deseada: ";
         cin >> opcion;
         
         switch (opcion) {
@@ -306,7 +306,7 @@ void menu(ListadoCompras & listadoCompras)
                 cout << "Gracias por utilizar la lista de compras. Te esperamos pronto." << endl;
                 break;
             default:
-                cout << "Opción inválida" << endl;
+                cout << "Opcion invalida" << endl;
                 break;
         }
         

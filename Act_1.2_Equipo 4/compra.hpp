@@ -8,16 +8,16 @@ using namespace std;
 class Compra{
     protected:
     int monto;
-    Persona* persona;
-    Vehiculo* vehiculo;
+    Persona persona;
+    Vehiculo vehiculo;
     public:
     Compra(){}
-    Compra(int _monto, Persona* _persona, Vehiculo* _vehiculo):monto(_monto),persona(_persona),vehiculo(_vehiculo){}
+    Compra(int _monto, Persona _persona, Vehiculo _vehiculo):monto(_monto),persona(_persona),vehiculo(_vehiculo){}
     int getMonto();
     string getComprador();
-    Persona* getDireccionComprador();
+    Persona getDireccionComprador();
     string getVehiculoComprado();
-    Vehiculo* getDireccionVehiculoComprado();
+    Vehiculo getDireccionVehiculoComprado();
     int getAnio();
     int getKilometraje();
 

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "compra.hpp"
+#include "compra.cpp"
 
 using namespace std;
 
