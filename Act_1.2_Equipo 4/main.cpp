@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <vector>
-#include "../../../tc1031/Tema_5_Ordenamiento/ordenamiento_generico/ordenamiento_generico/Ordenamiento.hpp"
+#include "C:/Users/aaens/Desktop/C++/ObjectOrientedThinking/CodeSamples/tc1031/Tema_5_Ordenamiento/ordenamiento_generico/ordenamiento_generico/Ordenamiento.hpp"
 #include "listadoCompras.hpp"
 
 void menu(ListadoCompras &);
@@ -169,7 +169,7 @@ auto seleccionarComparacion()
 void menu(ListadoCompras & listadoCompras)
 {
     int opcion;
-    int año;
+    int anio;
     int kilometraje;
     string marca;
     vector<Compra> encontrados;
@@ -217,9 +217,9 @@ void menu(ListadoCompras & listadoCompras)
             {
                 /* Buscar libros menores a un año */
                 cout << "Entre el año: ";
-                cin >> año;
+                cin >> anio;
                 
-                encontrados = listadoCompras.buscarAntesDeAnio(año);
+                encontrados = listadoCompras.buscarAntesDeAnio(anio);
                 
                 mostrarResultados(encontrados, "Vehiculos encontrados:");
                 
@@ -229,9 +229,9 @@ void menu(ListadoCompras & listadoCompras)
             {
                 /* Buscar mayores a un año */
                 cout << "Entre el año: ";
-                cin >> año;
+                cin >> anio;
                 
-                encontrados = listadoCompras.buscarDespuesDeAnio(año);
+                encontrados = listadoCompras.buscarDespuesDeAnio(anio);
                 
                 mostrarResultados(encontrados, "Vehiculos encontrados:");
                 
@@ -241,13 +241,13 @@ void menu(ListadoCompras & listadoCompras)
             {
                 /* Buscar por rango de años */
                 cout << "Entre el año inicial: ";
-                cin >> año;
+                cin >> anio;
                 
-                int año_final;
+                int anio_final;
                 cout << "Entre el año final: ";
-                cin >> año_final;
+                cin >> anio_final;
                 
-                encontrados = listadoCompras.buscarEntreAnios(año, año_final);
+                encontrados = listadoCompras.buscarEntreAnios(anio, anio_final);
                 
                 mostrarResultados(encontrados, "Vehiculos encontrados:");
                 
