@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <vector>
-#include "../../tc1031/Tema_5_Ordenamiento/ordenamiento_generico/ordenamiento_generico/Ordenamiento.hpp"
+#include "../../../tc1031/Tema_5_Ordenamiento/ordenamiento_generico/ordenamiento_generico/Ordenamiento.hpp"
 #include "listadoCompras.hpp"
 
 void menu(ListadoCompras &);
