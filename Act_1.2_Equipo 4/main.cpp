@@ -11,6 +11,10 @@ int main(int argc, const char * argv[]) {
     
     /* Crear la biblioteca */
     ListadoCompras listadoCompras;
+    Persona persona1("Aquiles","Ensminger","1ER1F");
+    Vehiculo vehiculo1(01,"Ferrari",2021,2000);
+    Compra c1(5,&persona1,&vehiculo1);
+    listadoCompras.agregarCompra(c1);
     
     /* Invocar la menú de opciones */
     menu(listadoCompras);
@@ -61,50 +65,50 @@ Compra crearCompra()
     return Compra(monto,&p1,&v1);
 }
 
-void mostrarResultados(std::vector<Libro> & libros, std::string msg)
+void mostrarResultados(vector<Compra> & compras, string msg)
 {
-    if (libros.size() == 0) {
-        std::cout << "No se encontraron libros con el criterio especificado";
+    if (compras.size() == 0) {
+        cout << "No se encontraron compras con el criterio especificado";
     }
     else {
         /* Imprimir los libros encontrados */
-        std::cout << msg << std::endl;
-        std::copy(libros.begin(), libros.end(), std::ostream_iterator<Libro>(std::cout));
-        libros.clear();
+        cout << msg << endl;
+        //copy(compras.begin(), compras.end(), ostream_iterator<Compra>(cout));
+        compras.clear();
     }
 }
 
 auto seleccionarAlgoritmo()
 {
     int opcion = 1;
-    auto algoritmo = Ordenamiento<Libro>::burbuja;
+    auto algoritmo = Ordenamiento<Compra>::burbuja;
     
     do {
-        std::cout << "Selecciona el algoritmo de ordenamiento: " << std::endl;
-        std::cout << "1 - Burbuja" << std::endl;
-        std::cout << "2 - Selección" << std::endl;
-        std::cout << "3 - Inserción" << std::endl;
-        std::cout << "4 - QuickSort" << std::endl;
-        std::cout << "5 - MergeSort" << std::endl;
-        std::cin >> opcion;
+        cout << "Selecciona el algoritmo de ordenamiento: " << endl;
+        cout << "1 - Burbuja" << endl;
+        cout << "2 - Selección" << endl;
+        cout << "3 - Inserción" << endl;
+        cout << "4 - QuickSort" << endl;
+        cout << "5 - MergeSort" << endl;
+        cin >> opcion;
     }
     while (opcion < 1 || opcion > 5);
     
     switch (opcion) {
         case 1:
-            algoritmo = Ordenamiento<Libro>::burbuja;
+            algoritmo = Ordenamiento<Compra>::burbuja;
             break;
         case 2:
-            algoritmo = Ordenamiento<Libro>::seleccion;
+            algoritmo = Ordenamiento<Compra>::seleccion;
             break;
         case 3:
-            algoritmo = Ordenamiento<Libro>::insercion;
+            algoritmo = Ordenamiento<Compra>::insercion;
             break;
         case 4:
-            algoritmo = Ordenamiento<Libro>::quicksort;
+            algoritmo = Ordenamiento<Compra>::quicksort;
             break;
         case 5:
-            algoritmo = Ordenamiento<Libro>::mergesort;
+            algoritmo = Ordenamiento<Compra>::mergesort;
             break;
     }
     
@@ -113,31 +117,23 @@ auto seleccionarAlgoritmo()
 
 auto seleccionarAtributoOrden(int atributo, int orden)
 {
-    auto ordena = Libro::compara_titulo_asc;
+    auto ordena = Compra::compara_anio_asc;
     
     switch (atributo) {
-        case 1: /* Título */
+        case 1: /* Año */
             if (orden == 1) {
-                ordena = Libro::compara_titulo_asc;
+                ordena = Compra::compara_anio_asc;
             }
             else {
-                ordena = Libro::compara_titulo_desc;
+                ordena = Compra::compara_anio_desc;
             }
             break;
-        case 2: /* Autor */
+        case 2: /* Kilometraje */
             if (orden == 1) {
-                ordena = Libro::compara_autor_asc;
+                ordena = Compra::compara_kilometraje_asc;
             }
             else {
-                ordena = Libro::compara_autor_desc;
-            }
-            break;
-        case 3: /* Año */
-            if (orden == 1) {
-                ordena = Libro::compara_año_asc;
-            }
-            else {
-                ordena = Libro::compara_año_desc;
+                ordena = Compra::compara_kilometraje_desc;
             }
             break;
     }
@@ -150,21 +146,20 @@ auto seleccionarComparacion()
     int atributo = 1;
     
     do {
-        std::cout << "Selecciona el atributo de ordenamiento: " << std::endl;
-        std::cout << "1 - Título" << std::endl;
-        std::cout << "2 - Autor" << std::endl;
-        std::cout << "3 - Año" << std::endl;
-        std::cin >> atributo;
+        cout << "Selecciona el atributo de ordenamiento: " << endl;
+        cout << "1 - Año" << endl;
+        cout << "2 - Kilometraje" << endl;
+        cin >> atributo;
     }
     while (atributo < 1 || atributo > 3);
         
     int orden = 1;
     
     do {
-        std::cout << "Selecciona el orden: " << std::endl;
-        std::cout << "1 - Ascendente" << std::endl;
-        std::cout << "2 - Descendente" << std::endl;
-        std::cin >> orden;
+        cout << "Selecciona el orden: " << endl;
+        cout << "1 - Ascendente" << endl;
+        cout << "2 - Descendente" << endl;
+        cin >> orden;
     }
     while (orden < 1 || orden > 2);
     
@@ -175,113 +170,110 @@ void menu(ListadoCompras & listadoCompras)
 {
     int opcion;
     int año;
-    std::string titulo;
-    std::vector<Libro> encontrados;
+    int kilometraje;
+    string marca;
+    vector<Compra> encontrados;
     
     
     do {
-        std::cout << "--- Menú de opciones ---" << std::endl;
-        std::cout << "1 - Adicionar libro" << std::endl;
-        std::cout << "2 - Eliminar libro" << std::endl;
-        std::cout << "3 - Buscar menores que un año" << std::endl;
-        std::cout << "4 - Buscar mayores a un año" << std::endl;
-        std::cout << "5 - Buscar en un rango de años" << std::endl;
-        std::cout << "6 - Buscar por autor" << std::endl;
-        std::cout << "7 - Buscar por editorial" << std::endl;
-        std::cout << "8 - Ordenar" << std::endl;
-        std::cout << "9 - Mostrar libros en la biblioteca" << std::endl;
-        std::cout << "10 - Salir" << std::endl;
+        cout << "--- Menú de opciones ---" << endl;
+        cout << "1 - Adicionar compra" << endl;
+        cout << "2 - Eliminar compra" << endl;
+        cout << "3 - Buscar menores que un año" << endl;
+        cout << "4 - Buscar mayores a un año" << endl;
+        cout << "5 - Buscar en un rango de años" << endl;
+        cout << "6 - Buscar menores que un kilometraje" << endl;
+        cout << "7 - Buscar mayores que un kilometraje" << endl;
+        cout << "8 - Ordenar" << endl;
+        cout << "9 - Mostrar compras en la lista" << endl;
+        cout << "10 - Salir" << endl;
         
-        std::cout << "Ingresa la opción deseada: ";
-        std::cin >> opcion;
+        cout << "Ingresa la opción deseada: ";
+        cin >> opcion;
         
         switch (opcion) {
             case 1:
             {
                 /* Adicionar libros */
-                Libro libro = crearLibro();
-                biblioteca.adicionarLibro(libro);
+                Compra compra = crearCompra();
+                listadoCompras.agregarCompra(compra);
                 
                 break;
             }
             case 2:
             {
                 /* Eliminar libros*/
-                std::cout << "Entre el título del libro a eliminar: ";
-                std::cin.get();
-                getline(std::cin, titulo);
+                cout << "Entre la marca del vehiculo a eliminar: ";
+                cin.get();
+                getline(cin, marca);
                 
-                encontrados = biblioteca.eliminarLibro(titulo);
+                encontrados = listadoCompras.eliminarCompra(marca);
                 
-                mostrarResultados(encontrados, "Libros eliminados:");
+                mostrarResultados(encontrados, "Vehiculos eliminados:");
                 
                 break;
             }
             case 3:
             {
                 /* Buscar libros menores a un año */
-                std::cout << "Entre el año: ";
-                std::cin >> año;
+                cout << "Entre el año: ";
+                cin >> año;
                 
-                encontrados = biblioteca.buscarAntesDeAño(año);
+                encontrados = listadoCompras.buscarAntesDeAnio(año);
                 
-                mostrarResultados(encontrados, "Libros encontrados:");
+                mostrarResultados(encontrados, "Vehiculos encontrados:");
                 
                 break;
             }
             case 4:
             {
                 /* Buscar mayores a un año */
-                std::cout << "Entre el año: ";
-                std::cin >> año;
+                cout << "Entre el año: ";
+                cin >> año;
                 
-                encontrados = biblioteca.buscarDespuesDeAño(año);
+                encontrados = listadoCompras.buscarDespuesDeAnio(año);
                 
-                mostrarResultados(encontrados, "Libros encontrados:");
+                mostrarResultados(encontrados, "Vehiculos encontrados:");
                 
                 break;
             }
             case 5:
             {
                 /* Buscar por rango de años */
-                std::cout << "Entre el año inicial: ";
-                std::cin >> año;
+                cout << "Entre el año inicial: ";
+                cin >> año;
                 
                 int año_final;
-                std::cout << "Entre el año final: ";
-                std::cin >> año_final;
+                cout << "Entre el año final: ";
+                cin >> año_final;
                 
-                encontrados = biblioteca.buscarEntreAños(año, año_final);
+                encontrados = listadoCompras.buscarEntreAnios(año, año_final);
                 
-                mostrarResultados(encontrados, "Libros encontrados:");
+                mostrarResultados(encontrados, "Vehiculos encontrados:");
                 
                 break;
             }
             case 6:
             {
-                /* Buscar por autor */
-                std::cout << "Entre el autor: ";
-                std::cin.get();
-                std::string autor;
-                getline(std::cin, autor);
-                    
-                encontrados = biblioteca.buscarPorAutor(autor);
-                    
-                mostrarResultados(encontrados, "Libros encontrados:");
-                    
+                /* Buscar menores a un kilometraje */
+                cout << "Entre el kilometraje: ";
+                cin >> kilometraje;
+                
+                encontrados = listadoCompras.buscarAntesDeKilometraje(kilometraje);
+                
+                mostrarResultados(encontrados, "Vehiculos encontrados:");
+                
                 break;
             }
             case 7:
             {
-                /* Buscar por editorial */
-                std::cout << "Entre la editorial: ";
-                std::cin.get();
-                std::string editorial;
-                getline(std::cin, editorial);
+                /* Buscar mayores a un kilometraje */
+                cout << "Entre el kilometraje: ";
+                cin >> kilometraje;
                 
-                encontrados = biblioteca.buscarPorEditorial(editorial);
+                encontrados = listadoCompras.buscarDespuesDeKilometraje(kilometraje);
                 
-                mostrarResultados(encontrados, "Libros encontrados:");
+                mostrarResultados(encontrados, "Vehiculos encontrados:");
                 
                 break;
             }
@@ -292,33 +284,33 @@ void menu(ListadoCompras & listadoCompras)
                 auto algoritmo = seleccionarAlgoritmo();
                 auto compara = seleccionarComparacion();
                 
-                biblioteca.ordenar(algoritmo, compara);
+                listadoCompras.ordenar(algoritmo, compara);
                 
                 break;
             }
             case 9:
             {
                 /* Visualizar los libros en la biblioteca  */
-                if (biblioteca.size() == 0) {
-                    std::cout << "La biblioteca está vacía" << std::endl;
+                if (listadoCompras.size() == 0) {
+                    cout << "La lista de compras está vacía" << endl;
                 }
                 else {
-                    std::cout << "Libros en la biblioteca:" << std::endl;
-                    std::cout << biblioteca;
+                    cout << "Vehiculos en la lista de compras:" << endl;
+                    cout << listadoCompras;
                 }
                 
                 break;
             }
             case 10:
                 /* Terminar */
-                std::cout << "Gracias por utilizar la biblioteca. Te esperamos pronto." << std::endl;
+                cout << "Gracias por utilizar la lista de compras. Te esperamos pronto." << endl;
                 break;
             default:
-                std::cout << "Opción inválida" << std::endl;
+                cout << "Opción inválida" << endl;
                 break;
         }
         
-        std::cout << std::endl;
+        cout << endl;
         
     }
     while (opcion != 10);
