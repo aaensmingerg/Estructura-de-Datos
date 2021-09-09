@@ -9,7 +9,7 @@ void menu(ListadoCompras &);
 
 int main(int argc, const char * argv[]) {
     
-    /* Crear la biblioteca */
+    /* Crear la Lista de Compra */
     ListadoCompras listadoCompras;
     Persona persona1("Aquiles","Ensminger","1ER1F");
     Vehiculo vehiculo1(01,"Ferrari",2021,0);
@@ -86,7 +86,7 @@ void mostrarResultados(vector<Compra> & compras, string msg)
         cout << "No se encontraron compras con el criterio especificado";
     }
     else {
-        /* Imprimir los libros encontrados */
+        /* Imprimir las compras encontrados */
         cout << msg << endl;
         //copy(compras.begin(), compras.end(), ostream_iterator<Compra>(cout));
         compras.clear();
@@ -209,7 +209,7 @@ void menu(ListadoCompras & listadoCompras)
         switch (opcion) {
             case 1:
             {
-                /* Adicionar libros */
+                /* Adicionar compras */
                 Compra compra = crearCompra();
                 listadoCompras.agregarCompra(compra);
                 
@@ -217,7 +217,7 @@ void menu(ListadoCompras & listadoCompras)
             }
             case 2:
             {
-                /* Eliminar libros*/
+                /* Eliminar compras*/
                 cout << "Entre la marca del vehiculo a eliminar: ";
                 cin.get();
                 getline(cin, marca);
@@ -230,7 +230,7 @@ void menu(ListadoCompras & listadoCompras)
             }
             case 3:
             {
-                /* Buscar libros menores a un año */
+                /* Buscar vehiculos menores a un año */
                 cout << "Entre el año: ";
                 cin >> anio;
                 
@@ -242,7 +242,7 @@ void menu(ListadoCompras & listadoCompras)
             }
             case 4:
             {
-                /* Buscar mayores a un año */
+                /* Buscar vehiculos mayores a un año */
                 cout << "Entre el año: ";
                 cin >> anio;
                 
@@ -305,7 +305,7 @@ void menu(ListadoCompras & listadoCompras)
             }
             case 9:
             {
-                /* Visualizar los libros en la biblioteca  */
+                /* Visualizar las compras en la lista  */
                 if (listadoCompras.size() == 0) {
                     cout << "La lista de compras está vacía" << endl;
                 }
