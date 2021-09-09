@@ -17,6 +17,8 @@ class Vehiculo{
     virtual string getMarca();
     virtual int getModelo();
     virtual int getKilometraje();
+    virtual void setModelo(int);
+    virtual void setKilometraje(int);
 
     virtual void printVehiculo();
 };

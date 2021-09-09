@@ -17,6 +17,14 @@ string Persona::getIne(){
     return ine;
 }
 
+void Persona::setNombre(string _nombre){
+    nombre=_nombre;
+}
+
+void Persona::setApellido(string _apellido){
+    apellido=_apellido;
+}
+
 void Persona::printPersona(){
     cout << getNombre() << ",  ";
     cout << getApellido() << ". (";

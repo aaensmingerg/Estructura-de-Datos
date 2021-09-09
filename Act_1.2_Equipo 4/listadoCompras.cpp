@@ -51,16 +51,13 @@ vector<Compra> ListadoCompras::eliminarCompra(string marca){
 
 vector<Compra> ListadoCompras::buscarAntesDeAnio(int anio){
     Compra buscar;
-    //buscar.getAnio()=anio;
-    
+    buscar.setAnio(anio);
     return compara(buscar, Compra::compara_anio_asc);
 }
 
-vector<Compra> ListadoCompras::buscarDespuesDeAnio(int anio)
-{
+vector<Compra> ListadoCompras::buscarDespuesDeAnio(int anio){
     Compra buscar;
-    //buscar.getAnio() = anio;
-    
+    buscar.setAnio(anio);
     return compara(buscar, Compra::compara_anio_desc);
 }
 
@@ -83,16 +80,13 @@ vector<Compra> ListadoCompras::buscarEntreAnios(int despues, int antes){
 
 vector<Compra> ListadoCompras::buscarAntesDeKilometraje(int kilometraje){
     Compra buscar;
-    //buscar.getAnio()=anio;
-    
+    buscar.setKilometraje(kilometraje);
     return compara(buscar, Compra::compara_kilometraje_asc);
 }
 
-vector<Compra> ListadoCompras::buscarDespuesDeKilometraje(int kilometraje)
-{
+vector<Compra> ListadoCompras::buscarDespuesDeKilometraje(int kilometraje){
     Compra buscar;
-    //buscar.getAnio() = anio;
-    
+    buscar.setKilometraje(kilometraje);
     return compara(buscar, Compra::compara_kilometraje_desc);
 }
 
@@ -111,6 +105,13 @@ vector<Compra> ListadoCompras::buscarEntreKilometrajes(int despues, int antes){
     }
     
     return encontrados;
+}
+
+vector<Compra> ListadoCompras::buscarPorComprador(string _nombre, string _apellido){
+    Compra buscar;
+    buscar.setNombre(_nombre);
+    buscar.setApellido(_apellido);
+    return compara(buscar, Compra::compara_comprador_eq);
 }
 
 void ListadoCompras::ordenar(

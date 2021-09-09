@@ -15,6 +15,8 @@ class Persona{
     string getNombre();
     string getApellido();
     string getIne();
+    void setNombre(string);
+    void setApellido(string);
 
     void printPersona();
 };

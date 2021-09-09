@@ -21,7 +21,7 @@ class ListadoCompras{
     vector<Compra> buscarAntesDeKilometraje(int);
     vector<Compra> buscarDespuesDeKilometraje(int);
     vector<Compra> buscarEntreKilometrajes(int, int);
-    vector<Compra> buscarPorComprador(std::string);
+    vector<Compra> buscarPorComprador(string, string);
     void ordenar(
                 vector<Compra>(*)(vector<Compra>, bool(*)(Compra, Compra)),
                 bool(*)(Compra,Compra)

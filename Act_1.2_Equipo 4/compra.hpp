@@ -21,14 +21,18 @@ class Compra{
     Vehiculo* getDireccionVehiculoComprado();
     int getAnio();
     int getKilometraje();
+    void setAnio(int);
+    void setKilometraje(int);
+    void setNombre(string);
+    void setApellido(string);
 
     static bool compara_anio_asc(Compra, Compra);
     static bool compara_anio_desc(Compra, Compra);
-    static bool compara_anio_eq(Compra, Compra);
 
     static bool compara_kilometraje_asc(Compra, Compra);
     static bool compara_kilometraje_desc(Compra, Compra);
-    static bool compara_kilometraje_eq(Compra, Compra);
+
+    static bool compara_comprador_eq(Compra, Compra);
 
     void printCompra();
 };

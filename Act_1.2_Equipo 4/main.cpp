@@ -112,7 +112,7 @@ void mostrarResultados(vector<Compra> & compras, string msg){
     else {
         /* Imprimir las compras encontrados */
         cout << msg << endl;
-        //copy(compras.begin(), compras.end(), ostream_iterator<Compra>(cout));
+        copy(compras.begin(), compras.end(), ostream_iterator<Compra>(cout));
         compras.clear();
     }
 }
@@ -207,6 +207,8 @@ void menu(ListadoCompras & listadoCompras){
     int anio;
     int kilometraje;
     string marca;
+    string nombreComprador;
+    string apellidoComprador;
     vector<Compra> encontrados;
     
     
@@ -219,9 +221,10 @@ void menu(ListadoCompras & listadoCompras){
         cout << "5 - Buscar en un rango de anios" << endl;
         cout << "6 - Buscar menores que un kilometraje" << endl;
         cout << "7 - Buscar mayores que un kilometraje" << endl;
-        cout << "8 - Ordenar" << endl;
-        cout << "9 - Mostrar compras en la lista" << endl;
-        cout << "10 - Salir" << endl;
+        cout << "8 - Buscar por comprador" << endl;
+        cout << "9 - Ordenar" << endl;
+        cout << "10 - Mostrar compras en la lista" << endl;
+        cout << "11 - Salir" << endl;
         
         cout << "Ingresa la opcion deseada: ";
         cin >> opcion;
@@ -306,6 +309,20 @@ void menu(ListadoCompras & listadoCompras){
                 break;
             }
             case 8:{
+                /* Buscar por comprador */
+                cout << "Entre el nombre del comprador: ";
+                cin >> nombreComprador;
+
+                cout << "Entre el apellido del comprador: ";
+                cin >> apellidoComprador;
+                
+                encontrados = listadoCompras.buscarPorComprador(nombreComprador,apellidoComprador);
+                
+                mostrarResultados(encontrados, "Vehiculos encontrados:");
+                
+                break;
+            }
+            case 9:{
                 /* Invocar al método ordenar */
                 
                 auto algoritmo = seleccionarAlgoritmo();
@@ -315,7 +332,7 @@ void menu(ListadoCompras & listadoCompras){
                 
                 break;
             }
-            case 9:{
+            case 10:{
                 /* Visualizar las compras en la lista  */
                 if (listadoCompras.size() == 0) {
                     cout << "La lista de compras está vacía" << endl;
@@ -327,7 +344,7 @@ void menu(ListadoCompras & listadoCompras){
                 
                 break;
             }
-            case 10:
+            case 11:
                 /* Terminar */
                 cout << "Gracias por utilizar la lista de compras. Te esperamos pronto." << endl;
                 break;
