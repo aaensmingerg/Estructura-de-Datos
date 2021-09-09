@@ -12,9 +12,24 @@ int main(int argc, const char * argv[]) {
     /* Crear la biblioteca */
     ListadoCompras listadoCompras;
     Persona persona1("Aquiles","Ensminger","1ER1F");
-    Vehiculo vehiculo1(01,"Ferrari",2021,2000);
-    Compra c1(5,persona1,vehiculo1);
+    Vehiculo vehiculo1(01,"Ferrari",2021,0);
+    Compra c1(5000000,persona1,vehiculo1);
     listadoCompras.agregarCompra(c1);
+
+    Persona persona2("Javier","Lozano","1JOP23");
+    Vehiculo vehiculo2(02,"Fiat",2002,2500);
+    Compra c2(24000,persona2,vehiculo2);
+    listadoCompras.agregarCompra(c2);
+
+    Persona persona3("German","Garmendia","DRO89E");
+    Vehiculo vehiculo3(03,"Nissan",2016,15000);
+    Compra c3(554000,persona3,vehiculo3);
+    listadoCompras.agregarCompra(c3);
+
+    Persona persona4("Juan","Gabriel","KS485KL");
+    Vehiculo vehiculo4(04,"Chevrolet",2013,11500);
+    Compra c4(10000,persona4,vehiculo4);
+    listadoCompras.agregarCompra(c4);
     
     /* Invocar la menú de opciones */
     menu(listadoCompras);
@@ -24,7 +39,7 @@ int main(int argc, const char * argv[]) {
 
 Compra crearCompra()
 {
-    cout << "Introduzca los datos del libro: " << endl;
+    cout << "Introduzca los datos de la compra: " << endl;
     cin.get();
     
     int monto;
