@@ -30,5 +30,5 @@ class Compra{
     static bool compara_kilometraje_desc(Compra, Compra);
     static bool compara_kilometraje_eq(Compra, Compra);
 
-    friend std::ostream & operator<<(std::ostream & os, const Compra & compra);
+    void printCompra();
 };

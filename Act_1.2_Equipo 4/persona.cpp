@@ -17,12 +17,8 @@ string Persona::getIne(){
     return ine;
 }
 
-ostream & operator<<(ostream & os, const Persona & persona)
-{
-    os << persona.nombre << ", ";
-    os << persona.apellido << ". (";
-    os << persona.ine << "). ";
-    os << endl;
-    
-    return os;
+void Persona::printPersona(){
+    cout << getNombre() << ",  ";
+    cout << getApellido() << ". (";
+    cout << getIne() << "). ";
 }

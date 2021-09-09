@@ -126,11 +126,9 @@ unsigned long ListadoCompras::size()
     return compras.size();
 }
 
-ostream & operator<<(ostream & os, const ListadoCompras & listadoCompras)
-{
-    for (auto compra : listadoCompras.compras) {
-        os << compra;
+void ListadoCompras::printLista(){
+    for (int i=0; i<size(); i++){
+        Compra compra=compras[i];
+        compra.printCompra();
     }
-    
-    return os;
 }

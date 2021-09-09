@@ -57,10 +57,7 @@ bool Compra::compara_kilometraje_eq(Compra a, Compra b){
    return a.getKilometraje() == b.getKilometraje();
 }
 
-ostream & operator<<(ostream & os, const Compra & compra){
-    os << *compra.vehiculo;
-    os << *compra.persona << " ";
-    os << endl;
-    
-    return os;
+void Compra::printCompra(){
+    persona->printPersona();
+    vehiculo->printVehiculo();
 }

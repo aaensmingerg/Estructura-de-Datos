@@ -16,5 +16,5 @@ class Persona{
     string getApellido();
     string getIne();
 
-    friend ostream & operator<<(ostream & os, const Persona & persona);
+    void printPersona();
 };

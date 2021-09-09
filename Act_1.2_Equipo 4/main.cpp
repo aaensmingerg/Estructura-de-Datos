@@ -17,14 +17,13 @@ int main(int argc, const char * argv[]){
     /* Crear la Lista de Compra */
     ListadoCompras listadoCompras;
     Persona persona1("Aquiles","Ensminger","1ER1F");
-    //Vehiculo vehiculo1(01,"Ferrari",2021,0);
     Motocicleta motocicleta1(01,"Ferrari",2021,0,200);
     Compra c1(5000000,&persona1,&motocicleta1);
     listadoCompras.agregarCompra(c1);
 
     Persona persona2("Javier","Lozano","1JOP23");
     Vehiculo vehiculo2(02,"Fiat",2002,2500);
-    Compra c2(24000,&persona2,&vehiculo2);
+    Compra c2(24000,&persona1,&vehiculo2);
     listadoCompras.agregarCompra(c2);
 
     Persona persona3("German","Garmendia","DRO89E");
@@ -78,11 +77,32 @@ Compra crearCompra(){
     int kilometraje;
     cout << "Kilometraje del vehiculo: ";
     cin >> kilometraje;
-    
-    Persona p1(nombre, apellido, ine);
-    Vehiculo v1(codigo,marca,modelo,kilometraje);
 
-    return Compra(monto,&p1,&v1);
+    string tipoDeVehiculo;
+    cout << "Tipo de vehiculo (A)->Auto (C)->Camioneta (M)->Moto: ";
+    cin >> tipoDeVehiculo;
+
+    if (tipoDeVehiculo=="A"){
+        Persona p1(nombre, apellido, ine);
+        Vehiculo v1(codigo,marca,modelo,kilometraje);
+        return Compra(monto,&p1,&v1);
+    }
+    else if (tipoDeVehiculo=="C"){
+        string traccion;
+        cout << "Tipo de traccion: ";
+        cin >> traccion;
+        Persona p1(nombre, apellido, ine);
+        Camioneta c1(codigo,marca,modelo,kilometraje,traccion);
+        return Compra(monto,&p1,&c1);
+    }
+    else if (tipoDeVehiculo=="M"){
+        int cilindraje;
+        cout << "Tipo de cilindraje: ";
+        cin >> cilindraje;
+        Persona p1(nombre, apellido, ine);
+        Motocicleta m1(codigo,marca,modelo,kilometraje,cilindraje);
+        return Compra(monto,&p1,&m1);
+    }
 }
 
 void mostrarResultados(vector<Compra> & compras, string msg){
@@ -92,7 +112,7 @@ void mostrarResultados(vector<Compra> & compras, string msg){
     else {
         /* Imprimir las compras encontrados */
         cout << msg << endl;
-        copy(compras.begin(), compras.end(), ostream_iterator<Compra>(cout));
+        //copy(compras.begin(), compras.end(), ostream_iterator<Compra>(cout));
         compras.clear();
     }
 }
@@ -302,7 +322,7 @@ void menu(ListadoCompras & listadoCompras){
                 }
                 else {
                     cout << "Vehiculos en la lista de compras:" << endl;
-                    cout << listadoCompras;
+                    listadoCompras.printLista();
                 }
                 
                 break;

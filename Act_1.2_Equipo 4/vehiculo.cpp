@@ -21,12 +21,11 @@ int Vehiculo::getKilometraje(){
     return kilometraje;
 }
 
-ostream & operator<<(ostream & os, const Vehiculo & vehiculo){
-    os << vehiculo.marca << " (";
-    os << vehiculo.codigo << "). ";
-    os << vehiculo.modelo << ", ";
-    os << vehiculo.kilometraje << " km, ";
-    os << endl;
-    
-    return os;
+void Vehiculo::printVehiculo(){
+    cout << getMarca() << " (";
+    cout << getCodigo() << "). ";
+    cout << getModelo() << ", ";
+    cout << getKilometraje() << " km. ";
+
+    cout << endl;
 }

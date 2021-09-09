@@ -11,5 +11,7 @@ class Camioneta:public Vehiculo{
     public:
     Camioneta(){}
     Camioneta(int _codigo,string _marca, int _modelo, int _kilometraje,string _traccion):Vehiculo(_codigo,_marca,_modelo,_kilometraje),traccion(_traccion){}
-    string getTraccion();    
+    string getTraccion();
+
+    void printVehiculo();    
 };

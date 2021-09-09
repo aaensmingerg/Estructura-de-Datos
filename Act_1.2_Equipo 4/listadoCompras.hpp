@@ -27,5 +27,5 @@ class ListadoCompras{
                 bool(*)(Compra,Compra)
                 );
     unsigned long size();
-    friend ostream & operator<<(ostream & os, const ListadoCompras & listadoCompras);
+    void printLista();
 };

@@ -18,5 +18,5 @@ class Vehiculo{
     virtual int getModelo();
     virtual int getKilometraje();
 
-    friend ostream & operator<<(ostream & os, const Vehiculo & vehiculo);
+    virtual void printVehiculo();
 };

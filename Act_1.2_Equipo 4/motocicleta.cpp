@@ -9,10 +9,10 @@ int Motocicleta::getCilindraje(){
     return cilindraje;
 }
 
-ostream & operator<<(ostream & os, const Motocicleta & motocicleta){
-    os << (Vehiculo)motocicleta;
-    os << motocicleta.cilindraje << " cc, ";
-    os << endl;
-    
-    return os;
+void Motocicleta::printVehiculo(){
+    cout << getMarca() << " (";
+    cout << getCodigo() << "). ";
+    cout << getModelo() << ", ";
+    cout << getKilometraje() << " km, ";
+    cout << getCilindraje() << " cc. " << endl;
 }
