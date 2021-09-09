@@ -256,7 +256,7 @@ void menu(ListadoCompras & listadoCompras){
                 /* Buscar vehiculos menores a un año */
                 cout << "Entre el anio: ";
                 cin >> anio;
-                
+    
                 encontrados = listadoCompras.buscarAntesDeAnio(anio);
                 
                 mostrarResultados(encontrados, "Vehiculos encontrados:");

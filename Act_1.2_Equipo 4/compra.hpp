@@ -11,10 +11,11 @@ class Compra{
     int monto;
     Persona* persona;
     Vehiculo* vehiculo;
+    bool revisa=false;
     public:
     friend class Vehiculo;
     friend class Persona;
-    Compra(){}
+    Compra():persona(new Persona), vehiculo(new Vehiculo),revisa(true){}
     Compra(int _monto, Persona* _persona, Vehiculo* _vehiculo):monto(_monto),persona(_persona),vehiculo(_vehiculo){}
     int getMonto();
     string getComprador();
