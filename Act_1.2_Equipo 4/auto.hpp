@@ -4,6 +4,7 @@
 
 using namespace std;
 
+#pragma once
 class Auto:public Vehiculo{
     public:
     Auto(){}

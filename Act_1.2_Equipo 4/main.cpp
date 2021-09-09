@@ -1,9 +1,14 @@
 
 
 #include <iostream>
+#include <iterator>
 #include <vector>
 #include "C:/Users/aaens/Desktop/C++/ObjectOrientedThinking/CodeSamples/tc1031/Tema_5_Ordenamiento/ordenamiento_generico/ordenamiento_generico/Ordenamiento.hpp"
 #include "listadoCompras.cpp"
+#include "camioneta.cpp"
+#include "motocicleta.cpp"
+
+
 
 void menu(ListadoCompras &);
 
@@ -12,23 +17,24 @@ int main(int argc, const char * argv[]){
     /* Crear la Lista de Compra */
     ListadoCompras listadoCompras;
     Persona persona1("Aquiles","Ensminger","1ER1F");
-    Vehiculo vehiculo1(01,"Ferrari",2021,0);
-    Compra c1(5000000,persona1,vehiculo1);
+    //Vehiculo vehiculo1(01,"Ferrari",2021,0);
+    Motocicleta motocicleta1(01,"Ferrari",2021,0,200);
+    Compra c1(5000000,&persona1,&motocicleta1);
     listadoCompras.agregarCompra(c1);
 
     Persona persona2("Javier","Lozano","1JOP23");
     Vehiculo vehiculo2(02,"Fiat",2002,2500);
-    Compra c2(24000,persona2,vehiculo2);
+    Compra c2(24000,&persona2,&vehiculo2);
     listadoCompras.agregarCompra(c2);
 
     Persona persona3("German","Garmendia","DRO89E");
     Vehiculo vehiculo3(03,"Nissan",2016,15000);
-    Compra c3(554000,persona3,vehiculo3);
+    Compra c3(554000,&persona3,&vehiculo3);
     listadoCompras.agregarCompra(c3);
 
     Persona persona4("Juan","Gabriel","KS485KL");
     Vehiculo vehiculo4(04,"Chevrolet",2013,11500);
-    Compra c4(10000,persona4,vehiculo4);
+    Compra c4(10000,&persona4,&vehiculo4);
     listadoCompras.agregarCompra(c4);
     
     /* Invocar la menú de opciones */
@@ -76,7 +82,7 @@ Compra crearCompra(){
     Persona p1(nombre, apellido, ine);
     Vehiculo v1(codigo,marca,modelo,kilometraje);
 
-    return Compra(monto,p1,v1);
+    return Compra(monto,&p1,&v1);
 }
 
 void mostrarResultados(vector<Compra> & compras, string msg){
@@ -86,7 +92,7 @@ void mostrarResultados(vector<Compra> & compras, string msg){
     else {
         /* Imprimir las compras encontrados */
         cout << msg << endl;
-        //copy(compras.begin(), compras.end(), ostream_iterator<Compra>(cout));
+        copy(compras.begin(), compras.end(), ostream_iterator<Compra>(cout));
         compras.clear();
     }
 }
@@ -98,8 +104,8 @@ auto seleccionarAlgoritmo(){
     do {
         cout << "Selecciona el algoritmo de ordenamiento: " << endl;
         cout << "1 - Burbuja" << endl;
-        cout << "2 - Selección" << endl;
-        cout << "3 - Inserción" << endl;
+        cout << "2 - Seleccion" << endl;
+        cout << "3 - Insercion" << endl;
         cout << "4 - QuickSort" << endl;
         cout << "5 - MergeSort" << endl;
         cin >> opcion;
@@ -157,7 +163,7 @@ auto seleccionarComparacion(){
     
     do {
         cout << "Selecciona el atributo de ordenamiento: " << endl;
-        cout << "1 - Año" << endl;
+        cout << "1 - Anio" << endl;
         cout << "2 - Kilometraje" << endl;
         cin >> atributo;
     }
@@ -222,7 +228,7 @@ void menu(ListadoCompras & listadoCompras){
             }
             case 3:{
                 /* Buscar vehiculos menores a un año */
-                cout << "Entre el año: ";
+                cout << "Entre el anio: ";
                 cin >> anio;
                 
                 encontrados = listadoCompras.buscarAntesDeAnio(anio);
@@ -233,7 +239,7 @@ void menu(ListadoCompras & listadoCompras){
             }
             case 4:{
                 /* Buscar vehiculos mayores a un año */
-                cout << "Entre el año: ";
+                cout << "Entre el anio: ";
                 cin >> anio;
                 
                 encontrados = listadoCompras.buscarDespuesDeAnio(anio);
@@ -244,11 +250,11 @@ void menu(ListadoCompras & listadoCompras){
             }
             case 5:{
                 /* Buscar por rango de años */
-                cout << "Entre el año inicial: ";
+                cout << "Entre el anio inicial: ";
                 cin >> anio;
                 
                 int anio_final;
-                cout << "Entre el año final: ";
+                cout << "Entre el anio final: ";
                 cin >> anio_final;
                 
                 encontrados = listadoCompras.buscarEntreAnios(anio, anio_final);

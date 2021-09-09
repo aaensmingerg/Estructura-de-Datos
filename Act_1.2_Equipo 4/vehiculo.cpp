@@ -4,6 +4,7 @@
 
 using namespace std;
 
+#pragma once
 int Vehiculo::getCodigo(){
     return codigo;
 }
@@ -20,8 +21,7 @@ int Vehiculo::getKilometraje(){
     return kilometraje;
 }
 
-ostream & operator<<(ostream & os, const Vehiculo & vehiculo)
-{
+ostream & operator<<(ostream & os, const Vehiculo & vehiculo){
     os << vehiculo.marca << " (";
     os << vehiculo.codigo << "). ";
     os << vehiculo.modelo << ", ";

@@ -4,6 +4,7 @@
 
 using namespace std;
 
+#pragma once
 class Camioneta:public Vehiculo{
     protected:
     string traccion;

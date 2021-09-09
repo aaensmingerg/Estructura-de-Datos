@@ -3,6 +3,7 @@
 
 using namespace std;
 
+#pragma once
 class Persona{
     protected:
     string nombre;

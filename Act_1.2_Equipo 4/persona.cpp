@@ -4,6 +4,7 @@
 
 using namespace std;
 
+#pragma once
 string Persona::getNombre(){
     return nombre;
 }

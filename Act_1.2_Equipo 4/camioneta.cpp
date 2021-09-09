@@ -4,6 +4,7 @@
 
 using namespace std;
 
+#pragma once
 string Camioneta::getTraccion(){
     return traccion;
 }
