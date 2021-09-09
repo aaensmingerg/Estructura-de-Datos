@@ -7,7 +7,7 @@
 
 void menu(ListadoCompras &);
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char * argv[]){
     
     /* Crear la Lista de Compra */
     ListadoCompras listadoCompras;
@@ -37,8 +37,7 @@ int main(int argc, const char * argv[]) {
     return 0;
 }
 
-Compra crearCompra()
-{
+Compra crearCompra(){
     cout << "Introduzca los datos de la compra: " << endl;
     cin.get();
     
@@ -80,8 +79,7 @@ Compra crearCompra()
     return Compra(monto,p1,v1);
 }
 
-void mostrarResultados(vector<Compra> & compras, string msg)
-{
+void mostrarResultados(vector<Compra> & compras, string msg){
     if (compras.size() == 0) {
         cout << "No se encontraron compras con el criterio especificado";
     }
@@ -93,8 +91,7 @@ void mostrarResultados(vector<Compra> & compras, string msg)
     }
 }
 
-auto seleccionarAlgoritmo()
-{
+auto seleccionarAlgoritmo(){
     int opcion = 1;
     auto algoritmo = Ordenamiento<Compra>::burbuja;
     
@@ -130,8 +127,7 @@ auto seleccionarAlgoritmo()
     return algoritmo;
 }
 
-auto seleccionarAtributoOrden(int atributo, int orden)
-{
+auto seleccionarAtributoOrden(int atributo, int orden){
     auto ordena = Compra::compara_anio_asc;
     
     switch (atributo) {
@@ -156,8 +152,7 @@ auto seleccionarAtributoOrden(int atributo, int orden)
     return ordena;
 }
 
-auto seleccionarComparacion()
-{
+auto seleccionarComparacion(){
     int atributo = 1;
     
     do {
@@ -181,8 +176,7 @@ auto seleccionarComparacion()
     return seleccionarAtributoOrden(atributo, orden);
 }
 
-void menu(ListadoCompras & listadoCompras)
-{
+void menu(ListadoCompras & listadoCompras){
     int opcion;
     int anio;
     int kilometraje;
@@ -207,16 +201,14 @@ void menu(ListadoCompras & listadoCompras)
         cin >> opcion;
         
         switch (opcion) {
-            case 1:
-            {
+            case 1:{
                 /* Adicionar compras */
                 Compra compra = crearCompra();
                 listadoCompras.agregarCompra(compra);
                 
                 break;
             }
-            case 2:
-            {
+            case 2:{
                 /* Eliminar compras*/
                 cout << "Entre la marca del vehiculo a eliminar: ";
                 cin.get();
@@ -228,8 +220,7 @@ void menu(ListadoCompras & listadoCompras)
                 
                 break;
             }
-            case 3:
-            {
+            case 3:{
                 /* Buscar vehiculos menores a un año */
                 cout << "Entre el año: ";
                 cin >> anio;
@@ -240,8 +231,7 @@ void menu(ListadoCompras & listadoCompras)
                 
                 break;
             }
-            case 4:
-            {
+            case 4:{
                 /* Buscar vehiculos mayores a un año */
                 cout << "Entre el año: ";
                 cin >> anio;
@@ -252,8 +242,7 @@ void menu(ListadoCompras & listadoCompras)
                 
                 break;
             }
-            case 5:
-            {
+            case 5:{
                 /* Buscar por rango de años */
                 cout << "Entre el año inicial: ";
                 cin >> anio;
@@ -268,8 +257,7 @@ void menu(ListadoCompras & listadoCompras)
                 
                 break;
             }
-            case 6:
-            {
+            case 6:{
                 /* Buscar menores a un kilometraje */
                 cout << "Entre el kilometraje: ";
                 cin >> kilometraje;
@@ -280,8 +268,7 @@ void menu(ListadoCompras & listadoCompras)
                 
                 break;
             }
-            case 7:
-            {
+            case 7:{
                 /* Buscar mayores a un kilometraje */
                 cout << "Entre el kilometraje: ";
                 cin >> kilometraje;
@@ -292,8 +279,7 @@ void menu(ListadoCompras & listadoCompras)
                 
                 break;
             }
-            case 8:
-            {
+            case 8:{
                 /* Invocar al método ordenar */
                 
                 auto algoritmo = seleccionarAlgoritmo();
@@ -303,8 +289,7 @@ void menu(ListadoCompras & listadoCompras)
                 
                 break;
             }
-            case 9:
-            {
+            case 9:{
                 /* Visualizar las compras en la lista  */
                 if (listadoCompras.size() == 0) {
                     cout << "La lista de compras está vacía" << endl;
