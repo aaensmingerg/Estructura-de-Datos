@@ -10,10 +10,10 @@ ListadoCompras::~ListadoCompras(){
     compras.clear();
 }
 
-std::vector<Compra> ListadoCompras::compara(Compra buscar, bool(comparador)(Compra, Compra)){
+vector<Compra> ListadoCompras::compara(Compra buscar, bool(comparador)(Compra, Compra)){
     int i = 0;
     
-    std::vector<Compra> encontrados;
+    vector<Compra> encontrados;
     
     long int size = compras.size();
     

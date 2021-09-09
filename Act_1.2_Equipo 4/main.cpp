@@ -112,7 +112,10 @@ void mostrarResultados(vector<Compra> & compras, string msg){
     else {
         /* Imprimir las compras encontrados */
         cout << msg << endl;
-        copy(compras.begin(), compras.end(), ostream_iterator<Compra>(cout));
+        for (int i=0; i<compras.size(); i++){
+        Compra compra=compras[i];
+        compra.printCompra();
+    }
         compras.clear();
     }
 }
