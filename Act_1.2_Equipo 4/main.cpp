@@ -51,15 +51,15 @@ Compra crearCompra(){
     cin >> monto;
 
     string nombre;
-    cout << "Nombre: ";
+    cout << "Nombre del comprador: ";
     cin >> nombre;
     
     string apellido;
-    cout << "Apellido: ";
+    cout << "Apellido del comprador: ";
     cin >> apellido;
     
     string ine;
-    cout << "INE: ";
+    cout << "INE del comprador: ";
     cin >> ine;
     
     int codigo;
