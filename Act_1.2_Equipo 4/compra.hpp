@@ -12,6 +12,8 @@ class Compra{
     Persona* persona;
     Vehiculo* vehiculo;
     public:
+    friend class Vehiculo;
+    friend class Persona;
     Compra(){}
     Compra(int _monto, Persona* _persona, Vehiculo* _vehiculo):monto(_monto),persona(_persona),vehiculo(_vehiculo){}
     int getMonto();

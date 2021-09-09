@@ -359,5 +359,5 @@ void menu(ListadoCompras & listadoCompras){
         cout << endl;
         
     }
-    while (opcion != 10);
+    while (opcion != 11);
 }
