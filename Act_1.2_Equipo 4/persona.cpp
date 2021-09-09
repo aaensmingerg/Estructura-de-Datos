@@ -26,7 +26,7 @@ void Persona::setApellido(string _apellido){
 }
 
 void Persona::printPersona(){
-    cout << getNombre() << ",  ";
+    cout << getNombre() << ", ";
     cout << getApellido() << ". (";
     cout << getIne() << "). ";
 }

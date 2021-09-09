@@ -83,25 +83,25 @@ Compra crearCompra(){
     cin >> tipoDeVehiculo;
 
     if (tipoDeVehiculo=="A"){
-        Persona p1(nombre, apellido, ine);
-        Vehiculo v1(codigo,marca,modelo,kilometraje);
-        return Compra(monto,&p1,&v1);
+        Persona* p1=new Persona(nombre, apellido, ine);
+        Vehiculo* v1=new Vehiculo(codigo,marca,modelo,kilometraje);
+        return Compra(monto,p1,v1);
     }
     else if (tipoDeVehiculo=="C"){
         string traccion;
         cout << "Tipo de traccion: ";
         cin >> traccion;
-        Persona p1(nombre, apellido, ine);
-        Camioneta c1(codigo,marca,modelo,kilometraje,traccion);
-        return Compra(monto,&p1,&c1);
+        Persona* p1= new Persona(nombre, apellido, ine);
+        Camioneta* c1=new Camioneta(codigo,marca,modelo,kilometraje,traccion);
+        return Compra(monto,p1,c1);
     }
     else if (tipoDeVehiculo=="M"){
         int cilindraje;
         cout << "Tipo de cilindraje: ";
         cin >> cilindraje;
-        Persona p1(nombre, apellido, ine);
-        Motocicleta m1(codigo,marca,modelo,kilometraje,cilindraje);
-        return Compra(monto,&p1,&m1);
+        Persona* p1=new Persona(nombre, apellido, ine);
+        Motocicleta* m1=new Motocicleta(codigo,marca,modelo,kilometraje,cilindraje);
+        return Compra(monto,p1,m1);
     }
 }
 
