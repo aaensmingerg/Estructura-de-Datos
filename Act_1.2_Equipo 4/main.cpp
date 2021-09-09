@@ -47,7 +47,7 @@ Compra crearCompra(){
     cin.get();
     
     int monto;
-    cout << "Valor de la compra :";
+    cout << "Valor de la compra: ";
     cin >> monto;
 
     string nombre;
