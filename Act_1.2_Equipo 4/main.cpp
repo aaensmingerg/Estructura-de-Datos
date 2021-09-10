@@ -15,7 +15,6 @@ Fecha de Entrega: Jueves 26 de Agosto de 2021  */
 #include <iostream>
 #include <iterator>
 #include <vector>
-/* Escribir el path respectivo del archivo "Oredanmiento.hpp"*/
 #include "Ordenamiento.hpp"
 #include "listadoCompras.cpp"
 #include "camioneta.cpp"
