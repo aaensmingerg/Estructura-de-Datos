@@ -9,7 +9,7 @@ cada registro consiste de la siguiente información: monto de la venta, vehícul
 Además se ecnuentra un menú de búsqueda para hacer busqueda sobre el inventario
 con algoritmos de búsqueda de: Burbuja, Selección, Inserción, QuickSort y MergeSort
 Aquiles Ensminger A01781243 y Javier Lozano A01029756
-Fecha de Entrega: Jueves 26 de Agosto de 2021  */
+Fecha de Entrega: Jueves 12 de Septiembre de 2021  */
 
 
 #include <iostream>
