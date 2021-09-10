@@ -1,47 +1,31 @@
 
+/* Este programa lleva un registro de ventas 
+de una concesionaria que comercializa vehículos usados. 
+Los vehículos se clasifican en: autos, camionetas y motocicletas. 
+Todos los vehículos tienen un código, una marca, un modelo (año), y el kilometraje.
+De las camionetas se conoce además el tipo de tracción que tienen (4x2, 4x4, AWD o 4WD). 
+De las motocicletas se conoce además el cilindraje (150cc, 250cc, etc.). 
+cada registro consiste de la siguiente información: monto de la venta, vehículo vendido y comprador (apellido, nombre e INE).
+Además se ecnuentra un menú de búsqueda para hacer busqueda sobre el inventario
+con algoritmos de búsqueda de: Burbuja, Selección, Inserción, QuickSort y MergeSort
+Aquiles Ensminger A01781243 y Javier Lozano A01029756
+Fecha de Entrega: Jueves 26 de Agosto de 2021  */
+
 
 #include <iostream>
 #include <iterator>
 #include <vector>
-#include "C:/Users/aaens/Desktop/C++/ObjectOrientedThinking/CodeSamples/tc1031/Tema_5_Ordenamiento/ordenamiento_generico/ordenamiento_generico/Ordenamiento.hpp"
+#include "Ordenamiento.hpp"
 #include "listadoCompras.cpp"
 #include "camioneta.cpp"
 #include "motocicleta.cpp"
 
 
 
-void menu(ListadoCompras &);
 
-int main(int argc, const char * argv[]){
-    
-    /* Crear la Lista de Compra */
-    ListadoCompras listadoCompras;
-    Persona persona1("Aquiles","Ensminger","1ER1F");
-    Motocicleta motocicleta1(01,"Ferrari",2021,0,200);
-    Compra c1(5000000,&persona1,&motocicleta1);
-    listadoCompras.agregarCompra(c1);
 
-    Persona persona2("Javier","Lozano","1JOP23");
-    Vehiculo vehiculo2(02,"Fiat",2002,2500);
-    Compra c2(24000,&persona1,&vehiculo2);
-    listadoCompras.agregarCompra(c2);
-
-    Persona persona3("German","Garmendia","DRO89E");
-    Vehiculo vehiculo3(03,"Nissan",2016,15000);
-    Compra c3(554000,&persona3,&vehiculo3);
-    listadoCompras.agregarCompra(c3);
-
-    Persona persona4("Juan","Gabriel","KS485KL");
-    Vehiculo vehiculo4(04,"Chevrolet",2013,11500);
-    Compra c4(10000,&persona4,&vehiculo4);
-    listadoCompras.agregarCompra(c4);
-    
-    /* Invocar la menú de opciones */
-    menu(listadoCompras);
-    
-    return 0;
-}
-
+/* La función "crearCompra" Genra un menú de entrada 
+en el que se ingresan los valores necesarios para construir un objeto de tipo Compra*/
 Compra crearCompra(){
     cout << "Introduzca los datos de la compra: " << endl;
     cin.get();
@@ -105,13 +89,14 @@ Compra crearCompra(){
     }
 }
 
-void mostrarResultados(vector<Compra> & compras, string msg){
+/* La función "mostrarResultados" como parámetro el vector con los registros de compras e imprime los resultados de la busqueda */
+void mostrarResultados(vector<Compra> & compras){
     if (compras.size() == 0) {
         cout << "No se encontraron compras con el criterio especificado";
     }
     else {
         /* Imprimir las compras encontrados */
-        cout << msg << endl;
+        cout << "Vehiculos encontrados: " << endl;
         for (int i=0; i<compras.size(); i++){
         Compra compra=compras[i];
         compra.printCompra();
@@ -120,6 +105,7 @@ void mostrarResultados(vector<Compra> & compras, string msg){
     }
 }
 
+/* La función "seleccionarAlgoritmo" muestra un menú sobre el cual se selecciona el algoritmo con el cual hacer la búsqueda*/
 auto seleccionarAlgoritmo(){
     int opcion = 1;
     auto algoritmo = Ordenamiento<Compra>::burbuja;
@@ -156,6 +142,9 @@ auto seleccionarAlgoritmo(){
     return algoritmo;
 }
 
+/* La función "selccionarAtributoOrden" tiene dos parámtetros: un valor de tipo int "atributo" que indica si se 
+ordena con respectoa los kilómetros o años y como segundo parámetro un valor de tipo int "orden" 
+con el que e indica si el ordenamiento se hace de manera ascendente o descendente sea 1 ascendente*/
 auto seleccionarAtributoOrden(int atributo, int orden){
     auto ordena = Compra::compara_anio_asc;
     
@@ -181,6 +170,7 @@ auto seleccionarAtributoOrden(int atributo, int orden){
     return ordena;
 }
 
+/* La función "seleccionarComparacion" muestra un menu para escoger el atributo sobre el cuál se desea ordenar*/
 auto seleccionarComparacion(){
     int atributo = 1;
     
@@ -205,6 +195,8 @@ auto seleccionarComparacion(){
     return seleccionarAtributoOrden(atributo, orden);
 }
 
+/*La función "menu" muestra el menú principal, sobre el cual se escogen las acciones que se desean llevar a cabo
+tiene como parámetro la dirección del vector de listado de compras para realizar sobre este las acciones indicadas*/
 void menu(ListadoCompras & listadoCompras){
     int opcion;
     int anio;
@@ -248,7 +240,7 @@ void menu(ListadoCompras & listadoCompras){
                 
                 encontrados = listadoCompras.eliminarCompra(marca);
                 
-                mostrarResultados(encontrados, "Vehiculos eliminados:");
+                mostrarResultados(encontrados);
                 
                 break;
             }
@@ -259,7 +251,7 @@ void menu(ListadoCompras & listadoCompras){
     
                 encontrados = listadoCompras.buscarAntesDeAnio(anio);
                 
-                mostrarResultados(encontrados, "Vehiculos encontrados:");
+                mostrarResultados(encontrados);
                 
                 break;
             }
@@ -270,7 +262,7 @@ void menu(ListadoCompras & listadoCompras){
                 
                 encontrados = listadoCompras.buscarDespuesDeAnio(anio);
                 
-                mostrarResultados(encontrados, "Vehiculos encontrados:");
+                mostrarResultados(encontrados);
                 
                 break;
             }
@@ -285,7 +277,7 @@ void menu(ListadoCompras & listadoCompras){
                 
                 encontrados = listadoCompras.buscarEntreAnios(anio, anio_final);
                 
-                mostrarResultados(encontrados, "Vehiculos encontrados:");
+                mostrarResultados(encontrados);
                 
                 break;
             }
@@ -296,7 +288,7 @@ void menu(ListadoCompras & listadoCompras){
                 
                 encontrados = listadoCompras.buscarAntesDeKilometraje(kilometraje);
                 
-                mostrarResultados(encontrados, "Vehiculos encontrados:");
+                mostrarResultados(encontrados);
                 
                 break;
             }
@@ -307,7 +299,7 @@ void menu(ListadoCompras & listadoCompras){
                 
                 encontrados = listadoCompras.buscarDespuesDeKilometraje(kilometraje);
                 
-                mostrarResultados(encontrados, "Vehiculos encontrados:");
+                mostrarResultados(encontrados);
                 
                 break;
             }
@@ -321,7 +313,7 @@ void menu(ListadoCompras & listadoCompras){
                 
                 encontrados = listadoCompras.buscarPorComprador(nombreComprador,apellidoComprador);
                 
-                mostrarResultados(encontrados, "Vehiculos encontrados:");
+                mostrarResultados(encontrados);
                 
                 break;
             }
@@ -361,3 +353,35 @@ void menu(ListadoCompras & listadoCompras){
     }
     while (opcion != 11);
 }
+
+int main(int argc, const char * argv[]){
+    
+    /* Crear la Lista de Compra */
+    ListadoCompras listadoCompras;
+    Persona persona1("Aquiles","Ensminger","1ER1F");
+    Motocicleta motocicleta1(01,"Ferrari",2021,0,200);
+    Compra c1(5000000,&persona1,&motocicleta1);
+    listadoCompras.agregarCompra(c1);
+
+    Persona persona2("Javier","Lozano","1JOP23");
+    Vehiculo vehiculo2(02,"Fiat",2002,2500);
+    Compra c2(24000,&persona1,&vehiculo2);
+    listadoCompras.agregarCompra(c2);
+
+    Persona persona3("German","Garmendia","DRO89E");
+    Vehiculo vehiculo3(03,"Nissan",2016,15000);
+    Compra c3(554000,&persona3,&vehiculo3);
+    listadoCompras.agregarCompra(c3);
+
+    Persona persona4("Juan","Gabriel","KS485KL");
+    Vehiculo vehiculo4(04,"Chevrolet",2013,11500);
+    Compra c4(10000,&persona4,&vehiculo4);
+    listadoCompras.agregarCompra(c4);
+    
+    /* Invocar la menú de opciones */
+    menu(listadoCompras);
+    
+    return 0;
+}
+
+

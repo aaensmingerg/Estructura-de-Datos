@@ -16,4 +16,3 @@ void Camioneta::printVehiculo(){
     cout << getKilometraje() << " km, ";
     cout << getTraccion() << ". " << endl;
 }
-
