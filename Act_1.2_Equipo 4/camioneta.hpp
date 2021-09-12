@@ -14,7 +14,7 @@ class Camioneta:public Vehiculo{
     /*Se declara el constructor de la clase*/
     Camioneta(int _codigo,string _marca, int _modelo, int _kilometraje,string _traccion):Vehiculo(_codigo,_marca,_modelo,_kilometraje),traccion(_traccion){}
     
-    /* Se plantea la funcíon "getTraccion" que se definirá en "camioneta.hpp"*/
+    /* Sedefine el Get de la variable traccion que se definirá en "camioneta.hpp"*/
     string getTraccion();  
 
     /* La función "printVehiculo" 
