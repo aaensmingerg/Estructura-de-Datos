@@ -9,19 +9,8 @@
 #include "Ordenamiento.hpp"
 using namespace std;
         
-    /* Hace falta ordenar primero */
+
 Fecha File::buscarSegundaFecha(File f1){
-    /*int i = 0;
-    Fecha fechaInicial = fecha[(fecha.size()-1)];
-    vector<Fecha> encontrados;
-    long int size = fecha.size();
-        while (i < size) {
-            if (fecha[i] > fecha[0] && fecha[i] <= fechaInicial) {
-                encontrados.push_back(fecha[i]);
-                fechaInicial = fecha[i];
-            }
-            ++i;
-        }*/
         int encontrados;
         int inicial;
         Fecha fechaInicial = f1.fecha[0];
@@ -49,7 +38,6 @@ vector<string> File::getNombreDestino(){
     return nombreDestino;
 }
 
-
 /* Valores unicos- ordenar po campos, hacer un ciclo, primer registro mientraas el valor 
 no sea diferente elimino hast otro  */
 template<class T>
@@ -67,8 +55,6 @@ vector<T> File::valoresUnicos(vector<T> vectorBusqueda){
     return unicos;
 }
 
-
-/* Busqueda por nombre */
 void File::busquedaNombre(){
     vector<string> nombres = {"jeffrey.reto.com","betty.reto.com","katherine.reto.com",
     "scott.reto.com","benjamin.reto.com","samuel.reto.com","raymond.reto.com","server.reto.com"};
@@ -84,8 +70,6 @@ void File::busquedaNombre(){
     }
 }
 
-
-/* Direccion interna */
 vector<string> File::direcccionIterna(){
     vector<string> almacena;
     string s1;
@@ -103,7 +87,6 @@ vector<string> File::direcccionIterna(){
     return valoresUnicos(almacena);
 }
 
-/* Servicio de correo electronico */
 void File::correosElectronicos(){
     vector<string> correos = {"gmail.com","hotmail.com","outlook.com","protonmail.com"};
     for(int i=0; i < correos.size(); i++){
@@ -118,7 +101,6 @@ void File::correosElectronicos(){
     }
 }
 
-/* Puertos destino debajo del 1000 */
 void File::puertosUsados(){
     vector<int> puertos = {};
     int puerto;

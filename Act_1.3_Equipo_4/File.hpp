@@ -43,34 +43,40 @@ class File{
         file.close();
     }
     
-    /* get fecha */
+    /* Getter de fecha */
     vector<Fecha> getFecha();
     
-    /* get fecha */
+    /* Getter de nombreDestino */
     vector<string> getNombreDestino();
 
-    /* get Puertos */
+    /* Getter de puertoOrigen */
     vector<string> getPuertoOrigen();
     
-    /* Hace falta ordenar primero */
+    /* La función "buscarSegundaFecha" recibe un dato
+    de tipo File y busca todas las fechas correspondientes a
+    la segunda fecha */
     Fecha buscarSegundaFecha(File);
 
-    /* Busqueda por nombre */
+    /* La función "busquedaNombre" busca todas instancias
+    que tiene alguno de los nombres requeridos */
     void busquedaNombre();
     
     /* Valores unicos */
     template<class T>
     vector<T> valoresUnicos(vector<T>);
 
-    /* Direccion interna */
+    /* La función "direcccionIterna" obtiene la
+    dirección interna del IP de Origen */
     vector<string> direcccionIterna();
 
-    /* Servicio de correo electronico */
+    /* La función "correosElectronicos" busca todas instancias
+    que tiene alguno de los servicios de correo electrónico
+    requeridos */
     void correosElectronicos();
 
-    /* Puertos destino debajo del 1000 */
+    /* La función "puertosUsados" calcula los puertos destino debajo del 1000  */
     void puertosUsados();
 
-    /* Imprimir puertos destino debajo del 1000 */
+    /* La función "printPuertos" imprime los puertos destino debajo del 1000 */
     void printPuertos(vector<int>);
 };
