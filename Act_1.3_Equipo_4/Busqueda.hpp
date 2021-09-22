@@ -1,4 +1,4 @@
-//
+//  Programa de Búsqueda proporcionado por el Profesor
 //  Busqueda.hpp
 //  busqueda_secuencial
 //

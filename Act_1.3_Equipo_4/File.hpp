@@ -7,6 +7,7 @@
 #include "Ordenamiento.hpp"
 using namespace std;
 
+/* La implementación se encuentra en su respectivo .cpp*/
 class File{
     protected:
         string fileName;
@@ -52,7 +53,7 @@ class File{
     vector<string> getPuertoOrigen();
     
     /* Hace falta ordenar primero */
-    vector<Fecha> buscarSegundaFecha();
+    Fecha buscarSegundaFecha(File);
 
     /* Busqueda por nombre */
     void busquedaNombre();

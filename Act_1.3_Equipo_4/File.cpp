@@ -10,8 +10,8 @@
 using namespace std;
         
     /* Hace falta ordenar primero */
-vector<Fecha> File::buscarSegundaFecha(){
-    int i = 0;
+Fecha File::buscarSegundaFecha(File f1){
+    /*int i = 0;
     Fecha fechaInicial = fecha[(fecha.size()-1)];
     vector<Fecha> encontrados;
     long int size = fecha.size();
@@ -21,8 +21,24 @@ vector<Fecha> File::buscarSegundaFecha(){
                 fechaInicial = fecha[i];
             }
             ++i;
+        }*/
+        int encontrados;
+        int inicial;
+        Fecha fechaInicial = f1.fecha[0];
+        Fecha fechaBuscar;
+        for (int i = 0; i < f1.fecha.size(); i++){
+            if (f1.fecha[i] != fechaInicial){
+                inicial = i;
+                fechaBuscar = f1.fecha[i];
+                break;
+            }
         }
-        return encontrados;
+        while (f1.fecha[inicial] == fechaBuscar){
+            encontrados++;
+            inicial++;
+        }
+        cout << encontrados << endl;
+        return fechaBuscar;
     }
 
 vector<Fecha> File::getFecha(){
@@ -59,10 +75,10 @@ void File::busquedaNombre(){
     for(int i=0; i < nombres.size(); i++){
         int indice = Busqueda<string>::busquedaSecuencial(nombreOrigen, nombres[i]);
         if(indice == -1){
-            cout << "El nombre: " << nombres[i] << "|no se encuentra|" << endl;
+            cout << "El nombre: " << nombres[i] << " |no se encuentra|" << endl;
         }
         else{
-            cout << "El nombre: " << nombres[i] << " si se encuentra " << endl;
+            cout << "El nombre: " << nombres[i] << " |si se encuentra| " << endl;
         }
 
     }
@@ -93,10 +109,10 @@ void File::correosElectronicos(){
     for(int i=0; i < correos.size(); i++){
         int indice = Busqueda<string>::busquedaSecuencial(nombreDestino, correos[i]);
         if(indice == -1){
-            cout << "El nombre: " << correos[i] << "|no se encuentra|" << endl;
+            cout << "El nombre: " << correos[i] << " |no se encuentra|" << endl;
         }
         else{
-            cout << "El nombre: " << correos[i] << " si se encuentra " << endl;
+            cout << "El nombre: " << correos[i] << " |si se encuentra| " << endl;
         }
 
     }
