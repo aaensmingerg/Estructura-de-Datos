@@ -28,6 +28,7 @@ int main(){
     cout << "Alguna de las computadoras pertenece a Jeffrey, Betty, Katherine, Scott, Benjamin, Samuel o Raymond?" << endl;
     cout << "R. " << endl;
     f1.busquedaNombre();
+    cout << "A quienes" << endl;
     cout << "Cual es la direccion de la red interna de la compania? " << endl;
     cout << "R. " << f1.direcccionIterna()[0] << endl;
     cout << "Que servicio de correo electronico utilizan (algunas ideas: Gmail, Hotmail, Outlook, Protonmail)? " << endl;
