@@ -52,19 +52,23 @@ class File{
     /* Getter de puertoOrigen */
     vector<string> getPuertoOrigen();
     
-    /* La función "buscarSegundaFecha" recibe un dato
-    de tipo File y busca todas las fechas correspondientes a
+    /* La función "buscarSegundaFecha" busca todas las fechas correspondientes a
     la segunda fecha */
-    Fecha buscarSegundaFecha(File);
+    Fecha buscarSegundaFecha();
 
     /* La función "busquedaNombre" busca todas instancias
     que tiene alguno de los nombres requeridos */
     void busquedaNombre();
     
-    /* Valores unicos */
+    /* La función "ValoresUnicos" regresa los valores unicos de un vector, 
+    solo si el vector se encuentra ordenado  */
     template<class T>
     vector<T> valoresUnicos(vector<T>);
 
+    /* La funcion "printNombresUnicos" imprime 
+    los valores unicos de la columna nombre */
+    void printNombresUnicos();
+    
     /* La función "direcccionIterna" obtiene la
     dirección interna del IP de Origen */
     vector<string> direcccionIterna();
