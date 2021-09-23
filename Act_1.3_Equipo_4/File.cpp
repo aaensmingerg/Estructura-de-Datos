@@ -39,8 +39,6 @@ vector<string> File::getNombreDestino(){
     return nombreDestino;
 }
 
-/* Valores unicos- ordenar po campos, hacer un ciclo, primer registro mientraas el valor 
-no sea diferente elimino hast otro  */
 template<class T>
 vector<T> File::valoresUnicos(vector<T> vectorBusqueda){
     vector<T> unicos = {vectorBusqueda[0]};
