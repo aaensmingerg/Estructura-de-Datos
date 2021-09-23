@@ -7,22 +7,23 @@
 #include "File.hpp"
 #include "Busqueda.hpp"
 #include "Ordenamiento.hpp"
+#include <algorithm>
 using namespace std;
         
 
-Fecha File::buscarSegundaFecha(File f1){
+Fecha File::buscarSegundaFecha(){
         int encontrados;
         int inicial;
-        Fecha fechaInicial = f1.fecha[0];
+        Fecha fechaInicial = fecha[0];
         Fecha fechaBuscar;
-        for (int i = 0; i < f1.fecha.size(); i++){
-            if (f1.fecha[i] != fechaInicial){
+        for (int i = 0; i < fecha.size(); i++){
+            if (fecha[i] != fechaInicial){
                 inicial = i;
-                fechaBuscar = f1.fecha[i];
+                fechaBuscar = fecha[i];
                 break;
             }
         }
-        while (f1.fecha[inicial] == fechaBuscar){
+        while (fecha[inicial] == fechaBuscar){
             encontrados++;
             inicial++;
         }
@@ -70,6 +71,15 @@ void File::busquedaNombre(){
     }
 }
 
+void File::printNombresUnicos(){
+    vector<string> dummy = nombreOrigen;
+    sort(dummy.begin(), dummy.end(), Ordenamiento<string>::asc);
+    vector<string> unico;
+    unico = valoresUnicos(dummy);
+    for(int i=0; i < unico.size(); i++){
+        cout << "Nombre Registrado: " << unico[i] << endl;
+    }
+}
 vector<string> File::direcccionIterna(){
     vector<string> almacena;
     string s1;
@@ -88,16 +98,12 @@ vector<string> File::direcccionIterna(){
 }
 
 void File::correosElectronicos(){
-    vector<string> correos = {"gmail.com","hotmail.com","outlook.com","protonmail.com"};
-    for(int i=0; i < correos.size(); i++){
-        int indice = Busqueda<string>::busquedaSecuencial(nombreDestino, correos[i]);
-        if(indice == -1){
-            cout << "El nombre: " << correos[i] << " |no se encuentra|" << endl;
-        }
-        else{
-            cout << "El nombre: " << correos[i] << " |si se encuentra| " << endl;
-        }
-
+    vector<string> dummy = nombreDestino;
+    sort(dummy.begin(), dummy.end(), Ordenamiento<string>::asc);
+    vector<string> unico;
+    unico = valoresUnicos(dummy);
+    for(int i=0; i < unico.size(); i++){
+        cout << "Direccion registrada: " << unico[i] << endl; 
     }
 }
 
