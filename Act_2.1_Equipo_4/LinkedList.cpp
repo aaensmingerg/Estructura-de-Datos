@@ -105,6 +105,9 @@ public:
     
     /* Clonar una lista */
     LinkedList<T> * clone();
+
+    /* Unir dos listas */
+    virtual void Union (LinkedList<T>*);
     
 };
 
@@ -486,6 +489,20 @@ LinkedList<T> * LinkedList<T>::clone()
     }
     
     return list;
+}
+
+/* Unir dos listas */
+template <class T>
+void LinkedList<T>::Union(LinkedList<T>* listaB){
+    /* Crear referencia al primer elemento */
+    Node<T>* tmp = listaB->_first;
+    /* Recorrer la lista que se quiere adicionar*/
+    for(int i=0; i < listaB->size(); i++){
+        /* Añadir el elemento de la lista secundaria*/
+        this->insert_back(tmp->getInfo());
+        /* Desplazarse al siguiente elemento */
+        tmp = tmp->getNext();
+    }
 }
 
 #endif /* LinkedList_hpp */
