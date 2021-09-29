@@ -107,7 +107,10 @@ public:
     LinkedList<T> * clone();
 
     /* Unir dos listas */
-    virtual void Union (LinkedList<T>*);
+    LinkedList<T> * Union (LinkedList<T>*);
+
+    /* Intersección de dos listas */
+    LinkedList<T> * Intersection (LinkedList<T>*);
     
 };
 
@@ -493,16 +496,61 @@ LinkedList<T> * LinkedList<T>::clone()
 
 /* Unir dos listas */
 template <class T>
-void LinkedList<T>::Union(LinkedList<T>* listaB){
+LinkedList<T> * LinkedList<T>::Union(LinkedList<T>* listaB){
+    /* Crear lista vacía */
+    LinkedList<T> * resultList = this->clone();
     /* Crear referencia al primer elemento */
     Node<T>* tmp = listaB->_first;
-    /* Recorrer la lista que se quiere adicionar*/
-    for(int i=0; i < listaB->size(); i++){
-        /* Añadir el elemento de la lista secundaria*/
-        this->insert_back(tmp->getInfo());
-        /* Desplazarse al siguiente elemento */
-        tmp = tmp->getNext();
+    if(tmp != nullptr){
+        /* Recorrer la lista que se quiere adicionar*/
+        for(int i=0; i < listaB->size(); i++){
+            /* Añadir el elemento de la lista secundaria*/
+            resultList->insert_back(tmp->getInfo());
+            /* Desplazarse al siguiente elemento */
+            tmp = tmp->getNext();
+        }
+        return resultList;
+    }
+    else{
+        std::cout << "No se puede añadir una lista vacía" << std::endl;
+        return 0;
     }
 }
+
+/* Intersección de dos listas */
+template <class T>
+LinkedList<T> * LinkedList<T>::Intersection(LinkedList<T>* listaB){
+    /* Crear lista vacía */
+    LinkedList<T> * resultList = new LinkedList<T>();
+    /* Obtener el nodo que está en una posición  */
+    Node<T> * a ;
+    Node<T> * b ;
+
+    if(this->size() > listaB->size()){
+        for(int i=0; i < this->size(); i++){
+            a = this->at(i);
+            for(int f=0; f < listaB->size(); f++){
+                b = listaB->at(f);
+                if (a->getInfo() == b->getInfo()){
+                    resultList->insert_back(a->getInfo());
+                }
+            }
+        }
+    }
+    else{
+        for(int i=0; i < listaB->size(); i++){
+            a = this->at(i);
+            for(int f=0; f < this->size(); f++){
+                b = listaB->at(f);
+                if (a == b){
+                    resultList->insert_back(a);
+                }
+            }    
+        }
+    }
+    return resultList;
+}
+
+
 
 #endif /* LinkedList_hpp */

@@ -79,10 +79,18 @@ int main(int argc, const char * argv[]) {
     std::cout << "(LB) La lista tiene los siguientes elementos: " << std::endl;
     std::cout << *listB << std::endl;
     std::cout << "--- Demostración de union lista ---" << std::endl;
-    list->Union(listB);
+    LinkedList<int> * listc =list->Union(listB);
     std::cout << "(L) La lista tiene los siguientes elementos: " << std::endl;
-    std::cout << *list << std::endl;
+    std::cout << *listc << std::endl;
     std::cout << std::endl;
+    
+
+    std::cout << "--- Demostración de Intersección lista ---" << std::endl;
+    LinkedList<int> * listd =list->Intersection(listB);
+    std::cout << "(L) La lista tiene los siguientes elementos: " << std::endl;
+    std::cout << *listd << std::endl;
+    std::cout << std::endl;
+
     
 
     return 0;
