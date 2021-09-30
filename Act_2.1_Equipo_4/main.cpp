@@ -71,9 +71,9 @@ int main(int argc, const char * argv[]) {
     /* Unir dos listas*/
     std::cout << std::endl;
     LinkedList<int> * listB = new LinkedList<int>();
-    listB->insert_front(1);
-    listB->insert_front(2);
-    listB->insert_front(3);
+    listB->insert_front(9);
+    listB->insert_front(7);
+    listB->insert_front(0);
 
     /* Mostrar el contenido de la lista B*/
     std::cout << "(LB) La lista tiene los siguientes elementos: " << std::endl;
@@ -91,6 +91,14 @@ int main(int argc, const char * argv[]) {
     std::cout << *listd << std::endl;
     std::cout << std::endl;
 
+    std::cout << "--- Demostración de Except lista ---" << std::endl;
+    LinkedList<int> * liste =list->Except(listB);
+    std::cout << "(L) La lista tiene los siguientes elementos: " << std::endl;
+    std::cout << *liste << std::endl;
+    std::cout << std::endl;
+    
+    std::cout << "--- Demostración de isIn lista ---" << std::endl;
+    std::cout << list->isIn(4) << std::endl;
     
 
     return 0;

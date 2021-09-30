@@ -9,7 +9,7 @@
 #define SortedLinkedList_hpp
 
 #include <iostream>
-#include "LinkedList.hpp"
+#include "LinkedList.cpp"
 
 template <class T>
 class SortedLinkedList : public LinkedList<T>

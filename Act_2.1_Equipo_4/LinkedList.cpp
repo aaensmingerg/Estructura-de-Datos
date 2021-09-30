@@ -111,6 +111,12 @@ public:
 
     /* Intersección de dos listas */
     LinkedList<T> * Intersection (LinkedList<T>*);
+
+    /* Diferencia de dos listas */
+    LinkedList<T> * Except (LinkedList<T>*);
+    
+    /* Buscar si un valor está en la lista */
+    virtual bool isIn(const T &) const;
     
 };
 
@@ -497,15 +503,21 @@ LinkedList<T> * LinkedList<T>::clone()
 /* Unir dos listas */
 template <class T>
 LinkedList<T> * LinkedList<T>::Union(LinkedList<T>* listaB){
+    
     /* Crear lista vacía */
     LinkedList<T> * resultList = this->clone();
+    
     /* Crear referencia al primer elemento */
     Node<T>* tmp = listaB->_first;
+    
     if(tmp != nullptr){
-        /* Recorrer la lista que se quiere adicionar*/
+
+        /* Recorrer la lista que se quiere adicionar */
         for(int i=0; i < listaB->size(); i++){
-            /* Añadir el elemento de la lista secundaria*/
+            
+            /* Añadir el elemento de la lista secundaria */
             resultList->insert_back(tmp->getInfo());
+            
             /* Desplazarse al siguiente elemento */
             tmp = tmp->getNext();
         }
@@ -520,37 +532,82 @@ LinkedList<T> * LinkedList<T>::Union(LinkedList<T>* listaB){
 /* Intersección de dos listas */
 template <class T>
 LinkedList<T> * LinkedList<T>::Intersection(LinkedList<T>* listaB){
+    
     /* Crear lista vacía */
     LinkedList<T> * resultList = new LinkedList<T>();
-    /* Obtener el nodo que está en una posición  */
+    
+    /* Crear nodo para almacenar la información */
     Node<T> * a ;
-    Node<T> * b ;
 
-    if(this->size() > listaB->size()){
-        for(int i=0; i < this->size(); i++){
-            a = this->at(i);
-            for(int f=0; f < listaB->size(); f++){
-                b = listaB->at(f);
-                if (a->getInfo() == b->getInfo()){
-                    resultList->insert_back(a->getInfo());
-                }
-            }
+    /* Explorar la lista */
+    for(int i=0; i < this->size(); i++){
+        
+        /* Asignar valor a comparar */
+        a = this->at(i);
+
+        /* Comparar si el valor se encuentra en la lista */
+        if(listaB->isIn(a->getInfo())){
+
+            /* Almacenar en la lista*/
+            resultList->insert_back(a->getInfo());
         }
     }
-    else{
-        for(int i=0; i < listaB->size(); i++){
-            a = this->at(i);
-            for(int f=0; f < this->size(); f++){
-                b = listaB->at(f);
-                if (a == b){
-                    resultList->insert_back(a);
-                }
-            }    
-        }
+    if(resultList->_first == nullptr){
+        std::cout << " No hay elementos iguales " << std::endl;
     }
     return resultList;
 }
 
+/* Buscar si un valor forma parte de la lista */
+template <class T>
+bool LinkedList<T>::isIn(const T & value) const{
+    
+    /* Crear nodo para almacenar la información */
+    Node<T> * tmp;
+    bool is = false;
+    
+    /* Explorar la lista */
+    for(int i=0; i < this->size(); i++){
+        
+        /* Asignar valor a comparar */
+        tmp = this->at(i);
+        
+        /* Comparar si el valor se encuentra en la lista */
+        if(tmp->getInfo() == value){
+            is = true;
+        }
+    }
+    return is;
+}
+
+/* Elementos que están en la lista pero no están en la lista ingresada como parametro */
+template <class T>
+LinkedList<T> * LinkedList<T>::Except(LinkedList<T>* listaB){
+    
+    /* Crear lista vacía */
+    LinkedList<T> * resultList = new LinkedList<T>();
+    
+    /* Crear nodo para almacenar la información */
+    Node<T> * a;
+    
+    /* Explorar la lista */
+    for(int i=0; i < this->size(); i++){
+        
+        /* Asignar valor a comparar */
+        a = this->at(i);
+        
+        /* Comparar si el valor no se encuentra en la lista */
+        if(!listaB->isIn(a->getInfo())){
+            
+            /* Almacenar en la lista*/
+            resultList->insert_back(a->getInfo());
+        }
+    }
+    if(resultList->_first == nullptr){
+        std::cout << " No hay elementos desiguales " << std::endl;
+    }
+    return resultList;
+}
 
 
 #endif /* LinkedList_hpp */
