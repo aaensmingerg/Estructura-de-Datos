@@ -117,6 +117,12 @@ public:
     
     /* Buscar si un valor está en la lista */
     virtual bool isIn(const T &) const;
+
+    /* Buscar datos en un rango */
+    LinkedList<T> * SubList(int, int);
+
+    /* Eliminar datos en un rango */
+    void DeleteRange(int , int);
     
 };
 
@@ -500,7 +506,45 @@ LinkedList<T> * LinkedList<T>::clone()
     return list;
 }
 
-/* Unir dos listas */
+/* ¡¡¡Nuevas funciones para actividad 2.1!!! */
+
+/* Imprimir los elementos desde un "from" hasta un "to"
+Complejidad: O(n) 
+*/
+template <class T>
+LinkedList<T> * LinkedList<T>::SubList(int from, int to){
+/* Crear una lista vacía */
+    LinkedList<T> * subList = new LinkedList<T>();
+    
+    /* Obtener una referencia al primer elemento, que será from */
+    Node<T> * tmp = this->at(from);
+    
+    /* Recorrer la lista */
+    while (tmp != at(to)->getNext()) {
+        /* Insertar un elemento en la lista nueva */
+        subList->insert_back( tmp->getInfo() );
+        
+        /* Desplazarse al siguiente elemento */
+        tmp = tmp->getNext();
+    }
+    return subList;   
+}
+
+/* Eliminar los elementos desde un "from" hasta un "to"
+Complejidad: O(n) 
+*/
+template <class T>
+void LinkedList<T>::DeleteRange(int from, int to){
+    /* Recorrer el rango establecido, en sentido inverso para que no haya problema con el índice */
+    for (int i = to; i >= from; i--){
+        /* Eliminar dato */
+        this->remove(i);
+    }
+}
+
+/* Unir dos listas 
+Complejidad: O(n) 
+*/
 template <class T>
 LinkedList<T> * LinkedList<T>::Union(LinkedList<T>* listaB){
     
@@ -529,7 +573,9 @@ LinkedList<T> * LinkedList<T>::Union(LinkedList<T>* listaB){
     }
 }
 
-/* Intersección de dos listas */
+/* Intersección de dos listas 
+Complejidad: O(n) 
+*/
 template <class T>
 LinkedList<T> * LinkedList<T>::Intersection(LinkedList<T>* listaB){
     
@@ -558,7 +604,9 @@ LinkedList<T> * LinkedList<T>::Intersection(LinkedList<T>* listaB){
     return resultList;
 }
 
-/* Buscar si un valor forma parte de la lista */
+/* Buscar si un valor forma parte de la lista 
+Complejidad: O(n) 
+*/
 template <class T>
 bool LinkedList<T>::isIn(const T & value) const{
     
@@ -580,7 +628,9 @@ bool LinkedList<T>::isIn(const T & value) const{
     return is;
 }
 
-/* Elementos que están en la lista pero no están en la lista ingresada como parametro */
+/* Elementos que están en la lista pero no están en la lista ingresada como parametro 
+Complejidad: O(n) 
+*/
 template <class T>
 LinkedList<T> * LinkedList<T>::Except(LinkedList<T>* listaB){
     

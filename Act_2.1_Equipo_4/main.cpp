@@ -67,39 +67,40 @@ int main(int argc, const char * argv[]) {
     std::cout << "(L) La lista tiene los siguientes elementos: " << std::endl;
     std::cout << *list << std::endl;
     
- 
-    /* Unir dos listas*/
-    std::cout << std::endl;
+    std::cout << "--- Demostracion de SubList lista ---" << std::endl;
+    LinkedList<int> * subList = list->SubList(0, 2);
+    std::cout << *subList << std::endl;
+
+    std::cout << "--- Demostracion de DeleteRange lista ---" << std::endl;
+    list->DeleteRange(0, 2);
+    std::cout << *list << std::endl;
+
+    /* Crear nueva lista */
     LinkedList<int> * listB = new LinkedList<int>();
     listB->insert_front(9);
     listB->insert_front(7);
     listB->insert_front(0);
-
-    /* Mostrar el contenido de la lista B*/
     std::cout << "(LB) La lista tiene los siguientes elementos: " << std::endl;
     std::cout << *listB << std::endl;
-    std::cout << "--- Demostración de union lista ---" << std::endl;
-    LinkedList<int> * listc =list->Union(listB);
+
+
+    std::cout << "--- Demostracion de union lista ---" << std::endl;
+    LinkedList<int> * listc = list->Union(listB);
     std::cout << "(L) La lista tiene los siguientes elementos: " << std::endl;
     std::cout << *listc << std::endl;
-    std::cout << std::endl;
-    
 
-    std::cout << "--- Demostración de Intersección lista ---" << std::endl;
-    LinkedList<int> * listd =list->Intersection(listB);
+    std::cout << "--- Demostracion de Interseccion lista ---" << std::endl;
+    LinkedList<int> * listd = list->Intersection(listB);
     std::cout << "(L) La lista tiene los siguientes elementos: " << std::endl;
     std::cout << *listd << std::endl;
-    std::cout << std::endl;
 
-    std::cout << "--- Demostración de Except lista ---" << std::endl;
-    LinkedList<int> * liste =list->Except(listB);
+    std::cout << "--- Demostracion de Except lista ---" << std::endl;
+    LinkedList<int> * liste = list->Except(listB);
     std::cout << "(L) La lista tiene los siguientes elementos: " << std::endl;
     std::cout << *liste << std::endl;
-    std::cout << std::endl;
     
-    std::cout << "--- Demostración de isIn lista ---" << std::endl;
+    std::cout << "--- Demostracion de isIn lista ---" << std::endl;
     std::cout << list->isIn(4) << std::endl;
-    
 
     return 0;
 }
