@@ -74,7 +74,7 @@ int main(int argc, const char * argv[]) {
     std::cout << *subList << std::endl;
 
     std::cout << "--- Demostracion de DeleteRange lista ---" << std::endl;
-    list->DeleteRange(0, 2);
+    list->DeleteRange(2, 3);
     std::cout << *list << std::endl;
 
     /* Crear nueva lista */
