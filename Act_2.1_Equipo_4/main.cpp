@@ -1,9 +1,11 @@
-//
-//  main.cpp
-//  LinkedList
-//
-//  Created by Vicente Cubells on 25/09/20.
-//
+/* Este programa es una continuación de la implementación de una lista ligada
+y sus funciones, la mayoría de los métodos son tomados del archivo "LinkedList",
+proporcionado por el profesor. Lo nuevo que se incluye son las funciones que permiten buscar
+y eliminar en un rango, unir dos lista, realizar la función matemática intersección entre dos
+listas y comparar dos lista y devolver las elementos únicos de la primera, a través de otra función que revisa
+si pertenece o no.
+Aquiles Ensminger A01781243 y Javier Lozano A01029756
+Fecha de Entrega: Viernes 1 de Octubre de 2021  */
 
 #include <iostream>
 #include "Node.hpp"
