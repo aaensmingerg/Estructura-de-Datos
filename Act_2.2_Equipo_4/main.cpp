@@ -19,4 +19,8 @@ int main(){
     ConexionesComputadora c1("1", "Aquiles", e1, s1);
     c1.printEntrante();
     c1.printSaliente();
+    c1.direcccionIterna("28");
+    c1.printIP();
+    c1.direcccionIterna("150");
+    c1.printIP();
 }
