@@ -79,7 +79,7 @@ int main(int argc, const char * argv[]) {
 
     /* Crear nueva lista */
     LinkedList<int> * listB = new LinkedList<int>();
-    listB->insert_front(9);
+    listB->insert_front(8);
     listB->insert_front(7);
     listB->insert_front(0);
     std::cout << "(LB) La lista tiene los siguientes elementos: " << std::endl;

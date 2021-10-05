@@ -574,7 +574,7 @@ LinkedList<T> * LinkedList<T>::Union(LinkedList<T>* listaB){
 }
 
 /* Intersección de dos listas 
-Complejidad: O(n) 
+Complejidad: O(n^2) 
 */
 template <class T>
 LinkedList<T> * LinkedList<T>::Intersection(LinkedList<T>* listaB){
