@@ -2,13 +2,12 @@
 #include <string>
 #include <fstream>
 #include <sstream>
-#include <stack>
-
+#include <queue>
 
 class ConexionesSalientes{
     private:
     std::string fileName;
-    std::stack<string> ipOrigen;
+    std::queue<string> ipOrigen;
     public:
     ConexionesSalientes(string fileName_){
         fileName = fileName_;
@@ -29,7 +28,7 @@ class ConexionesSalientes{
         }
         file.close();
     }
-    stack<string> getIPOrigen(){
+    queue<string> getIPOrigen(){
         return ipOrigen;
     }
 };

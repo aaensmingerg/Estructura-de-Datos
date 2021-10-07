@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <stack>
 #include <sstream>
 #include <queue>
 
@@ -8,7 +9,7 @@
 class ConexionesEntrantes{
     private:
     std::string fileName;
-    std::queue<string> ipDestino;
+    std::stack<string> ipDestino;
     public:
     ConexionesEntrantes(string fileName_){
         fileName = fileName_;
@@ -29,7 +30,7 @@ class ConexionesEntrantes{
         }
         file.close();
     }
-    queue<string> getIPDestino(){
+    stack<string> getIPDestino(){
         return ipDestino;
     }
 };
