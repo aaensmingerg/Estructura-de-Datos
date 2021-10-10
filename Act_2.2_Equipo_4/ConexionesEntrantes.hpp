@@ -4,31 +4,24 @@
 #include <stack>
 #include <sstream>
 #include <queue>
-
-
+#include "File.hpp"
+using namespace std;
 class ConexionesEntrantes{
     private:
-    std::string fileName;
-    std::stack<string> ipDestino;
+    string fileName;
+    stack<string> ipDestino;
+    string ipComp = "172.17.230";
     public:
-    ConexionesEntrantes(string fileName_){
-        fileName = fileName_;
-        std::string line,word;
-        std::string row[8];
-        std::ifstream file;
-        int j = 0;
-        file.open(fileName);
-        while(getline(file, line)){
-            stringstream sS(line);
-            int i = 0;
-            while(getline(sS, word, ',')){
-                row[i] = word;
-                i++;
-            }
-            ipDestino.push(row[5]);
-            j++;
+    ConexionesEntrantes(string iP, File f1){
+        vector<string> ipDestinoFile = f1.getIpDestino();
+        for(int i=0; i < iP.size(); i++){
+            ipComp.push_back(iP[i]);
         }
-        file.close();
+        for(int i=0; i < ipDestinoFile.size(); i++){
+            if(ipDestinoFile[i] == ipComp){
+                ipDestino.push(ipDestinoFile[i]);
+            }
+        } 
     }
     stack<string> getIPDestino(){
         return ipDestino;

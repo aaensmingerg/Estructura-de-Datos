@@ -35,6 +35,14 @@ vector<Fecha> File::getFecha(){
     return fecha;
 }
 
+vector<string> File::getIpDestino(){
+    return ipDestino;
+}
+
+vector<string> File::getIpOrigen(){
+    return ipDestino;
+}
+
 vector<string> File::getNombreDestino(){
     return nombreDestino;
 }
