@@ -46,14 +46,17 @@ class File{
     /* Getter de fecha */
     vector<Fecha> getFecha();
     
+    /* Getter de ipDestino*/
+    vector<string> getIpDestino();
+
+    /* Getter de ipOrigen*/
+    vector<string> getIpOrigen();
+
     /* Getter de nombreDestino */
     vector<string> getNombreDestino();
 
-    /* Getter de ipOrigen */
-    vector<string> getIpOrigen();
-
-    /* Getter de ipDestino */
-    vector<string> getIpDestino();
+    /* Getter de nombreDestino */
+    vector<string> getNombreOrigen();
 
     /* Getter de puertoOrigen */
     vector<string> getPuertoOrigen();

@@ -40,11 +40,15 @@ vector<string> File::getIpDestino(){
 }
 
 vector<string> File::getIpOrigen(){
-    return ipDestino;
+    return ipOrigen;
 }
 
 vector<string> File::getNombreDestino(){
     return nombreDestino;
+}
+
+vector<string> File::getNombreOrigen(){
+    return nombreOrigen;
 }
 
 template<class T>
