@@ -8,17 +8,7 @@
 using namespace std;
 class ConexionesComputadora{
     private:
-    /*
-
-    El nombre se asigna como parametro o se determina 
-    a partir de una busqueda del documento donde sea igual 
-    la ip dada?
-
-
-    No contamos los valores "-"?
-    */
-
-    string IP = "172.17.230", nombre;
+    string IP = "172.17.230.", nombre;
     ConexionesEntrantes* ConexionEntrante;
     ConexionesSalientes* ConexionSaliente;
     File archivoPadre;
