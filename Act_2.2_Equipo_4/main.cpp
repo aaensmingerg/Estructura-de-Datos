@@ -19,6 +19,8 @@ Fecha de Entrega: Lunes 11 de Octubre de 2021  */
 int main(){
     /* Lectura del archivo csv */
     File f1("equipo4.csv");
+
+    /* Crear objeto de conexiones computadora */
     ConexionesComputadora c1(".146","Aquiles",f1);
     
     cout << "Que direccion ip estas usando?" << endl; 

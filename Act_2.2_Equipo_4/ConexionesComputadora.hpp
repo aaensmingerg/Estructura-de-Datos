@@ -37,7 +37,7 @@ class ConexionesComputadora{
         ConexionSaliente = s1;
     }
 
-    /* Determina si el valor parámetro de tipo string "ip" pertenece a las ip internas */
+    /* Determina si el valor parámetro de tipo string "ip" pertenece a las ip internas segmento de red.... */
     void isInterna(string IP_);
 
     /* Imprime el valor de IP */
