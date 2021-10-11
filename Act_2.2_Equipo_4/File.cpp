@@ -1,13 +1,5 @@
-#include <iostream>
-#include <string>
-#include <fstream>
-#include <vector>
-#include <sstream>
-#include <algorithm>
 #include "File.hpp"
-#include "Busqueda.hpp"
-#include "Ordenamiento.hpp"
-#include <algorithm>
+
 using namespace std;
         
 

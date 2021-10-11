@@ -4,12 +4,14 @@
 #include <stack>
 #include <sstream>
 #include <queue>
-
+using namespace std;
 
 class ConexionesEntrantes{
     private:
-    std::stack<string> ipDestino;
+    stack<string> ipDestino;
     public:
+    
+    /* Constructor de la clase */
     ConexionesEntrantes(string iP, File f1){
          vector<string> ipDestinoFile = f1.getIpDestino();
          vector<string> ipOrigenFile = f1.getIpOrigen();
@@ -19,10 +21,11 @@ class ConexionesEntrantes{
             }
         } 
     }
-    stack<string> getIPDestino(){
-        return ipDestino;
-    }
-    int size(){
-        return ipDestino.size();
-    }
+
+    /* Getter del stack ipDestino */
+    stack<string> getIPDestino();
+
+    /* size regresa el tamaño del stack ipDestino */
+    int size();
+    
 };
