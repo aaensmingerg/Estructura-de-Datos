@@ -8,19 +8,18 @@
 using namespace std;
 class ConexionesComputadora{
     private:
-    string IP = "172.17.230.", nombre;
+    string IP = "172.17.230.";
     ConexionesEntrantes* ConexionEntrante;
     ConexionesSalientes* ConexionSaliente;
     File archivoPadre;
     public:
     
     /* Constructor de la Clase */
-    ConexionesComputadora(string IP_, string nombre_, File f1){
+    ConexionesComputadora(string IP_, File f1){
         for(int i=0; i < IP_.size(); i++){
             IP.push_back(IP_[i]);
         }
         archivoPadre = f1;
-        nombre = nombre_;
         ConexionesEntrantes* e1 = new ConexionesEntrantes(IP,f1);
         ConexionesSalientes* s1 = new ConexionesSalientes(IP,f1);
         ConexionEntrante = e1;
@@ -39,9 +38,15 @@ class ConexionesComputadora{
     /* Regresa el valor de la primera conexión saliente */
     string saliente();
 
-    /* imprime el número de conexiones entrantes totales */
+    /* Imprime el número de conexiones entrantes totales */
     void entrantesTotales();
 
-    /* imprime el número de conexiones entrantes salientes */
+    /* Imprime el número de conexiones entrantes salientes */
     void salientesTotales();
+
+    vector<string> ConversionVectorDestino();
+
+    vector<string> ConversionVectorOrigen();
+
+    string conexionesSeguidas();
 };

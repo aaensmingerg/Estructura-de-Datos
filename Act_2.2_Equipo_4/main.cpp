@@ -21,7 +21,7 @@ int main(){
     File f1("equipo4.csv");
 
     /* Crear objeto de conexiones computadora */
-    ConexionesComputadora c1("146","Aquiles",f1);
+    ConexionesComputadora c1("72",f1);
     
     cout << "Que direccion ip estas usando?" << endl; 
     c1.printIp();
@@ -34,5 +34,6 @@ int main(){
     c1.entrantesTotales();
     cout << "Cuantas conexiones salientes tiene esta computadora?" << endl;
     c1.salientesTotales();
-    
+    cout << "Tiene esta computadora tres conexiones seguidas" << endl;
+    cout << " Tiene 3 conexiones seguidas a la direccion: " << c1.conexionesSeguidas() << endl;
 }
