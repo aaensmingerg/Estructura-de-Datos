@@ -3,32 +3,26 @@
 #include <fstream>
 #include <sstream>
 #include <queue>
+using namespace std;
 
 class ConexionesSalientes{
     private:
-    std::string fileName;
     std::queue<string> ipOrigen;
     public:
-    ConexionesSalientes(string fileName_){
-        fileName = fileName_;
-        std::string line,word;
-        std::string row[8];
-        std::ifstream file;
-        int j = 0;
-        file.open(fileName);
-        while(getline(file, line)){
-            stringstream sS(line);
-            int i = 0;
-            while(getline(sS, word, ',')){
-                row[i] = word;
-                i++;
+
+    /* Constructor de la clase */
+    ConexionesSalientes(string iP, File f1){
+        vector<string> ipOrigenFile = f1.getIpOrigen();
+        for(int i=0; i < ipOrigenFile.size(); i++){
+            if(ipOrigenFile[i] == iP){
+                ipOrigen.push(ipOrigenFile[i]);
             }
-            ipOrigen.push(row[2]);
-            j++;
-        }
-        file.close();
+        }   
     }
-    queue<string> getIPOrigen(){
-        return ipOrigen;
-    }
+    
+    /* Getter de la queue ipOrigen */
+    queue<string> getIPOrigen();
+    
+    /* size Regresa el tamaño de la queue ipOrigen */ 
+    int size();
 };

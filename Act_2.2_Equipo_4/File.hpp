@@ -3,8 +3,10 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
+#include <algorithm>
 #include "Fecha.cpp"
 #include "Ordenamiento.hpp"
+#include "Busqueda.hpp"
 using namespace std;
 
 /* La implementación se encuentra en su respectivo .cpp*/
@@ -14,6 +16,7 @@ class File{
         vector<Fecha> fecha;
         vector<string> hora,ipOrigen,puertoOrigen,nombreOrigen,ipDestino,puertoDestino,nombreDestino;
     public:
+    File(){}
     /* Constructor de la clase*/
     File(string fileName_){
         fileName = fileName_;
@@ -46,8 +49,17 @@ class File{
     /* Getter de fecha */
     vector<Fecha> getFecha();
     
+    /* Getter de ipDestino*/
+    vector<string> getIpDestino();
+
+    /* Getter de ipOrigen*/
+    vector<string> getIpOrigen();
+
     /* Getter de nombreDestino */
     vector<string> getNombreDestino();
+
+    /* Getter de nombreDestino */
+    vector<string> getNombreOrigen();
 
     /* Getter de puertoOrigen */
     vector<string> getPuertoOrigen();

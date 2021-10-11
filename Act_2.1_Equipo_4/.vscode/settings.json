@@ -18,9 +18,19 @@
         "vector": "cpp",
         "exception": "cpp",
         "algorithm": "cpp",
+<<<<<<< HEAD
         "memory": "cpp",
         "memory_resource": "cpp",
         "optional": "cpp",
+=======
+        "functional": "cpp",
+        "iterator": "cpp",
+        "memory": "cpp",
+        "memory_resource": "cpp",
+        "numeric": "cpp",
+        "optional": "cpp",
+        "random": "cpp",
+>>>>>>> Javier
         "string": "cpp",
         "string_view": "cpp",
         "system_error": "cpp",
@@ -38,6 +48,10 @@
         "sstream": "cpp",
         "stdexcept": "cpp",
         "streambuf": "cpp",
+<<<<<<< HEAD
+=======
+        "cinttypes": "cpp",
+>>>>>>> Javier
         "typeinfo": "cpp"
     }
 }

@@ -1,13 +1,5 @@
-#include <iostream>
-#include <string>
-#include <fstream>
-#include <vector>
-#include <sstream>
-#include <algorithm>
 #include "File.hpp"
-#include "Busqueda.hpp"
-#include "Ordenamiento.hpp"
-#include <algorithm>
+
 using namespace std;
         
 
@@ -35,8 +27,20 @@ vector<Fecha> File::getFecha(){
     return fecha;
 }
 
+vector<string> File::getIpDestino(){
+    return ipDestino;
+}
+
+vector<string> File::getIpOrigen(){
+    return ipOrigen;
+}
+
 vector<string> File::getNombreDestino(){
     return nombreDestino;
+}
+
+vector<string> File::getNombreOrigen(){
+    return nombreOrigen;
 }
 
 template<class T>
