@@ -179,6 +179,8 @@ int main(int argc, const char * argv[]) {
     
     /* Fin ejercicios Tarea 3.1 */
 
+    
+
     exist = bst->search(20);
     /* Buscar si el nodo existe */
     std::cout << (exist ? "(S) El valor 20 se encontró" : "(S) El valor 20 no existe") << std::endl;
