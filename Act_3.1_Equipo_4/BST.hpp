@@ -107,7 +107,7 @@ bool BST<T>::insert(TreeNode<T> * node )
 template <class T>
 void BST<T>::getAltura(std::vector<T> hojas){
     int mayor = 0;
-    for (int n =0; n < hojas.size(); n++){
+    for (int n = 0; n < hojas.size(); n++){
         TreeNode <int> * hoja = search(hojas[n]);
         int nivel = getNivel(hoja);
         if (nivel > mayor){
@@ -119,19 +119,19 @@ void BST<T>::getAltura(std::vector<T> hojas){
 
 template <class T>
 void BST<T>::getAncestors(TreeNode<T> * node){
-    TreeNode<T> * aux = this->root;
-    while (node != aux){
-        std::cout << *node->getParent() << std::endl;
-        node = node->getParent();
+    TreeNode<T> * aux = node;
+    while (this->root != aux){
+        std::cout << *aux->getParent() << std::endl;
+        aux = aux->getParent();
     }
 }
 
 template <class T>
 int BST<T>::getNivel(TreeNode<T> * node){
-    TreeNode<T> * aux = this->root;
+    TreeNode<T> * aux = node;
     int cuenta = 1;
-    while (node != aux){
-        node = node->getParent();
+    while (this->root != aux){
+        aux = aux->getParent();
         cuenta++;
     }
     return cuenta;
