@@ -118,6 +118,7 @@ int main(int argc, const char * argv[]) {
     TreeNode<int> * ne = new TreeNode<int>(6);
     TreeNode<int> * nf = new TreeNode<int>(9);
     TreeNode<int> * ng = new TreeNode<int>(7);
+    TreeNode<int> * nh = new TreeNode<int>(3);
     
     bst->insert(na);
     bst->insert(nb);
@@ -126,6 +127,7 @@ int main(int argc, const char * argv[]) {
     bst->insert(ne);
     bst->insert(nf);
     bst->insert(ng);
+    bst->insert(nh);
 
     
     /* Insertar un nodo repetido */
@@ -168,15 +170,18 @@ int main(int argc, const char * argv[]) {
     hojas = bst->printLeaf(hojas);
     std::cout << std::endl;
     std::cout << "2) La mayor altura es: " << std::endl;
-    bst->getAltura(hojas);
+    bst->height(hojas);
     
 
     /* Buscar todos los antecesores de un número */
     std::cout << "3) Sus ancestros son: " << std::endl;
-    bst->getAncestors(exist);
+    bst->ancestors(exist);
     std::cout << "4) Su nivel es: " << std::endl;
-    std::cout << bst->getNivel(exist) << std::endl;
-    
+    std::cout << bst->whatlevelami(exist) << std::endl;
+    std::cout << "Imprimir por nivel"<< std::endl;
+    bst->levelByLevel();
+
+
     /* Fin ejercicios Tarea 3.1 */
 
     

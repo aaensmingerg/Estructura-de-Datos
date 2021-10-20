@@ -22,9 +22,12 @@ public:
     bool insert(T &);
     bool insert(TreeNode<T> * );
 
-    void getAltura(std::vector<T>);
-    void getAncestors(TreeNode<T> * );
-    int getNivel(TreeNode<T> * );
+    int height(std::vector<T>);
+    void ancestors(TreeNode<T> * );
+    int whatlevelami(TreeNode<T> * );
+    
+    void levelByLevel();
+    void levelByLevel(TreeNode<T> *, int);
     
     
 private:
@@ -105,20 +108,21 @@ bool BST<T>::insert(TreeNode<T> * node )
 }
 
 template <class T>
-void BST<T>::getAltura(std::vector<T> hojas){
+int BST<T>::height(std::vector<T> hojas){
     int mayor = 0;
     for (int n = 0; n < hojas.size(); n++){
         TreeNode <int> * hoja = search(hojas[n]);
-        int nivel = getNivel(hoja);
+        int nivel = whatlevelami(hoja);
         if (nivel > mayor){
             mayor = nivel;
         }
     }
     std::cout << mayor << std::endl;
+    return mayor;
 }
 
 template <class T>
-void BST<T>::getAncestors(TreeNode<T> * node){
+void BST<T>::ancestors(TreeNode<T> * node){
     TreeNode<T> * aux = node;
     while (this->root != aux){
         std::cout << *aux->getParent() << std::endl;
@@ -127,7 +131,7 @@ void BST<T>::getAncestors(TreeNode<T> * node){
 }
 
 template <class T>
-int BST<T>::getNivel(TreeNode<T> * node){
+int BST<T>::whatlevelami(TreeNode<T> * node){
     TreeNode<T> * aux = node;
     int cuenta = 1;
     while (this->root != aux){
@@ -137,4 +141,26 @@ int BST<T>::getNivel(TreeNode<T> * node){
     return cuenta;
 }
 
+template <class T>
+void BST<T>::levelByLevel(){
+    this->levelByLevel( this->root, 0 );
+}
+
+template <class T>
+void BST<T>::levelByLevel(TreeNode<T> * node, int altura) {
+    if (node != nullptr) {
+        altura ++;
+
+        if (this->whatlevelami(node) == altura){
+            std::cout << "Nivel " << altura << " : "<< *node << std::endl;
+        }
+
+        /* Desplazarse a la derecha */
+        levelByLevel( node->getRight(), altura );
+        
+        /* Desplazarse a la izquierda */
+        levelByLevel( node->getLeft(), altura );        
+
+    }
+}
 #endif /* BST_hpp */
