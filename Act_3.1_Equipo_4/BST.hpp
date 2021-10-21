@@ -23,17 +23,24 @@ public:
     bool insert(T &);
     bool insert(TreeNode<T> * );
 
-    int height(std::vector<T>);
+    int height();
+
     void ancestors(TreeNode<T> * );
+    
     int whatlevelami(TreeNode<T> * );
     
     void levelByLevel();
     void levelByLevel(TreeNode<T> *);
-    
+
+    void visit(int);
+
+    void setLevels(); 
+    void setLevels(TreeNode<T> *);    
     
 private:
     /* Ocultar algunos métodos heredados */
     //using BinaryTree<T>::insert;
+    int altura = 0;
 };
 template <class T>
 TreeNode<T> * BST<T>::search(const T & value) const
@@ -109,18 +116,8 @@ bool BST<T>::insert(TreeNode<T> * node )
 }
 
 template <class T>
-int BST<T>::height(std::vector<T> hojas){
-    int mayor = 0;
-    for (int n = 0; n < hojas.size(); n++){
-        TreeNode <int> * hoja = search(hojas[n]);
-        int nivel = whatlevelami(hoja);
-        if (nivel > mayor){
-            mayor = nivel;
-        }
-    }
-    
-    std::cout << mayor << std::endl;
-    return mayor;
+int BST<T>::height(){
+   return this->altura;
 }
 
 template <class T>
@@ -134,13 +131,7 @@ void BST<T>::ancestors(TreeNode<T> * node){
 
 template <class T>
 int BST<T>::whatlevelami(TreeNode<T> * node){
-    TreeNode<T> * aux = node;
-    int cuenta = 1;
-    while (this->root != aux){
-        aux = aux->getParent();
-        cuenta++;
-    }
-    return cuenta;
+    return node->getAltura();
 }
 
 template <class T>
@@ -167,6 +158,47 @@ void BST<T>::levelByLevel(TreeNode<T> * node) {
         
         TreeNode<T>* Izq = aux->getLeft();
         if (Izq != nullptr){
+            q.push(Izq);
+        }
+
+        TreeNode<T>* Der = aux->getRight();
+        if (Der != nullptr){
+            q.push(Der);
+        }
+
+        if (alturaActual != auxLevel){
+            alturaActual += 1 ;
+            std::cout << std::endl <<"Nivel " << alturaActual << ": ";
+            
+        }
+        std::cout << *aux << " - "; 
+
+    }
+}
+
+template <class T>
+void BST<T>::setLevels(){
+    if (!this->empty()){
+    this->root->setAltura(1);
+    this->setLevels( this->root);
+    }
+}
+
+template <class T>
+void BST<T>::setLevels(TreeNode<T> * node) {
+    std::queue< TreeNode <T>* > q;
+    TreeNode<T>* aux;
+    q.push(node);
+    
+    int alturaActual = 0;
+
+    while (!q.empty()){
+        aux = q.front();
+        int auxLevel = aux->getAltura();
+        q.pop();
+        
+        TreeNode<T>* Izq = aux->getLeft();
+        if (Izq != nullptr){
             Izq->setAltura(auxLevel + 1);
             q.push(Izq);
         }
@@ -179,11 +211,39 @@ void BST<T>::levelByLevel(TreeNode<T> * node) {
 
         if (alturaActual != auxLevel){
             alturaActual += 1 ;
-            std::cout << std::endl <<"Nivel " << alturaActual << ": ";
-            
+            this->altura = alturaActual;
         }
-        std::cout << *aux << " - "; 
-
     }
+}
+
+template <class T>
+void BST<T>::visit(int opt){
+    switch (opt)
+    {
+    case 1:
+        std::cout << std::endl <<"Se imprime el BST en PreOrden" << std::endl;
+        this->preOrden();
+        std::cout << std::endl;
+        break;
+    
+    case 2:
+        std::cout << std::endl << "Se imprime el BST en InOrden" << std::endl;
+        this->inOrden();
+        std::cout << std::endl;
+        break;
+    case 3:
+        std::cout << std::endl << "Se imprime el BST en PostOrden" << std::endl;
+        this->postOrden();
+        std::cout << std::endl;
+        break;
+    case 4:
+        std::cout << std::endl << "Se imprime el BST por nivel " << std::endl;
+        this->levelByLevel();
+        std::cout << std::endl;
+        break;
+    default:
+        break;
+    }
+
 }
 #endif /* BST_hpp */
