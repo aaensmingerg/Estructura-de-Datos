@@ -16,24 +16,45 @@ class BST : public BinaryTree<T>
 {
     
 public:
+
+    /* Constructor de la clase */
     BST() {};
+    
+    /*Destructor de la clase */
     virtual ~BST() { };
     
+    /* Search recibe como parámetro un valor 
+    a buscar dentro del arbol */
     TreeNode<T> * search(const T &) const;
+    
+    /* Insert recibe un valorr a insertar
+    dentro del árbol */
     bool insert(T &);
     bool insert(TreeNode<T> * );
 
+    /* Heihgt regresa la altura del arbol binario */
     int height();
 
+    /* ancestors regresa los padres del nodo 
+    planteado como parámetro*/
     void ancestors(TreeNode<T> * );
     
+    /* Whatlevelami toma un apuntar a un nodo 
+    y devuelve el nivel en el que este se encuentra */
     int whatlevelami(TreeNode<T> * );
     
+    /* levelBYlevel imprime el valor de los nodos
+    por nivel */
     void levelByLevel();
     void levelByLevel(TreeNode<T> *);
 
+    /* Visit  toma como parámetro un entero entre 1 y 4
+    y ejecuta el método de impresión correspondiente
+    1. Preorden, 2. Inorden, 3. Postorden, 4. Levelbylevel */
     void visit(int);
 
+    /* Setlevels recorre los nodos del árbol y asigna la 
+    altura que le corresponde al nodo */
     void setLevels(); 
     void setLevels(TreeNode<T> *);    
     
@@ -136,6 +157,8 @@ int BST<T>::whatlevelami(TreeNode<T> * node){
 
 template <class T>
 void BST<T>::levelByLevel(){
+
+    /* Confirmar que el BST sea válido */
     if (!this->empty()){
     this->root->setAltura(1);
     this->levelByLevel( this->root);
@@ -144,28 +167,44 @@ void BST<T>::levelByLevel(){
 
 template <class T>
 void BST<T>::levelByLevel(TreeNode<T> * node) {
+    
+    /* Defición de queue para alamcenar los nodos */
     std::queue< TreeNode <T>* > q;
+
+    /* Nodo auxiliar para comparar */
     TreeNode<T>* aux;
 
+    /* Insertar la raiz del nodo como primer elemento de la queue */
     q.push(node);
     
+    /* Inicialización de la altura del arbol */
     int alturaActual = 0;
 
+    /* Recorrer los nodos por nivel hasta llegar al final */
     while (!q.empty()){
+
+        /* almacenar el primer valor de la queue en quxiliar*/
         aux = q.front();
+
+        /* Inicialización de la altura del arbol */
         int auxLevel = aux->getAltura();
+
         q.pop();
         
+        /* Recorrer izquierda */
         TreeNode<T>* Izq = aux->getLeft();
         if (Izq != nullptr){
             q.push(Izq);
         }
 
+        /* Recorrer Derecha */ 
         TreeNode<T>* Der = aux->getRight();
         if (Der != nullptr){
             q.push(Der);
         }
 
+        /* Aumentar la altura actual si se
+        recoren todos los nodos del nivel */
         if (alturaActual != auxLevel){
             alturaActual += 1 ;
             std::cout << std::endl <<"Nivel " << alturaActual << ": ";
@@ -186,29 +225,47 @@ void BST<T>::setLevels(){
 
 template <class T>
 void BST<T>::setLevels(TreeNode<T> * node) {
+    
+    /* Defición de queue para alamcenar los nodos */
     std::queue< TreeNode <T>* > q;
+
+    /* Nodo auxiliar para comparar */
     TreeNode<T>* aux;
+
+    /* Insertar la raiz del nodo como primer elemento de la queue */
     q.push(node);
     
+    /* Inicialización de la altura del arbol */
     int alturaActual = 0;
 
+    /* Insertar los nodos por nivel hasta llegar al final */
     while (!q.empty()){
+
+        /* almacenar el primer valor de la queue en quxiliar*/
         aux = q.front();
+
+        /*Obtener altura del nodo */
         int auxLevel = aux->getAltura();
+        
+        /* Eliminar el primer elemento de la queue */
         q.pop();
         
+        /* Recorrer izquierda */
         TreeNode<T>* Izq = aux->getLeft();
         if (Izq != nullptr){
             Izq->setAltura(auxLevel + 1);
             q.push(Izq);
         }
 
+        /* Recorrer Derecha */
         TreeNode<T>* Der = aux->getRight();
         if (Der != nullptr){
             Der->setAltura(auxLevel + 1);
             q.push(Der);
         }
 
+        /* Aumentar la altura actual si se
+        recoren todos los nodos del nivel */
         if (alturaActual != auxLevel){
             alturaActual += 1 ;
             this->altura = alturaActual;
