@@ -42,7 +42,7 @@ public:
     TreeNode<T> * getParent() const { return parent; }
     void setParent(TreeNode<T> * value) { parent = value; }
 
-    int setAltura(int);
+    void setAltura(int);
     int getAltura();
     
     /* Sobrecarga operador == */
@@ -83,7 +83,7 @@ bool TreeNode<T>::operator !=(TreeNode<T> & other)
 }
 
 template<class T>
-int TreeNode<T>::setAltura(int altura_){
+void TreeNode<T>::setAltura(int altura_){
     altura = altura_;
 }
 
