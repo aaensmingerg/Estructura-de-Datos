@@ -9,7 +9,7 @@
 sobre la que se implementan los métodos "Visit", "Height", "whatlevelami" y 
 "ancestors". Estos se encuentran definidos en el archivo BST.hpp.
 Aquiles Ensminger A01781243 y Javier Lozano A01029756
-Fecha de Entrega: Lunes 11 de Octubre de 2021  */
+Fecha de Entrega: Viernes 22 de Octubre de 2021  */
 
 #include <iostream>
 #include <vector>
