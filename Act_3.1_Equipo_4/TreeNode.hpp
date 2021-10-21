@@ -13,7 +13,7 @@
 template <class T>
 class TreeNode {
 private:
-    int altura;
+    int altura = 0;
     T info;
     TreeNode<T> * left = nullptr;
     TreeNode<T> * right = nullptr;

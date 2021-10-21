@@ -5,6 +5,7 @@
 //  Created by Vicente Cubells on 20/10/20.
 //
 
+#include <queue>
 #ifndef BST_hpp
 #define BST_hpp
 
@@ -27,7 +28,7 @@ public:
     int whatlevelami(TreeNode<T> * );
     
     void levelByLevel();
-    void levelByLevel(TreeNode<T> *, int);
+    void levelByLevel(TreeNode<T> *);
     
     
 private:
@@ -117,6 +118,7 @@ int BST<T>::height(std::vector<T> hojas){
             mayor = nivel;
         }
     }
+    
     std::cout << mayor << std::endl;
     return mayor;
 }
@@ -143,23 +145,44 @@ int BST<T>::whatlevelami(TreeNode<T> * node){
 
 template <class T>
 void BST<T>::levelByLevel(){
-    this->levelByLevel( this->root, 0 );
+    if (!this->empty()){
+    this->root->setAltura(1);
+    this->levelByLevel( this->root);
+    }
 }
 
 template <class T>
-void BST<T>::levelByLevel(TreeNode<T> * node, int altura) {
-    if (node != nullptr) {
-        altura ++;
+void BST<T>::levelByLevel(TreeNode<T> * node) {
+    std::queue< TreeNode <T>* > q;
+    TreeNode<T>* aux;
 
-        if (this->whatlevelami(node) == altura){
-            std::cout << "Nivel " << altura << " : "<< *node << std::endl;
+    q.push(node);
+    
+    int alturaActual = 0;
+
+    while (!q.empty()){
+        aux = q.front();
+        int auxLevel = aux->getAltura();
+        q.pop();
+        
+        TreeNode<T>* Izq = aux->getLeft();
+        if (Izq != nullptr){
+            Izq->setAltura(auxLevel + 1);
+            q.push(Izq);
         }
 
-        /* Desplazarse a la derecha */
-        levelByLevel( node->getRight(), altura );
-        
-        /* Desplazarse a la izquierda */
-        levelByLevel( node->getLeft(), altura );        
+        TreeNode<T>* Der = aux->getRight();
+        if (Der != nullptr){
+            Der->setAltura(auxLevel + 1);
+            q.push(Der);
+        }
+
+        if (alturaActual != auxLevel){
+            alturaActual += 1 ;
+            std::cout << std::endl <<"Nivel " << alturaActual << ": ";
+            
+        }
+        std::cout << *aux << " - "; 
 
     }
 }
