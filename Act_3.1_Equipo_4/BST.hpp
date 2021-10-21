@@ -3,7 +3,7 @@
 //  BinaryTree
 //
 //  Created by Vicente Cubells on 20/10/20.
-//
+//  Updarted by Aquiles Ensminger and Javier Lozano 
 
 #include <queue>
 #ifndef BST_hpp
