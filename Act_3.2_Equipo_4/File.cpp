@@ -54,6 +54,21 @@ vector<T> File::valoresUnicos(vector<T> vectorBusqueda){
     return unicos;
 }
 
+template<class T>
+vector<T> File::valoresUnicosDia(vector<T> vectorBusqueda,Fecha dia){
+    vector<T> unicos = {vectorBusqueda[0]};
+    T valorComparar = vectorBusqueda[0];
+    for(int i=0; i < vectorBusqueda.size(); i++){
+        if(vectorBusqueda[i] != valorComparar && fecha[i] == dia){
+            if(i > 0 && vectorBusqueda[i-1] != valorComparar){
+                unicos.push_back(vectorBusqueda[i]);
+                valorComparar = vectorBusqueda[i];
+            }
+        }
+    }
+    return unicos;
+}
+
 void File::busquedaNombre(){
     vector<string> nombres = {"jeffrey.reto.com","betty.reto.com","katherine.reto.com",
     "scott.reto.com","benjamin.reto.com","samuel.reto.com","raymond.reto.com","server.reto.com"};
@@ -130,4 +145,31 @@ void File::printPuertos(vector<int> puertos){
             cout << puertos[i] << ", ";
         }  
     }
+}
+
+map<string,int> File::conexionesPorDia(string dia_){
+    
+    map<string,int> conexiones;
+    Fecha dia = Fecha(dia_);
+    vector<string> ipDestinoUnicos = valoresUnicosDia(ipDestino,dia);
+    int f = 0;
+    
+    /* Recorrer la lista de direcciones por cada direccion en la lista*/
+    for(int i=0; i < ipDestinoUnicos.size(); i++){
+        int contador = 0;
+        /* recorrer la lista de direcciones buscando el dia y la conexion dada*/
+        for (int i=0; i <fecha.size(); i ++){
+
+            /* Comprobar que sea el mismo dia y misma conexion*/
+            if (fecha[i] == dia && ipDestino[i] == ipDestinoUnicos[f] && ipDestino[i] != "-"){
+                contador ++;
+            }
+        }
+        /* Insertar en el mapa */
+        conexiones.insert(pair<string,int>(ipDestinoUnicos[f],contador));
+        f ++;
+    }
+
+    return conexiones;
+
 }

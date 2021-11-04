@@ -3,6 +3,7 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
+#include <map>
 #include "Fecha.cpp"
 #include "Ordenamiento.hpp"
 using namespace std;
@@ -64,6 +65,11 @@ class File{
     solo si el vector se encuentra ordenado  */
     template<class T>
     vector<T> valoresUnicos(vector<T>);
+    
+    /* La función "ValoresUnicosDIa" regresa los valores unicos de un vector que correspondan a una misma fecha, 
+    solo si el vector se encuentra ordenado  */
+    template<class T>
+    vector<T> valoresUnicosDia(vector<T>,Fecha);
 
     /* La funcion "printNombresUnicos" imprime 
     los valores unicos de la columna nombre */
@@ -83,4 +89,8 @@ class File{
 
     /* La función "printPuertos" imprime los puertos destino debajo del 1000 */
     void printPuertos(vector<int>);
+
+    /* Crea un Mapa con llave: nombre de conexion del dia indicado
+     y valor: conexiones en el dia */
+    map<string, int> conexionesPorDia(string);
 };

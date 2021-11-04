@@ -38,5 +38,13 @@ int main(){
     cout << "---6. Considerando solamente los puertos destino. Que puertos abajo del 1000 se estan usando?---  " << endl;
     cout << "R. ";
     f1.puertosUsados();
+    cout << "---7. Demostracion mapa ---  " << endl;
+    cout << "R. " << endl;
+    map<string,int> mapa = f1.conexionesPorDia("10-8-2021");
+    for (auto r: mapa){
+        cout<< "Nombre conexion: " << r.first << " -> " << "Numero conexiones: " << r.second << endl;
+    }
+
+
     return 0;
 }
