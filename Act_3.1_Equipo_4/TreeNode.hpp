@@ -13,6 +13,7 @@
 template <class T>
 class TreeNode {
 private:
+    int altura = 0;
     T info;
     TreeNode<T> * left = nullptr;
     TreeNode<T> * right = nullptr;
@@ -40,6 +41,9 @@ public:
     
     TreeNode<T> * getParent() const { return parent; }
     void setParent(TreeNode<T> * value) { parent = value; }
+
+    void setAltura(int);
+    int getAltura();
     
     /* Sobrecarga operador == */
     bool operator ==(TreeNode<T> &);
@@ -78,6 +82,17 @@ bool TreeNode<T>::operator !=(TreeNode<T> & other)
     return (info != other.info);
 }
 
+template<class T>
+void TreeNode<T>::setAltura(int altura_){
+    altura = altura_;
+}
+
+template<class T>
+int TreeNode<T>::getAltura(){
+    return altura;
+}
+
+
 template <class T>
 std::ostream & operator << (std::ostream & os, const TreeNode<T> & node)
 {
@@ -85,5 +100,6 @@ std::ostream & operator << (std::ostream & os, const TreeNode<T> & node)
     
     return os;
 }
+
 
 #endif /* TreeNode_hpp */
