@@ -45,6 +45,11 @@ int main(){
         cout<< "Nombre conexion: " << r.first << " -> " << "Numero conexiones: " << r.second << endl;
     }
 
+    cout << "---8. Demostración top ---  " << endl;
+    cout << "R. " << endl;
+    f1.top(5,"10-8-2021");
+
+
 
     return 0;
 }

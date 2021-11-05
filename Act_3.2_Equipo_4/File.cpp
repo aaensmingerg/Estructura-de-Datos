@@ -1,13 +1,5 @@
-#include <iostream>
-#include <string>
-#include <fstream>
-#include <vector>
-#include <sstream>
-#include <algorithm>
+
 #include "File.hpp"
-#include "Busqueda.hpp"
-#include "Ordenamiento.hpp"
-#include <algorithm>
 using namespace std;
         
 
@@ -172,4 +164,17 @@ map<string,int> File::conexionesPorDia(string dia_){
 
     return conexiones;
 
+}
+
+void File::top(int n, string dia){
+    
+    /* Crear un árbol */
+    BST<Conexiones> * bst = new BST<Conexiones>();
+
+    map<string,int> mapConexiones = conexionesPorDia(dia);
+    for(auto r : mapConexiones){
+        Conexiones con = Conexiones(r.first,r.second);
+        bst->insert(new TreeNode<Conexiones>(con));
+    }
+    bst->inOrden();
 }

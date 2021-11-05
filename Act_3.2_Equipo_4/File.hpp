@@ -6,6 +6,7 @@
 #include <map>
 #include "Fecha.cpp"
 #include "Ordenamiento.hpp"
+#include "BST.hpp"
 using namespace std;
 
 /* La implementación se encuentra en su respectivo .cpp*/
@@ -93,4 +94,7 @@ class File{
     /* Crea un Mapa con llave: nombre de conexion del dia indicado
      y valor: conexiones en el dia */
     map<string, int> conexionesPorDia(string);
+
+    /* Imprimir el top n de valores */
+    void top(int,string);
 };
