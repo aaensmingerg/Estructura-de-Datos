@@ -95,6 +95,17 @@ class File{
      y valor: conexiones en el dia */
     map<string, int> conexionesPorDia(string);
 
+    /* Crea un Mapa con llave: nombre de conexion del dia indicado
+     y valor: conexiones en el dia */
+    map<string, int> conexionesPorDia(Fecha);
+
     /* Imprimir el top n de valores */
     void top(int,string);
+
+    /* Imprimir el top n de valores */
+    void top(int,Fecha);
+
+    /* Top 5 de todos los días */
+    vector<BST<Conexiones>> top5dias();
+
 };

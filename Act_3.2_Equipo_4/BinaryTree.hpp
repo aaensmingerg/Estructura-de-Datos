@@ -46,12 +46,12 @@ public:
     void postOrden() const;
     void postOrden(TreeNode<T> *) const;
     
-    int topN() const;
+    int topN(int) const;
     int topN(TreeNode<T> *, int, int) const;
     
     void printLeaf() const;
     void printLeaf(TreeNode<T> *) const;
-    
+        
 };
 
 template <class T>
@@ -201,9 +201,9 @@ void BinaryTree<T>::postOrden(TreeNode<T> * node) const
 
 
 template <class T>
-int BinaryTree<T>::topN() const
+int BinaryTree<T>::topN(int n) const
 {
-    return this->topN( this->root, 4, 0 );
+    return this->topN( this->root, n, 0 );
 }
 
 template <class T>
@@ -212,15 +212,15 @@ int BinaryTree<T>::topN(TreeNode<T> * node, int n, int cont) const
     if (node != nullptr && cont < n) {
         
         /* Desplazarse a la izquierda */
-        cont = topN( node->getLeft(), n, cont );
+        cont = topN( node->getRight(), n, cont );
          
         if (cont < n ) {
-            std::cout << *node << " (" << ++cont << ") ";
+            std::cout << *node << " (" << ++cont << ") " << endl;
         }
         else return cont;
         
         /* Desplazarse a la derecha */
-        cont = topN( node->getRight(), n, cont );
+        cont = topN( node->getLeft(), n, cont );
     }
     
     return cont;
@@ -233,27 +233,7 @@ void BinaryTree<T>::printLeaf() const
     this->printLeaf( this->root );
 }
 
-template <class T>
-void BinaryTree<T>::printLeaf(TreeNode<T> * node) const
-{
-    std::vector<TreeNode> hojas;
-    if (node != nullptr) {
-        TreeNode<T> * left = node->getLeft();
-        TreeNode<T> * right = node->getRight();
-        
-        if (left == nullptr && right == nullptr ) {
-            /* Procesar el nodo */
-            std::cout << *node << " ";
-        }
-        else {
-            /* Desplazarse a la izquierda */
-            printLeaf( left );
-            
-            /* Desplazarse a la derecha */
-            printLeaf( right );
-        }
-    }
-}
+
 
 
 #endif /* BinaryTree_hpp */

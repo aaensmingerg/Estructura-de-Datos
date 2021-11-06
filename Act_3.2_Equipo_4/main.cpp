@@ -18,26 +18,7 @@ using namespace std;
 int main(){
     /* Lectura del archivo csv */
     File f1("equipo4.csv");
-    cout << "---1. Cuantos registros tiene tu archivo?--- " << endl;
-    cout << "R. " << f1.getFecha().size() << endl;
-    cout << "---2. Cuantos records hay del segundo dia registrado?--- " << endl;
-    cout << "R. " << endl;
-    Fecha fecha = f1.buscarSegundaFecha();
-    cout << "2.1 Que dia es este? "<< endl;
-    cout << fecha << endl;
-    cout << "---3. Alguna de las computadoras pertenece a Jeffrey, Betty, Katherine, Scott, Benjamin, Samuel o Raymond?---" << endl;
-    cout << "R. " << endl;
-    f1.busquedaNombre();
-    cout << "---3.1 A quienes?--- " << endl << "R. " << endl;
-    f1.printNombresUnicos();
-    cout << "---4. Cual es la direccion de la red interna de la compania---? " << endl;
-    cout << "R. " << f1.direcccionIterna()[0] << endl;
-    cout << "---5. Que servicio de correo electronico utilizan?--- " << endl;
-    cout << "R. " << endl;
-    f1.correosElectronicos();
-    cout << "---6. Considerando solamente los puertos destino. Que puertos abajo del 1000 se estan usando?---  " << endl;
-    cout << "R. ";
-    f1.puertosUsados();
+    
     cout << "---7. Demostracion mapa ---  " << endl;
     cout << "R. " << endl;
     map<string,int> mapa = f1.conexionesPorDia("10-8-2021");
@@ -45,10 +26,14 @@ int main(){
         cout<< "Nombre conexion: " << r.first << " -> " << "Numero conexiones: " << r.second << endl;
     }
 
-    cout << "---8. Demostración top ---  " << endl;
+    cout << "---1. Demostración top ---  " << endl;
     cout << "R. " << endl;
-    f1.top(5,"10-8-2021");
+    f1.top(6,"10-8-2021");
 
+    cout << "---3. Demostración top ---  " << endl;
+    cout << "R. " << endl;
+    f1.top(6,"10-8-2021");
+    
 
 
     return 0;

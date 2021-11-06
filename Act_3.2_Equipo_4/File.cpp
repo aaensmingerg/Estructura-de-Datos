@@ -166,6 +166,32 @@ map<string,int> File::conexionesPorDia(string dia_){
 
 }
 
+map<string,int> File::conexionesPorDia(Fecha dia){
+    
+    map<string,int> conexiones;
+    vector<string> ipDestinoUnicos = valoresUnicosDia(ipDestino,dia);
+    int f = 0;
+    
+    /* Recorrer la lista de direcciones por cada direccion en la lista*/
+    for(int i=0; i < ipDestinoUnicos.size(); i++){
+        int contador = 0;
+        /* recorrer la lista de direcciones buscando el dia y la conexion dada*/
+        for (int i=0; i <fecha.size(); i ++){
+
+            /* Comprobar que sea el mismo dia y misma conexion*/
+            if (fecha[i] == dia && ipDestino[i] == ipDestinoUnicos[f] && ipDestino[i] != "-"){
+                contador ++;
+            }
+        }
+        /* Insertar en el mapa */
+        conexiones.insert(pair<string,int>(ipDestinoUnicos[f],contador));
+        f ++;
+    }
+
+    return conexiones;
+
+}
+
 void File::top(int n, string dia){
     
     /* Crear un árbol */
@@ -176,5 +202,21 @@ void File::top(int n, string dia){
         Conexiones con = Conexiones(r.first,r.second);
         bst->insert(new TreeNode<Conexiones>(con));
     }
-    bst->inOrden();
+    bst->topN(n);
 }
+
+void File::top(int n, Fecha dia){
+    
+    /* Crear un árbol */
+    BST<Conexiones> * bst = new BST<Conexiones>();
+
+    map<string,int> mapConexiones = conexionesPorDia(dia);
+    for(auto r : mapConexiones){
+        Conexiones con = Conexiones(r.first,r.second);
+        bst->insert(new TreeNode<Conexiones>(con));
+    }
+    bst->topN(n);
+}
+
+
+
