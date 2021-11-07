@@ -1,9 +1,11 @@
 /* Este programa es capaz de leer un archivor csv 
-y responder a las preguntas requeridas en la primera entrega de
-la situación problema utilizando los algoritmos de búsqueda: Búsqueda Secuencial y Binaria
-y además utiliza el algoritmo de ordenamiento de MergeSort
+y responder a las preguntas requeridas en la entrega 3.2 
+de la situación problema, principalmente la obtención de 
+los top 5 de sitios con más conexiones por día de utilizando 
+algoritmos de búsqueda y ordenamiento según requeridos,
+árboles binarios de búsqueda (BST) así como HashMaps.
 Aquiles Ensminger A01781243 y Javier Lozano A01029756
-Fecha de Entrega: Jueves 24 de Septiembre de 2021  */
+Fecha de Entrega: Domingo 7 de Octubre de 2021  */
 
 #include <iostream>
 #include <string>
