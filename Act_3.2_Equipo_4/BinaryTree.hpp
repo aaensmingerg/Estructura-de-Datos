@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <vector>
+#include "Fecha.cpp"
 #include "TreeNode.hpp"
 
 template <class T>
@@ -17,7 +18,11 @@ class BinaryTree {
 protected:
     TreeNode<T> * root = nullptr;
     
+    T Top5[5];
+
     void clear(TreeNode<T> * );
+    
+    Fecha id;
     
 public:
     BinaryTree() {}
@@ -46,11 +51,17 @@ public:
     void postOrden() const;
     void postOrden(TreeNode<T> *) const;
     
-    int topN(int) const;
-    int topN(TreeNode<T> *, int, int) const;
+    int topN(int) ;
+    int topN(TreeNode<T> *, int, int) ;
     
     void printLeaf() const;
     void printLeaf(TreeNode<T> *) const;
+
+    void setId(Fecha);
+    Fecha getId();
+
+    T getTop(int n);
+
         
 };
 
@@ -201,26 +212,29 @@ void BinaryTree<T>::postOrden(TreeNode<T> * node) const
 
 
 template <class T>
-int BinaryTree<T>::topN(int n) const
+int BinaryTree<T>::topN(int n) 
 {
     return this->topN( this->root, n, 0 );
 }
 
 template <class T>
-int BinaryTree<T>::topN(TreeNode<T> * node, int n, int cont) const
+int BinaryTree<T>::topN(TreeNode<T> * node, int n, int cont) 
 {
     if (node != nullptr && cont < n) {
         
         /* Desplazarse a la izquierda */
-        cont = topN( node->getRight(), n, cont );
+        cont = topN( node->getRight(), n, cont);
          
-        if (cont < n ) {
+        if (cont < n ) {  
             std::cout << *node << " (" << ++cont << ") " << endl;
+            if (cont <= 5){
+                Top5[cont-1] = node->getInfo();
+            }
         }
         else return cont;
         
         /* Desplazarse a la derecha */
-        cont = topN( node->getLeft(), n, cont );
+        cont = topN( node->getLeft(), n, cont);
     }
     
     return cont;
@@ -233,7 +247,18 @@ void BinaryTree<T>::printLeaf() const
     this->printLeaf( this->root );
 }
 
+template <class T>
+T BinaryTree<T>::getTop(int n){
+    return Top5[n];
+}
 
-
+template <class T>
+void BinaryTree<T>::setId(Fecha id_){
+    id = id_;
+}
+template <class T>
+Fecha BinaryTree<T>::getId(){
+    return id;
+}
 
 #endif /* BinaryTree_hpp */

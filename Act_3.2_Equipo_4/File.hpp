@@ -4,7 +4,6 @@
 #include <vector>
 #include <sstream>
 #include <map>
-#include "Fecha.cpp"
 #include "Ordenamiento.hpp"
 #include "BST.hpp"
 using namespace std;
@@ -104,6 +103,9 @@ class File{
 
     /* Imprimir el top n de valores */
     void top(int,Fecha);
+
+    /* Imprimir el top n de valores */
+    BST<Conexiones> * hacerArbol(Fecha);
 
     /* Top 5 de todos los días */
     vector<BST<Conexiones>> top5dias();

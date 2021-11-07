@@ -3,7 +3,10 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
+#include <algorithm>
 #include "Ordenamiento.hpp"
+#include "Busqueda.hpp"
+#include "conexiones.cpp"
 using namespace std;
 
 /* La implementación se encuentra en su respectivo .cpp*/

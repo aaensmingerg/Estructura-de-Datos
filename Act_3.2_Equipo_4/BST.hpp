@@ -3,8 +3,9 @@
 //  BinaryTree
 //
 //  Created by Vicente Cubells on 20/10/20.
-//
+//  Updated by Aquiles Ensminger and Javier Lozano 
 
+#include <queue>
 #ifndef BST_hpp
 #define BST_hpp
 
@@ -15,21 +16,52 @@ class BST : public BinaryTree<T>
 {
     
 public:
+
+    /* Constructor de la clase */
     BST() {};
+    
+    /*Destructor de la clase */
     virtual ~BST() { };
     
+    /* Search recibe como parámetro un valor 
+    a buscar dentro del arbol */
     TreeNode<T> * search(const T &) const;
+    
+    /* Insert recibe un valorr a insertar
+    dentro del árbol */
     bool insert(T &);
     bool insert(TreeNode<T> * );
 
-    void getAltura();
-    void getAncestors(TreeNode<T> * );
-    void getNivel(TreeNode<T> * );
+    /* Heihgt regresa la altura del arbol binario */
+    int height();
+
+    /* ancestors regresa los padres del nodo 
+    planteado como parámetro*/
+    void ancestors(TreeNode<T> * );
     
+    /* Whatlevelami toma un apuntar a un nodo 
+    y devuelve el nivel en el que este se encuentra */
+    int whatlevelami(TreeNode<T> * );
+    
+    /* levelBYlevel imprime el valor de los nodos
+    por nivel */
+    void levelByLevel();
+    void levelByLevel(TreeNode<T> *);
+
+    /* Visit  toma como parámetro un entero entre 1 y 4
+    y ejecuta el método de impresión correspondiente
+    1. Preorden, 2. Inorden, 3. Postorden, 4. Levelbylevel */
+    void visit(int);
+
+    /* Setlevels recorre los nodos del árbol y asigna la 
+    altura que le corresponde al nodo */
+    void setLevels(); 
+    void setLevels(TreeNode<T> *);    
     
 private:
     /* Ocultar algunos métodos heredados */
     //using BinaryTree<T>::insert;
+    int altura = 0;
 };
 template <class T>
 TreeNode<T> * BST<T>::search(const T & value) const
@@ -105,28 +137,170 @@ bool BST<T>::insert(TreeNode<T> * node )
 }
 
 template <class T>
-void BST<T>::getAltura(){
+int BST<T>::height(){
+   return this->altura;
+}
+
+template <class T>
+void BST<T>::ancestors(TreeNode<T> * node){
+    TreeNode<T> * aux = node;
+    while (this->root != aux){
+        std::cout << *aux->getParent() << std::endl;
+        aux = aux->getParent();
+    }
+}
+
+template <class T>
+int BST<T>::whatlevelami(TreeNode<T> * node){
+    return node->getAltura();
+}
+
+template <class T>
+void BST<T>::levelByLevel(){
+
+    /* Confirmar que el BST sea válido */
+    if (!this->empty()){
+    this->root->setAltura(1);
+    this->levelByLevel( this->root);
+    }
+}
+
+template <class T>
+void BST<T>::levelByLevel(TreeNode<T> * node) {
     
-}
+    /* Defición de queue para alamcenar los nodos */
+    std::queue< TreeNode <T>* > q;
 
-template <class T>
-void BST<T>::getAncestors(TreeNode<T> * node){
-    TreeNode<T> * aux = this->root;
-    while (node != aux){
-        std::cout << *node->getParent() << std::endl;
-        node = node->getParent();
+    /* Nodo auxiliar para comparar */
+    TreeNode<T>* aux;
+
+    /* Insertar la raiz del nodo como primer elemento de la queue */
+    q.push(node);
+    
+    /* Inicialización de la altura del arbol */
+    int alturaActual = 0;
+
+    /* Recorrer los nodos por nivel hasta llegar al final */
+    while (!q.empty()){
+
+        /* almacenar el primer valor de la queue en quxiliar*/
+        aux = q.front();
+
+        /* Inicialización de la altura del arbol */
+        int auxLevel = aux->getAltura();
+
+        q.pop();
+        
+        /* Recorrer izquierda */
+        TreeNode<T>* Izq = aux->getLeft();
+        if (Izq != nullptr){
+            q.push(Izq);
+        }
+
+        /* Recorrer Derecha */ 
+        TreeNode<T>* Der = aux->getRight();
+        if (Der != nullptr){
+            q.push(Der);
+        }
+
+        /* Aumentar la altura actual si se
+        recoren todos los nodos del nivel */
+        if (alturaActual != auxLevel){
+            alturaActual += 1 ;
+            std::cout << std::endl <<"Nivel " << alturaActual << ": ";
+            
+        }
+        std::cout << *aux << " - "; 
+
     }
 }
 
 template <class T>
-void BST<T>::getNivel(TreeNode<T> * node){
-    TreeNode<T> * aux = this->root;
-    int cuenta = 0;
-    while (node != aux){
-        node = node->getParent();
-        cuenta++;
+void BST<T>::setLevels(){
+    if (!this->empty()){
+    this->root->setAltura(1);
+    this->setLevels( this->root);
     }
-    std::cout << cuenta << std::endl;
 }
 
+template <class T>
+void BST<T>::setLevels(TreeNode<T> * node) {
+    
+    /* Defición de queue para alamcenar los nodos */
+    std::queue< TreeNode <T>* > q;
+
+    /* Nodo auxiliar para comparar */
+    TreeNode<T>* aux;
+
+    /* Insertar la raiz del nodo como primer elemento de la queue */
+    q.push(node);
+    
+    /* Inicialización de la altura del arbol */
+    int alturaActual = 0;
+
+    /* Insertar los nodos por nivel hasta llegar al final */
+    while (!q.empty()){
+
+        /* almacenar el primer valor de la queue en quxiliar*/
+        aux = q.front();
+
+        /*Obtener altura del nodo */
+        int auxLevel = aux->getAltura();
+        
+        /* Eliminar el primer elemento de la queue */
+        q.pop();
+        
+        /* Recorrer izquierda */
+        TreeNode<T>* Izq = aux->getLeft();
+        if (Izq != nullptr){
+            Izq->setAltura(auxLevel + 1);
+            q.push(Izq);
+        }
+
+        /* Recorrer Derecha */
+        TreeNode<T>* Der = aux->getRight();
+        if (Der != nullptr){
+            Der->setAltura(auxLevel + 1);
+            q.push(Der);
+        }
+
+        /* Aumentar la altura actual si se
+        recoren todos los nodos del nivel */
+        if (alturaActual != auxLevel){
+            alturaActual += 1 ;
+            this->altura = alturaActual;
+        }
+    }
+}
+
+template <class T>
+void BST<T>::visit(int opt){
+    switch (opt)
+    {
+    case 1:
+        std::cout << std::endl <<"Se imprime el BST en PreOrden" << std::endl;
+        this->preOrden();
+        std::cout << std::endl;
+        break;
+    
+    case 2:
+        std::cout << std::endl << "Se imprime el BST en InOrden" << std::endl;
+        this->inOrden();
+        std::cout << std::endl;
+        break;
+    case 3:
+        std::cout << std::endl << "Se imprime el BST en PostOrden" << std::endl;
+        this->postOrden();
+        std::cout << std::endl;
+        break;
+    case 4:
+        std::cout << std::endl << "Se imprime el BST por nivel " << std::endl;
+        this->levelByLevel();
+        std::cout << std::endl;
+        break;
+    default:
+        break;
+    }
+
+}
 #endif /* BST_hpp */

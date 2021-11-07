@@ -193,7 +193,7 @@ map<string,int> File::conexionesPorDia(Fecha dia){
 }
 
 void File::top(int n, string dia){
-    
+    vector<Conexiones> vect;
     /* Crear un árbol */
     BST<Conexiones> * bst = new BST<Conexiones>();
 
@@ -206,8 +206,12 @@ void File::top(int n, string dia){
 }
 
 void File::top(int n, Fecha dia){
-    
-    /* Crear un árbol */
+    BST<Conexiones> * bst = hacerArbol(dia);
+    bst->topN(n);
+       
+}
+
+BST<Conexiones>* File::hacerArbol(Fecha dia){
     BST<Conexiones> * bst = new BST<Conexiones>();
 
     map<string,int> mapConexiones = conexionesPorDia(dia);
@@ -215,8 +219,54 @@ void File::top(int n, Fecha dia){
         Conexiones con = Conexiones(r.first,r.second);
         bst->insert(new TreeNode<Conexiones>(con));
     }
-    bst->topN(n);
+    return bst;
 }
 
+vector<BST<Conexiones>> File::top5dias(){
+    vector<Conexiones> conexionesDia1;
+    vector<BST<Conexiones>*> Conec;
+    vector<Fecha> fechasUnicas = valoresUnicos(fecha);
+    string ipSearch;
+    for (int i=0; i < fechasUnicas.size(); i++){
+        Conec.push_back(hacerArbol(fechasUnicas[i]));
+        Conec[i]->setId(fechasUnicas[i]);
+    }
+    
+    /*Es necesario correr topN para asignar los tops */
+    for(auto v:Conec){
+        cout << "Top 5 en el dia -> " << v->getId() << endl;
+        v->topN(5);
+        cout << endl;
+    }
+    
+    for (int i=0; i<5; i++){
+        conexionesDia1.push_back(Conec[0]->getTop(i));
+    }
+
+    for (auto a:conexionesDia1){
+        int cont = 0;
+        int dia = 0;
+        for (auto b:Conec){
+            for (int i=0; i<5; i++){
+                ipSearch = a.getIp();
+                if (b->getTop(i).getIp() == ipSearch){
+                    cont ++;
+                }
+                if(b->search(a)){
+                    dia ++;
+                }
+            }
+        }
+        a.setDiasAparece(dia);
+        a.setDiasSeguidos(cont);
+        if (a.getDiasSeguidos() == fechasUnicas.size()){
+            cout << "La IP -> " << a.getIp() << " Aparece en el top 5 todos los dias";
+            cout << " Con una frecuencia de: " << a.getFrecuencia() << " el primer dia " << endl;
+
+        }else if (a.getDiasAparece() == fechasUnicas.size() ){
+            cout << "La IP -> " << a.getIp() << " Aparece en el top 5 el primer dia y en los demas dias  "<< a.getDiasAparece() << endl;
+        }
+    }
+}
 
 
