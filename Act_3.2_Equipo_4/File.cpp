@@ -294,8 +294,6 @@ vector<BST<Conexiones>> File::top5dias(){
 
         }
     }
-    //cout << conexionesSiguiente.size() << endl;
-    //conexionesDiaX.clear();
 }
 
     
