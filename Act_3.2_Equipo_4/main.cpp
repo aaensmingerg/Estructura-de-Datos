@@ -21,18 +21,23 @@ int main(){
     /* Lectura del archivo csv */
     File f1("equipo4.csv");
     
-    cout << "---1. Demostracion mapa ---  " << endl;
+    cout << "---1. Demostracion mapa primer dia---  " << endl;
     cout << "R. " << endl;
     map<string,int> mapa = f1.conexionesPorDia("10-8-2021");
     for (auto r: mapa){
         cout<< "Nombre conexion: " << r.first << " -> " << "Numero conexiones: " << r.second << endl;
     }
 
-    cout << "---2. Demostración top ---  " << endl;
-    cout << "R. " << endl;
-    f1.top(6,"10-8-2021");
+    cout << "" << endl;
 
-    cout << "--3. Demostracion top 5 dias --" << endl << endl;
+    cout << "---2. Demostracion top primer dia---  " << endl;
+    cout << "R. " << endl;
+    f1.top(5,"10-8-2021");
+
+    cout << "" << endl;
+
+    cout << "--3. Demostracion top 5 dias --" << endl;
+    cout << "R. " << endl;
     f1.top5dias();   
 
     return 0;

@@ -224,9 +224,12 @@ BST<Conexiones>* File::hacerArbol(Fecha dia){
 
 vector<BST<Conexiones>> File::top5dias(){
     vector<Conexiones> conexionesDia1;
+    vector<Conexiones> conexionesDiaX;
+    vector<string> conexionesSiguiente;
     vector<BST<Conexiones>*> Conec;
     vector<Fecha> fechasUnicas = valoresUnicos(fecha);
     string ipSearch;
+    
     for (int i=0; i < fechasUnicas.size(); i++){
         Conec.push_back(hacerArbol(fechasUnicas[i]));
         Conec[i]->setId(fechasUnicas[i]);
@@ -245,28 +248,60 @@ vector<BST<Conexiones>> File::top5dias(){
 
     for (auto a:conexionesDia1){
         int cont = 0;
-        int dia = 0;
         for (auto b:Conec){
             for (int i=0; i<5; i++){
                 ipSearch = a.getIp();
                 if (b->getTop(i).getIp() == ipSearch){
                     cont ++;
                 }
-                if(b->search(a)){
-                    dia ++;
-                }
             }
         }
-        a.setDiasAparece(dia);
         a.setDiasSeguidos(cont);
         if (a.getDiasSeguidos() == fechasUnicas.size()){
-            cout << "La IP -> " << a.getIp() << " Aparece en el top 5 todos los dias";
+            cout << "La IP -> " << a.getIp() << ". Aparece en el top 5 todos los dias.";
             cout << " Con una frecuencia de: " << a.getFrecuencia() << " el primer dia " << endl;
-
-        }else if (a.getDiasAparece() == fechasUnicas.size() ){
-            cout << "La IP -> " << a.getIp() << " Aparece en el top 5 el primer dia y en los demas dias  "<< a.getDiasAparece() << endl;
         }
     }
+
+    int b = 1;
+    int cuenta = 0;
+    Fecha fechaAparece;
+    for (int f = 0; f < fechasUnicas.size(); f++){
+        int cont = 0;
+        bool diaSiguiente = false;
+        for (int i = 0; i < 5; i++){
+            conexionesDiaX.push_back(Conec[f]->getTop(i));
+        }
+        for (auto a:conexionesDiaX){
+            for (int i = 0; i < 5; i++){
+                ipSearch = a.getIp();
+                if (Conec[b]->getTop(i).getIp() == ipSearch){
+                    diaSiguiente = true;
+                    if (find(conexionesSiguiente.begin(), conexionesSiguiente.end(), Conec[b]->getTop(i).getIp()) == conexionesSiguiente.end() && find(conexionesDia1.begin(), conexionesDia1.end(), Conec[b]->getTop(i)) == conexionesDia1.end()){
+                        conexionesSiguiente.push_back(Conec[b]->getTop(i).getIp());
+                        fechaAparece = fechasUnicas[f];
+                        break;
+                    }
+                }
+            }  
+        }
+        b++;
+        if (conexionesSiguiente.size() !=0 && cuenta == 0){
+            for (int i = 0; i < conexionesSiguiente.size(); i++){
+                cuenta++;
+                cout << "La IP -> " << conexionesSiguiente[i] << ". Aparece en el top 5 desde la fecha -> " << fechaAparece << endl;
+            }
+
+        }
+    }
+    //cout << conexionesSiguiente.size() << endl;
+    //conexionesDiaX.clear();
 }
+
+    
+
+
+    
+
 
 
