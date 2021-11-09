@@ -30,6 +30,10 @@ public:
     
     template <class Vn, class En>
     friend std::ostream & operator <<(std::ostream &, const Graph<Vn,En> &);
+
+    Vertex<V, E> * getVertex(const int);
+    Edge<V, E> * getEdge(const int, const int);
+    int getNumEdges(const int);
 };
 
 template <class V, class E>
@@ -103,6 +107,27 @@ std::ostream & operator <<(std::ostream & os, const Graph<V,E> & graph)
     }
     
     return os;
+}
+
+
+template <class V, class E>
+Vertex<V, E> * Graph<V,E>::getVertex(const int n)
+{
+    return this->nodes[n];
+}
+
+template <class V, class E>
+Edge<V, E> * Graph<V, E>::getEdge(const int n , const int m)
+{
+    Vertex <V, E>* vertices = this->nodes[n];
+    return vertices->getEdge(m);
+}
+
+template <class V, class E>   
+int Graph<V, E>::getNumEdges(const int n)
+{
+    Vertex <V, E>* vertices = this->nodes[n];
+    return vertices->size();
 }
 
 
