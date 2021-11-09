@@ -61,9 +61,10 @@ void DFS(std::vector < std::vector<int> > & graph, int u)
 void BFS(Graph<int, int> * graph, int u)
 {
     int cuenta = 0;
+    int valor;
     /* Defición de queue para alamcenar los nodos */
     std::queue< Vertex <int, int>* > q;
-
+    std::vector<int> valores;
     /* Nodo auxiliar para comparar */
     Vertex <int, int> * aux;
     q.push(graph->getVertex(cuenta));
@@ -73,12 +74,16 @@ void BFS(Graph<int, int> * graph, int u)
     while (!q.empty()){
         /* Almacenar el primer valor de la queue en auxiliar*/
         aux = q.front();
-        std::cout << q.front()->getInfo() << std::endl;
+        std::cout << aux->getInfo() << std::endl;
         q.pop();
         if (aux->getIsVisited() == false){
             for (int i = 0; i<graph->getNumEdges(cuenta); i++){
                 Edge<int, int> * arista = graph->getEdge(cuenta, i);
-                q.push(arista->getTarget());
+                valor = arista->getTarget()->getInfo();
+                if (find(valores.begin(), valores.end(), valor) == valores.end()){
+                    valores.push_back(valor);
+                    q.push(arista->getTarget()); 
+                }
             }
             aux->setIsVisited();
             cuenta = q.front()->getInfo();
