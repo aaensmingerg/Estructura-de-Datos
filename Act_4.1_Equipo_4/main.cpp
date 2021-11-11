@@ -58,8 +58,6 @@ void loadGraph2(int v, int e, Graph<int, int> * graph)
     graph->addEdge(valor7,valor2,16);
     graph->addEdge(valor7,valor5,17);
     graph->addEdge(valor2,valor8,18);
-
-    std::cout << *graph << std::endl;
 }
 
 void DFS(std::vector < std::vector<int> > & graph, int u)
@@ -69,37 +67,30 @@ void DFS(std::vector < std::vector<int> > & graph, int u)
 
 void BFS(Graph<int, int> * graph, int u)
 {
-    int cuenta = 0;
+    int target = 0;
     int valor;
     /* Defición de queue para alamcenar los nodos */
     std::queue< Vertex <int, int>* > q;
     std::vector<int> valores;
     /* Nodo auxiliar para comparar */
     Vertex <int, int> * aux;
-    q.push(graph->getVertex(cuenta));
+    q.push(graph->getVertex(target));
     
 
     /* Recorrer los nodos por nivel hasta llegar al final */
     while (!q.empty()){
         /* Almacenar el primer valor de la queue en auxiliar*/
         aux = q.front();
+        target = aux->getInfo();
         std::cout << aux->getInfo() << std::endl;
         q.pop();
-        if (aux->getIsVisited() == false){
-            for (int i = 0; i<graph->getNumEdges(cuenta); i++){
-                Edge<int, int> * arista = graph->getEdge(cuenta, i);
-                valor = arista->getTarget()->getInfo();
-                if (find(valores.begin(), valores.end(), valor) == valores.end()){
-                    valores.push_back(valor);
-                    q.push(arista->getTarget()); 
-                }
-            }
-            aux->setIsVisited();
-            if (!q.empty()){
-                cuenta = q.front()->getInfo();
-            }
-            else{
-                std::cout << "Todos los nodos han sido imprimidos exitosamente" << std::endl;
+        for (int i = 0; i<graph->getNumEdges(target); i++){
+            Edge<int, int> * arista = graph->getEdge(target, i);
+            valor = arista->getTarget()->getInfo();
+            if (find(valores.begin(), valores.end(), valor) == valores.end()){
+                valores.push_back(valor);
+                q.push(arista->getTarget()); 
+                
             }
         }
     }

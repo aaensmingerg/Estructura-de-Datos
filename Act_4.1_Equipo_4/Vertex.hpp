@@ -36,8 +36,6 @@ public:
     
     int size();
     Edge<V,E> * getEdge(const int);
-    bool getIsVisited();
-    void setIsVisited();
 };
 
 template <class V, class E>
@@ -103,15 +101,6 @@ Edge<V,E> * Vertex<V,E>::getEdge(const int m){
     return this->edges[m];
 }
 
-template <class V, class E>
-bool Vertex<V,E>::getIsVisited(){
-    return isVisited;
-}
-
-template <class V, class E>
-void Vertex<V,E>::setIsVisited(){
-    isVisited = true;
-}
 
 
 
