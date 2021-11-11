@@ -1,9 +1,8 @@
-//
-//  main.cpp
-//  actividad_4-1
-//
-//  Created by Vicente Cubells on 13/11/20.
-//
+/* Este programa implementa las funciones definidas
+por el profesor, que permiten la lectura e impresión
+de un grafo como matriz de adyacencia y por niveles.
+Aquiles Ensminger A01781243 y Javier Lozano A01029756
+Fecha de Entrega: Domingo 14 de Noviembre de 2021  */
 
 #include <iostream>
 #include <random>
@@ -50,6 +49,16 @@ void loadGraph2(int v, int e, Graph<int, int> * graph)
         cuenta++;
         }
     }
+    /* Vertices extras para imprimir todo el grafo */
+    Vertex<int, int> * valor2 = graph->getVertex(2);
+    Vertex<int, int> * valor5 = graph->getVertex(5);
+    Vertex<int, int> * valor7 = graph->getVertex(7);
+    Vertex<int, int> * valor8 = graph->getVertex(8);
+
+    graph->addEdge(valor7,valor2,16);
+    graph->addEdge(valor7,valor5,17);
+    graph->addEdge(valor2,valor8,18);
+
     std::cout << *graph << std::endl;
 }
 
@@ -86,7 +95,12 @@ void BFS(Graph<int, int> * graph, int u)
                 }
             }
             aux->setIsVisited();
-            cuenta = q.front()->getInfo();
+            if (!q.empty()){
+                cuenta = q.front()->getInfo();
+            }
+            else{
+                std::cout << "Todos los nodos han sido imprimidos exitosamente" << std::endl;
+            }
         }
     }
 }
