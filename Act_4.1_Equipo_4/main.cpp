@@ -4,29 +4,64 @@ de un grafo como matriz de adyacencia y por niveles.
 Aquiles Ensminger A01781243 y Javier Lozano A01029756
 Fecha de Entrega: Domingo 14 de Noviembre de 2021  */
 
+/* Comentario extra para el profesor:
+Este main y las conexiones extras para loadGraph2 estaban pensadas para el primer
+grafo generado con random. Es decir que cuando se genera un nuevo grafo con random,
+quizás haya que generar otras conexiones para imprimir todo el árbol.
+Por esta misma razón hace unos días se imprimía el grafo completo, pero ahora solo
+imprime una parte debido a que los valores random han cambiado. */
+
 #include <iostream>
 #include <random>
+#include <algorithm>
+#include <iterator>
 #include <queue>
 #include "Graph.hpp"
 
+void imprimir(std::vector<int> visitados){
+    for (int i = 0; i < visitados.size(); i++){
+        std::cout << visitados[i] << " ";
+    }
+    std::cout << std::endl;
+}
 
+void visualizar(std::vector < std::vector<int> > grafo, std::vector<int> vectorVertices)
+{
+    /* Imprimir los nodos */
+    std::cout << "\t";
+    for (auto vertice : vectorVertices) {
+        std::cout << vertice << "\t";
+    }
+    std::cout << std::endl;
+    std::cout << std::endl;
 
-void loadGraph(int v, int e, std::vector < std::vector<int> > graph)
+    /* Imprimir las filas de la matriz */
+    int i = 0;
+    for (auto fila : grafo) {
+        std::cout << vectorVertices[i++] << "\t";
+        std::copy(fila.begin(), fila.end(), std::ostream_iterator<int>(std::cout, "\t") );
+        std::cout << std::endl;
+    }
+    
+    std::cout << std::endl;
+}
+
+std::vector <std::vector<int>> loadGraph(int v, int e, std::vector < std::vector<int> > graph, std::vector <int> vectorVertices)
 {
     int cuenta = 0;
-    for(int i = 1; i < v; ++i){
+    for(int i = 0; i < v; ++i){
         graph[i] = std::vector<int>(v);
         for (int j = 1; j < v; j++){
             int valor = rand() % 2;
             if (cuenta < e && valor == 1){
                 graph[i][j] = valor;
                 cuenta++;
-            }
-            else{
-                graph[i][j] = valor;
+                //std::cout << i << " -> " << j << std::endl;
             }
         }
     }
+    return graph;
+    //visualizar(graph, vectorVertices);
 }
 
 void loadGraph2(int v, int e, Graph<int, int> * graph)
@@ -50,7 +85,7 @@ void loadGraph2(int v, int e, Graph<int, int> * graph)
         }
     }
     /* Vertices extras para imprimir todo el grafo */
-    Vertex<int, int> * valor2 = graph->getVertex(2);
+    Vertex<int, int> * valor2 = graph->getVertex(0);
     Vertex<int, int> * valor5 = graph->getVertex(5);
     Vertex<int, int> * valor7 = graph->getVertex(7);
     Vertex<int, int> * valor8 = graph->getVertex(8);
@@ -60,9 +95,25 @@ void loadGraph2(int v, int e, Graph<int, int> * graph)
     graph->addEdge(valor2,valor8,18);
 }
 
-void DFS(std::vector < std::vector<int> > & graph, int u)
+void DFS(std::vector < std::vector<int> > graph, int u, std::vector<int> vectorVertices, std::vector<int> visitados)
 {
-    /* Implementar */
+    int valor;
+    int cuenta = 0;
+    std::vector<int> aristasVerticeActual;
+    for (int i = 0; i < vectorVertices.size(); i++){
+        if (graph[u][i] == 1){
+            aristasVerticeActual.push_back(i);
+        }
+    }
+
+    for (int arista : aristasVerticeActual){
+        if (find(visitados.begin(), visitados.end(), arista) == visitados.end()){
+            visitados.push_back(arista);
+            imprimir(visitados);
+            //std::cout << arista << std::endl;
+            DFS(graph, arista, vectorVertices, visitados);
+        }   
+    }
 }
 
 void BFS(Graph<int, int> * graph, int u)
@@ -75,6 +126,7 @@ void BFS(Graph<int, int> * graph, int u)
     /* Nodo auxiliar para comparar */
     Vertex <int, int> * aux;
     q.push(graph->getVertex(target));
+    valores.push_back(target);
     
 
     /* Recorrer los nodos por nivel hasta llegar al final */
@@ -105,13 +157,22 @@ int main(int argc, const char * argv[]) {
     /* Declaración del grafo como matriz de adyacencia */
     std::vector < std::vector<int> > matriz_adyacencia(vertices);
 
+    std::vector<int> vectorVertices(vertices);
+    
+    /* Generar los vértices */
+    for (int i = 0; i < vertices; ++i) {
+        vectorVertices[i] = i;
+    }
+
     /* Generar el grafo como matriz de adyacencia */
-    loadGraph(vertices, aristas, matriz_adyacencia);
+    matriz_adyacencia = loadGraph(vertices, aristas, matriz_adyacencia, vectorVertices);
     
     /* Recorrido con DFS */
     std::cout << "------ Matriz de adyacencia con DFS ------" << std::endl;
-    int nodo_u = 1;
-    DFS(matriz_adyacencia, nodo_u);
+    int nodo_u = 0;
+    std::vector<int> visitados;
+    visitados.push_back(nodo_u);
+    DFS(matriz_adyacencia, nodo_u, vectorVertices, visitados);
     
     /* Declaración del grafo como multilista */
     Graph<int, int> * multilista = new Graph<int, int>();
