@@ -18,13 +18,6 @@ imprime una parte debido a que los valores random han cambiado. */
 #include <queue>
 #include "Graph.hpp"
 
-void imprimir(std::vector<int> visitados){
-    for (int i = 0; i < visitados.size(); i++){
-        std::cout << visitados[i] << " ";
-    }
-    std::cout << std::endl;
-}
-
 void visualizar(std::vector < std::vector<int> > grafo, std::vector<int> vectorVertices)
 {
     /* Imprimir los nodos */
@@ -85,17 +78,19 @@ void loadGraph2(int v, int e, Graph<int, int> * graph)
         }
     }
     /* Vertices extras para imprimir todo el grafo */
-    Vertex<int, int> * valor2 = graph->getVertex(0);
+    Vertex<int, int> * valor0 = graph->getVertex(0);
     Vertex<int, int> * valor5 = graph->getVertex(5);
     Vertex<int, int> * valor7 = graph->getVertex(7);
     Vertex<int, int> * valor8 = graph->getVertex(8);
 
-    graph->addEdge(valor7,valor2,16);
+    graph->addEdge(valor7,valor0,16);
     graph->addEdge(valor7,valor5,17);
-    graph->addEdge(valor2,valor8,18);
+    graph->addEdge(valor0,valor8,18);
+
+    //std::cout << *graph << std::endl;
 }
 
-void DFS(std::vector < std::vector<int> > graph, int u, std::vector<int> vectorVertices, std::vector<int> visitados)
+void DFS(std::vector < std::vector<int> > graph, int u, std::vector<int> vectorVertices, std::vector<int>* visitados)
 {
     int valor;
     int cuenta = 0;
@@ -107,10 +102,9 @@ void DFS(std::vector < std::vector<int> > graph, int u, std::vector<int> vectorV
     }
 
     for (int arista : aristasVerticeActual){
-        if (find(visitados.begin(), visitados.end(), arista) == visitados.end()){
-            visitados.push_back(arista);
-            imprimir(visitados);
-            //std::cout << arista << std::endl;
+        if (find(visitados->begin(), visitados->end(), arista) == visitados->end()){
+            visitados->push_back(arista);
+            std::cout << arista << std::endl;
             DFS(graph, arista, vectorVertices, visitados);
         }   
     }
@@ -170,8 +164,13 @@ int main(int argc, const char * argv[]) {
     /* Recorrido con DFS */
     std::cout << "------ Matriz de adyacencia con DFS ------" << std::endl;
     int nodo_u = 0;
-    std::vector<int> visitados;
-    visitados.push_back(nodo_u);
+    std::vector<int> * visitados = new std::vector<int>();
+    visitados->push_back(nodo_u);
+
+    //visualizar(matriz_adyacencia, vectorVertices);
+    
+    /* Imprimir el primer nodo */
+    std::cout << nodo_u << std::endl;
     DFS(matriz_adyacencia, nodo_u, vectorVertices, visitados);
     
     /* Declaración del grafo como multilista */
@@ -182,7 +181,7 @@ int main(int argc, const char * argv[]) {
     
     /* Recorrido con BFS */
     std::cout << "------ Multilista con BFS ------" << std::endl;
-    int nodo_v = 1;
+    int nodo_v = 0;
     BFS(multilista, nodo_v);
     
     delete multilista;
