@@ -118,7 +118,7 @@ int main(){
     }
     else{
         for(auto a : conexionesA){
-            cout << "En la fecha -> " << a.first << " hubieron (" << a.second <<") Conexiones" <<  endl;
+            cout << "En la fecha -> " << a.first << " hubo (" << a.second <<") Conexiones de Computadoras Independientes" <<  endl;
         }
     } 
     cout << endl << " --- 3. Ubica la cantidad de computadoras que se han conectado hacia B por dia --- " << endl;
@@ -127,7 +127,7 @@ int main(){
     }
     else{
         for(auto b : conexionesB){
-            cout << "En la fecha -> " << b.first << " hubieron (" << b.second <<") Conexiones" <<  endl;
+            cout << "En la fecha -> " << b.first << " hubieron (" << b.second <<") Conexiones de Computadoras Independientes" <<  endl;
         }
     } 
     cout << endl << " --- 4. Ubica la cantidad de computadoras que se han conectado hacia C por dia --- " << endl;
@@ -136,7 +136,7 @@ int main(){
     }
     else{
         for(auto c : conexionesC){
-            cout << "En la fecha -> " << c.first << " hubieron (" << c.second <<") Conexiones" <<  endl;
+            cout << "En la fecha -> " << c.first << " hubo (" << c.second <<") Conexiones de Computadoras Independientes" <<  endl;
         }
     }   
     
