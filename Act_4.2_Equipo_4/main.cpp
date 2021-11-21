@@ -127,7 +127,7 @@ int main(){
     }
     else{
         for(auto b : conexionesB){
-            cout << "En la fecha -> " << b.first << " hubieron (" << b.second <<") Conexiones de Computadoras Independientes" <<  endl;
+            cout << "En la fecha -> " << b.first << " hubo (" << b.second <<") Conexiones de Computadoras Independientes" <<  endl;
         }
     } 
     cout << endl << " --- 4. Ubica la cantidad de computadoras que se han conectado hacia C por dia --- " << endl;
