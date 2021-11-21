@@ -25,7 +25,7 @@ Fecha de Entrega: Domingo 21 de Noviembre de 2021 */
 int main(){
     /* Lectura del archivo csv */
     File f1("equipo4.csv");
-    string ipA = "172.17.230.12";
+    string ipA = "172.17.230.12"; //Dirección ip interna, definida anteriormente
     string ipB = "68.25.108.136"; //Dirección sitio con nombre raro, obtenida anteriormente
     string ipC = "23.207.91.19"; //Dirección con tráfico anómalo, obtenida anteriormente
     vector< pair<Fecha, Graph<string,int> * > > grafos = f1.vectorGrafos();
