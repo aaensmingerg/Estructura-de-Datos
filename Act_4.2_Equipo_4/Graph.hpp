@@ -89,11 +89,7 @@ void Graph<V,E>::addEdge(Vertex<V,E> * source, V target, E value)
             nodeTarget = verticeTarget;
         }
     }
-
-    /* Crear un edge y adicionarlo al vertex */
-    Edge<V,E> * edge = new Edge<V,E>(value, nodeTarget);
-    
-    (*node)->addEdge(edge);
+    addEdge(source, nodeTarget, value);
 }
 
 

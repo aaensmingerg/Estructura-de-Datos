@@ -84,7 +84,7 @@ std::ostream & operator <<(std::ostream & os, const Vertex<V,E> & vertex)
     os << "Vertex: " << vertex.info << std::endl;
     
     for (auto  e : vertex.edges) {
-        os << *e << std::endl;
+        os << *e;
     }
     
     return os;

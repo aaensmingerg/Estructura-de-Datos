@@ -89,26 +89,31 @@ template<class T>
 vector<T> File::conexionesEntrantesDia(T valor,Fecha dia){
     
     vector<T> valoresDia;
+    vector<T> vacio;
 
     for(int i=0; i < ipOrigen.size(); i++){
         if(fecha[i] == dia && ipOrigen[i] == valor && ipDestino[i] != "-"){
             valoresDia.push_back(ipDestino[i]);
         }
     }
+    if (valoresDia.size() != 0){
+        sort(valoresDia.begin(), valoresDia.end(), Ordenamiento<string>::asc);
+        vector<T> unicos = {valoresDia[0]};
+        T valorComparar = valoresDia[0];
 
-    sort(valoresDia.begin(), valoresDia.end(), Ordenamiento<string>::asc);
-    vector<T> unicos = {valoresDia[0]};
-    T valorComparar = valoresDia[0];
-    
-    for(int i=0; i < valoresDia.size(); i++){
-        if(valoresDia[i] != valorComparar){
-            if(i > 0 && valoresDia[i-1] != valorComparar){
-                unicos.push_back(valoresDia[i]);
-                valorComparar = valoresDia[i];
+        for(int i=0; i < valoresDia.size(); i++){
+            if(valoresDia[i] != valorComparar){
+                if(i > 0 && valoresDia[i-1] != valorComparar){
+                    unicos.push_back(valoresDia[i]);
+                    valorComparar = valoresDia[i];
+                }
             }
         }
+        return unicos;
     }
-    return unicos;
+    else{
+        return vacio;
+    }
 }
 
 void File::busquedaNombre(){
@@ -360,15 +365,19 @@ Graph<string,int> * File::grafoPorDia(string dia_){
 
     /* Declaración del vector de ip a recorrer */
     vector<string> ipUnicosOrigen = valoresUnicosDia(ipOrigen,dia);
+    vector<string> ipUnicosDestino = valoresUnicosDia(ipDestino,dia);
 
     /* Crear Vertices en el grafo */
     for(auto ipA : ipUnicosOrigen){
         grafo->addVertex(ipA);
     }
+    for(auto ipB : ipUnicosDestino){
+        grafo->addVertex(ipB);
+    }
 
     /* Añadir aristas */
     auto nodos = grafo->getNodes();
-
+    int cuenta = 0;
     /* Recorrer todos los nodos */
     for (int i=0; i < nodos.size(); i++){
         
@@ -376,9 +385,9 @@ Graph<string,int> * File::grafoPorDia(string dia_){
         string ipBusqueda = nodos[i]->getInfo();
 
         vector<string> conexionesEntrantesUnicas = conexionesEntrantesDia(ipBusqueda,dia);
-
         for (int b=0; b < conexionesEntrantesUnicas.size();b++){
-            grafo->addEdge(nodos[i],conexionesEntrantesUnicas[b],b);
+            grafo->addEdge(nodos[i],conexionesEntrantesUnicas[b],cuenta);
+            cuenta++;
         }
     }
 
