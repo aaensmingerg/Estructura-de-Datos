@@ -27,9 +27,22 @@ vector<Fecha> File::getFecha(){
     return fecha;
 }
 
+vector<string> File::getIpDestino(){
+    return ipDestino;
+}
+
+vector<string> File::getIpOrigen(){
+    return ipOrigen;
+}
+
 vector<string> File::getNombreDestino(){
     return nombreDestino;
 }
+
+vector<string> File::getNombreOrigen(){
+    return nombreOrigen;
+}
+
 
 template<class T>
 vector<T> File::valoresUnicos(vector<T> vectorBusqueda){
@@ -48,13 +61,50 @@ vector<T> File::valoresUnicos(vector<T> vectorBusqueda){
 
 template<class T>
 vector<T> File::valoresUnicosDia(vector<T> vectorBusqueda,Fecha dia){
-    vector<T> unicos = {vectorBusqueda[0]};
-    T valorComparar = vectorBusqueda[0];
+    
+    vector<T> valoresDia;
+
     for(int i=0; i < vectorBusqueda.size(); i++){
-        if(vectorBusqueda[i] != valorComparar && fecha[i] == dia){
-            if(i > 0 && vectorBusqueda[i-1] != valorComparar){
-                unicos.push_back(vectorBusqueda[i]);
-                valorComparar = vectorBusqueda[i];
+        if(fecha[i] == dia && vectorBusqueda[i] != "-"){
+            valoresDia.push_back(vectorBusqueda[i]);
+        }
+    }
+
+    sort(valoresDia.begin(), valoresDia.end(), Ordenamiento<string>::asc);
+    vector<T> unicos = {valoresDia[0]};
+    T valorComparar = valoresDia[0];
+    
+    for(int i=0; i < valoresDia.size(); i++){
+        if(valoresDia[i] != valorComparar){
+            if(i > 0 && valoresDia[i-1] != valorComparar){
+                unicos.push_back(valoresDia[i]);
+                valorComparar = valoresDia[i];
+            }
+        }
+    }
+    return unicos;
+}
+
+template<class T>
+vector<T> File::conexionesEntrantesDia(T valor,Fecha dia){
+    
+    vector<T> valoresDia;
+
+    for(int i=0; i < ipOrigen.size(); i++){
+        if(fecha[i] == dia && ipOrigen[i] == valor && ipDestino[i] != "-"){
+            valoresDia.push_back(ipDestino[i]);
+        }
+    }
+
+    sort(valoresDia.begin(), valoresDia.end(), Ordenamiento<string>::asc);
+    vector<T> unicos = {valoresDia[0]};
+    T valorComparar = valoresDia[0];
+    
+    for(int i=0; i < valoresDia.size(); i++){
+        if(valoresDia[i] != valorComparar){
+            if(i > 0 && valoresDia[i-1] != valorComparar){
+                unicos.push_back(valoresDia[i]);
+                valorComparar = valoresDia[i];
             }
         }
     }
@@ -298,7 +348,43 @@ vector<BST<Conexiones>> File::top5dias(){
     }
 }
 
+
+
+Graph<string,int> * File::grafoPorDia(string dia_){
     
+    /* Declaración del grafo a devolver */
+    Graph<string, int> * grafo = new Graph<string, int>();
+
+    /* Generar el objeto coorespondiente a la fecha a buscar */
+    Fecha dia(dia_);
+
+    /* Declaración del vector de ip a recorrer */
+    vector<string> ipUnicosOrigen = valoresUnicosDia(ipOrigen,dia);
+
+    /* Crear Vertices en el grafo */
+    for(auto ipA : ipUnicosOrigen){
+        grafo->addVertex(ipA);
+    }
+
+    /* Añadir aristas */
+    auto nodos = grafo->getNodes();
+
+    /* Recorrer todos los nodos */
+    for (int i=0; i < nodos.size(); i++){
+        
+        /* Definir ip a buscar */
+        string ipBusqueda = nodos[i]->getInfo();
+
+        vector<string> conexionesEntrantesUnicas = conexionesEntrantesDia(ipBusqueda,dia);
+
+        for (int b=0; b < conexionesEntrantesUnicas.size();b++){
+            grafo->addEdge(nodos[i],conexionesEntrantesUnicas[b],b);
+        }
+    }
+
+    cout << *grafo << endl;
+    return grafo;
+}
 
 
     

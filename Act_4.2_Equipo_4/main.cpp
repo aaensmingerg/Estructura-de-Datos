@@ -55,11 +55,14 @@ void loadGraph(int v, int e, Graph<int, int> * graph)
 
 
 
+
+
 /* En este caso la función main es la encargada de responder a todas las preguntas*/
 int main(){
     /* Lectura del archivo csv */
     File f1("equipo4.csv");
-    
+    f1.grafoPorDia("10-8-2020");
+    /*
     std::cout << "---1. Demostracion mapa primer dia---  " << std::endl;
     std::cout << "R. " << endl;
     map<string,int> mapa = f1.conexionesPorDia("10-8-2021");
@@ -77,7 +80,9 @@ int main(){
 
     std::cout << "--3. Demostracion top 5 dias --" << std::endl;
     std::cout << "R. " << std::endl;
-    f1.top5dias();   
+    f1.top5dias();
+    */   
 
     return 0;
 }
+

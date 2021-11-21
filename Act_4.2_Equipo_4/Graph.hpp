@@ -26,12 +26,14 @@ public:
     void addVertex(V & );
     void addVertex(Vertex<V,E> * );
     void addEdge(Vertex<V,E> *, Vertex<V,E> *, const E & );
+    void addEdge(Vertex<V,E> *, V, E);
     void removeEdge(Vertex<V,E> *, Vertex<V,E> *, const E & );
     
     template <class Vn, class En>
     friend std::ostream & operator <<(std::ostream &, const Graph<Vn,En> &);
 
     Vertex<V, E> * getVertex(const int);
+    std::vector<Vertex<V, E> *> getNodes();
     Edge<V, E> * getEdge(const int, const int);
     int getNumEdges(const int);
 };
@@ -71,6 +73,29 @@ void Graph<V,E>::addEdge(Vertex<V,E> * source, Vertex<V,E> * target, const E & v
     
     (*node)->addEdge(edge);
 }
+
+template <class V, class E>
+void Graph<V,E>::addEdge(Vertex<V,E> * source, V target, E value)
+{
+    /* Buscar vertex origen */
+    auto node = find(nodes.begin(), nodes.end(), source);
+
+    /* Definir la variable ne la que almacenar la direccion*/
+    Vertex<V,E> * nodeTarget;
+
+    /* Buscar vertice target por valor */
+    for (auto verticeTarget : nodes){
+        if(verticeTarget->getInfo() == target){
+            nodeTarget = verticeTarget;
+        }
+    }
+
+    /* Crear un edge y adicionarlo al vertex */
+    Edge<V,E> * edge = new Edge<V,E>(value, nodeTarget);
+    
+    (*node)->addEdge(edge);
+}
+
 
 template <class V, class E>
 void Graph<V,E>::removeEdge(Vertex<V,E> * source, Vertex<V,E> * target, const E & value )
@@ -115,6 +140,13 @@ Vertex<V, E> * Graph<V,E>::getVertex(const int n)
 {
     return this->nodes[n];
 }
+
+template <class V, class E>
+std::vector< Vertex<V, E> *> Graph<V,E>::getNodes()
+{
+    return nodes;
+}
+
 
 template <class V, class E>
 Edge<V, E> * Graph<V, E>::getEdge(const int n , const int m)

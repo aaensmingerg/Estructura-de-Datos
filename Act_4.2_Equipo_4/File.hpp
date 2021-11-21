@@ -6,6 +6,9 @@
 #include <map>
 #include "Ordenamiento.hpp"
 #include "BST.hpp"
+#include "Graph.hpp"
+
+
 using namespace std;
 
 /* La implementación se encuentra en su respectivo .cpp*/
@@ -47,8 +50,17 @@ class File{
     /* Getter de fecha */
     vector<Fecha> getFecha();
     
+    /* Getter de ipDestino*/
+    vector<string> getIpDestino();
+
+    /* Getter de ipOrigen*/
+    vector<string> getIpOrigen();
+
     /* Getter de nombreDestino */
     vector<string> getNombreDestino();
+
+    /* Getter de nombreDestino */
+    vector<string> getNombreOrigen();
 
     /* Getter de puertoOrigen */
     vector<string> getPuertoOrigen();
@@ -70,6 +82,11 @@ class File{
     solo si el vector se encuentra ordenado  */
     template<class T>
     vector<T> valoresUnicosDia(vector<T>,Fecha);
+
+    /* La función "ValoresUnicosDIa" regresa los valores unicos de un vector que correspondan a una misma fecha, 
+    solo si el vector se encuentra ordenado  */
+    template<class T>
+    vector<T> conexionesEntrantesDia(T,Fecha);
 
     /* La funcion "printNombresUnicos" imprime 
     los valores unicos de la columna nombre */
@@ -110,4 +127,6 @@ class File{
     /* Top 5 de todos los días */
     vector<BST<Conexiones>> top5dias();
 
+    /* Hacer un grafo con las conexiones de un dia dado */
+    Graph<string,int> * grafoPorDia(string);
 };
