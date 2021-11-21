@@ -56,6 +56,11 @@ class Fecha{
             return f1.dia == f2.dia;
         }
 
+        /* Sobrecarga de Operador "<" */
+        friend bool operator < (const Fecha &f1, const Fecha &f2){
+            return f1.dia < f2.dia;
+        }
+
         /* Sobrecarga de Operador "<<" */
         friend ostream& operator << (ostream &o, const Fecha &f1){
             o << f1.dia <<"-" << f1.mes << "-" << f1.anio;

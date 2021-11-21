@@ -4,6 +4,7 @@
 #include <vector>
 #include <sstream>
 #include <map>
+#include <utility>
 #include "Ordenamiento.hpp"
 #include "BST.hpp"
 #include "Graph.hpp"
@@ -125,8 +126,11 @@ class File{
     BST<Conexiones> * hacerArbol(Fecha);
 
     /* Top 5 de todos los días */
-    vector<BST<Conexiones>> top5dias();
+    void top5dias();
 
     /* Hacer un grafo con las conexiones de un dia dado */
-    Graph<string,int> * grafoPorDia(string);
+    Graph<string,int> * grafoPorDia(Fecha);
+
+    /* Hacer un grafo con las conexiones de un dia dado */
+    vector< pair<Fecha, Graph<string,int> * > > vectorGrafos();
 };

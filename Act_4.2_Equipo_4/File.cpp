@@ -279,7 +279,7 @@ BST<Conexiones>* File::hacerArbol(Fecha dia){
     return bst;
 }
 
-vector<BST<Conexiones>> File::top5dias(){
+void File::top5dias(){
     vector<Conexiones> conexionesDia1;
     vector<Conexiones> conexionesDiaX;
     vector<string> conexionesSiguiente;
@@ -355,13 +355,10 @@ vector<BST<Conexiones>> File::top5dias(){
 
 
 
-Graph<string,int> * File::grafoPorDia(string dia_){
+Graph<string,int> * File::grafoPorDia(Fecha dia){
     
     /* Declaración del grafo a devolver */
     Graph<string, int> * grafo = new Graph<string, int>();
-
-    /* Generar el objeto coorespondiente a la fecha a buscar */
-    Fecha dia(dia_);
 
     /* Declaración del vector de ip a recorrer */
     vector<string> ipUnicosOrigen = valoresUnicosDia(ipOrigen,dia);
@@ -391,10 +388,18 @@ Graph<string,int> * File::grafoPorDia(string dia_){
         }
     }
 
-    cout << *grafo << endl;
+    //cout << *grafo << endl;
     return grafo;
 }
 
+vector< pair< Fecha, Graph<string,int> *> > File::vectorGrafos(){
+    vector< pair< Fecha, Graph<string,int> *> > grafos;
+    vector<Fecha> fechasUnicas = valoresUnicos(fecha);
+    for (auto a : fechasUnicas){
+        grafos.push_back(make_pair(a,grafoPorDia(a)));
+    }
+    return grafos;
+}
 
     
 

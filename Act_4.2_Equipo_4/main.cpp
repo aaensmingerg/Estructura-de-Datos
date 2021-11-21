@@ -21,68 +21,66 @@ Fecha de Entrega: Domingo 21 de Noviembre de 2021 */
 #include "Ordenamiento.hpp"
 
 
-void loadGraph(int v, int e, Graph<int, int> * graph)
-{
-    int valor;
-    int posicionX;
-    int posicionY;
-    int cuenta = 0;
-    for (int i = 0; i < v; ++i){ 
-        graph->addVertex(i);
-    }
-
-    for (int j = 0; j < e; j++){
-        posicionX = rand() % 10;
-        posicionY = rand() % 10;
-        Vertex<int, int> * valorX = graph->getVertex(posicionX);
-        Vertex<int, int> * valorY = graph->getVertex(posicionY);
-        if (cuenta < e){
-            graph->addEdge(valorX, valorY, cuenta);
-        cuenta++;
-        }
-    }
-    /* Vertices extras para imprimir todo el grafo */
-    Vertex<int, int> * valor2 = graph->getVertex(0);
-    Vertex<int, int> * valor5 = graph->getVertex(5);
-    Vertex<int, int> * valor7 = graph->getVertex(7);
-    Vertex<int, int> * valor8 = graph->getVertex(8);
-
-    graph->addEdge(valor7,valor2,16);
-    graph->addEdge(valor7,valor5,17);
-    graph->addEdge(valor2,valor8,18);
-    std::cout<< *graph << std::endl;
-}
-
-
-
-
-
 /* En este caso la función main es la encargada de responder a todas las preguntas*/
 int main(){
     /* Lectura del archivo csv */
     File f1("equipo4.csv");
-    f1.grafoPorDia("17-8-2020");
-    /*
-    std::cout << "---1. Demostracion mapa primer dia---  " << std::endl;
-    std::cout << "R. " << endl;
-    map<string,int> mapa = f1.conexionesPorDia("10-8-2021");
-    for (auto r: mapa){
-        std::cout<< "Nombre conexion: " << r.first << " -> " << "Numero conexiones: " << r.second << std::endl;
+    string ipA = "172.17.230.22";
+    vector< pair<Fecha, Graph<string,int> * > > grafos = f1.vectorGrafos();
+    vector< pair<Fecha,int> > conexionesA;
+    vector< pair<Fecha, pair< Vertex<string,int> *, int> > >maxConeciones;
+    
+    cout << "--- 1. Determina la cantidad de computadoras con las que se ha conectado A por dia. ---" << endl;
+    for (auto par : grafos){
+        int max = 0;
+        int contador = 0;
+
+        Vertex<string,int> * maxVertex;
+        vector< Vertex<string,int> * > nodos = par.second->getNodes();
+        for (auto nodo : nodos){
+            if (nodo->getEdges()->size() > max){
+                maxVertex = nodo;
+                max = nodo->getEdges()->size();
+            }
+            if (nodo->getInfo() == ipA){
+                cout << "La computadora -> " << ipA << " se conecto con: " << nodo->getEdges()->size() << " computadoras";
+                cout << " en la fecha -> " << par.first << endl;
+            }
+            else{
+                vector< Edge<string,int>* > * conexiones = nodo->getEdges();
+                for (auto conexion : *conexiones){
+                    if (conexion->getTarget()->getInfo() == ipA){
+                        contador++;
+                    }
+                }
+            }
+            
+        }
+        maxConeciones.push_back(make_pair(par.first,make_pair(maxVertex,max)));
+        conexionesA.push_back(make_pair(par.first,contador));
+
     }
-
-    std::cout << "" << std::endl;
-
-    std::cout << "---2. Demostracion top primer dia---  " << std::endl;
-    cout << "R. " << std::endl;
-    f1.top(5,"10-8-2021");
-
-    std::cout << "" << std::endl;
-
-    std::cout << "--3. Demostracion top 5 dias --" << std::endl;
-    std::cout << "R. " << std::endl;
-    f1.top5dias();
-    */   
-
+    
+    cout << endl << "--- 1.1 ¿Es el vertice: " << ipA << " el que mas conexiones salientes tiene hacia la red interna?  " << endl;
+    for (auto maxC : maxConeciones){
+        if (maxC.second.first->getInfo() == ipA){
+            cout << "Si, en En la fecha: " << maxC.first << " La ip A es la computadora con mas conexiones. Tiene (" << maxC.second.second << ") " << endl;
+        }
+        else{
+            cout << "No, La computadora com mas conexiones en el dia -> " << maxC.first << " Es la computadora: " << maxC.second.first->getInfo();
+            cout << " con (" << maxC.second.second << ") conexiones" << endl;
+        }
+    }
+    cout << endl << " --- 2. Ubica la cantidad de computadoras que se han conectado hacia A por día --- " << endl;
+    if (conexionesA.size() == 0 ){
+        cout << "No hay conexiones de otras computadoras hacia " << ipA << endl;
+    }
+    else{
+        for(auto a : conexionesA){
+            cout << "En la fecha -> " << a.first << " hubieron (" << a.second <<") Conexiones" <<  endl;
+        }
+    }   
+    
     return 0;
 }
 

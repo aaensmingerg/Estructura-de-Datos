@@ -34,7 +34,6 @@ public:
     friend std::ostream & operator <<(std::ostream &, const Vertex<Vn, En> &);
     
     int size();
-    Edge<V,E> * getEdge(const int);
 };
 
 template <class V, class E>
@@ -95,10 +94,6 @@ int Vertex<V,E>::size(){
     return edges.size();
 }
 
-template <class V, class E>
-Edge<V,E> * Vertex<V,E>::getEdge(const int m){
-    return this->edges[m];
-}
 
 
 
