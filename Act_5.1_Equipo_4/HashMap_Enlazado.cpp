@@ -112,7 +112,9 @@ V HashMapEnlazado<K,V>::get(K key)
     int indice = hash_function(key);
     for (int i = 0; i < this->_keys[indice].size(); i++){
         if (this->_keys[indice][i] == key){
-            std::cout << indice << "-->" << i << std::endl; //Comprobar que funciona lista enlazada
+            std::cout << "Posicion en el Hash Map" << std::endl;
+            std::cout << indice << " --> " << i << std::endl; //Comprobar que funciona lista enlazada
+            std::cout << "Valor" << std::endl;
             return this->_values[indice][i];
         }
     }
