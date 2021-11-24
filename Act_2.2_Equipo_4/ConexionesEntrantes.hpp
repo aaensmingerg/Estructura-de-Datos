@@ -15,8 +15,8 @@ class ConexionesEntrantes{
     ConexionesEntrantes(string iP, File f1){
          vector<string> ipDestinoFile = f1.getIpDestino();
          vector<string> ipOrigenFile = f1.getIpOrigen();
-        for(int i=0; i < ipOrigenFile.size(); i++){
-            if(ipOrigenFile[i] == iP){
+        for(int i=0; i < ipDestinoFile.size(); i++){
+            if(ipDestinoFile[i] == iP){
                 ipDestino.push(ipDestinoFile[i]);
             }
         } 

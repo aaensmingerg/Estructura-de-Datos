@@ -8,7 +8,7 @@
 using namespace std;
 class ConexionesComputadora{
     private:
-    string IP = "172.17.230.";
+    string IP = "1.1.1.";
     ConexionesEntrantes* ConexionEntrante;
     ConexionesSalientes* ConexionSaliente;
     File archivoPadre;
