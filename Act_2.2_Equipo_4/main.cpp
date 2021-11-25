@@ -21,7 +21,7 @@ int main(){
     File f1("equipo4.csv");
 
     /* Crear objeto de conexiones computadora */
-    ConexionesComputadora c1("12",f1);
+    ConexionesComputadora c1("1",f1);
     
     cout << "Que direccion ip estas usando?" << endl; 
     c1.printIp();
