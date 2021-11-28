@@ -29,6 +29,9 @@ class ConexionesComputadora{
     /* Imprime las ip de las conexiones entrantes */
     ConexionesEntrantes* getConexionesEntrantes();
 
+    /* Imprime las ip de las conexiones entrantes */
+    ConexionesSalientes* getConexionesSalientes();
+
     /* Determina si el valor parámetro de tipo string "ip" pertenece a las ip internas segmento de red.... */
     void isInterna(string IP_);
 

@@ -98,13 +98,30 @@ int main(){
 
     std::cout << std::endl <<  "--- Toma algunas computadoras que no sean server.reto.com. ---  " << std::endl;
     std::vector<string> ipBuscar;
-    std::vector<ConexionesComputadora*> conexionesC;
-    ipBuscar.push_back("23.207.91.19");
-    ipBuscar.push_back("73.55.40.231");
-    ipBuscar.push_back("125.231.107.126");
-    ipBuscar.push_back("130.117.115.251");
-    ipBuscar.push_back("181.148.9.123");
+    //std::set<std::vector<string>> unicasEntrantes;
+    std::vector<pair<string,set<pair<string,string>>>> unicasEntrantes;
+    ipBuscar.push_back("172.17.230.12");
+    ipBuscar.push_back("172.17.230.100");
+    ipBuscar.push_back("172.17.230.101");
+    ipBuscar.push_back("172.17.230.103");
+    ipBuscar.push_back("172.17.230.150");
     
+    for (auto ip : ipBuscar){
+        std::vector<pair<string,string>> aux = mapConexiones[ip]->getConexionesSalientes()->getVecIpDestino();
+        std::set<pair<string,string>> auxSet;
+        for (auto par : aux){
+            if (par.second != "67"){
+                auxSet.insert(pair<string,string>(par.first,par.second));
+                std::cout << par.first << std::endl;
+            }
+        }
+        unicasEntrantes.push_back(pair<string,set<pair<string,string>>>(ip,auxSet));
+        auxSet.clear();
+        std::cout<<std::endl;
+    }
+    
+
+    /*
     for (int i=0; i < ipBuscar.size(); i++){
         std::cout << i << ". " << ipBuscar[i] << std::endl;
         conexionesC.push_back(new ConexionesComputadora(ipBuscar[i],f1));
@@ -120,7 +137,7 @@ int main(){
         }
     }
 
-
+    */
     
     return 0;
 }

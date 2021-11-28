@@ -43,6 +43,10 @@ vector<string> File::getNombreOrigen(){
     return nombreOrigen;
 }
 
+vector<string> File::getPuertoDestino(){
+    return puertoDestino;
+}
+
 template<class T>
 vector<T> File::valoresUnicos(vector<T> vectorBusqueda){
     vector<T> unicos = {vectorBusqueda[0]};

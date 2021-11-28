@@ -17,16 +17,22 @@ vector<T> ConexionesEntrantes::valoresUnicos(vector<T> vectorBusqueda){
     return unicos;
 }
 
+/*
 vector<string> ConexionesEntrantes::getEntrantesUnicas(){
-    vector<string> dummy = vecIpOrigen;
+    vector<string> dummy = vecIpDestino;
     sort(dummy.begin(), dummy.end(), Ordenamiento<string>::asc);
     return valoresUnicos(dummy);
 }
+*/
 
-stack<string> ConexionesEntrantes::getIpOrigen(){
-    return ipOrigen;
+vector<pair<string,string>> ConexionesEntrantes::getVecIpDestino(){
+    return vecIpDestino;
+}
+
+stack<string> ConexionesEntrantes::getIpDestino(){
+    return ipDestino;
 }
 
 int ConexionesEntrantes::size(){
-    return ipOrigen.size();
+    return ipDestino.size();
 }

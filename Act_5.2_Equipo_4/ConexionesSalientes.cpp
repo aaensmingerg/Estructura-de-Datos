@@ -1,9 +1,13 @@
 #include "ConexionesSalientes.hpp"
 using namespace std;
 
-queue<string> ConexionesSalientes::getIPOrigen(){
-        return ipDestino;
+vector<pair<string,string>> ConexionesSalientes::getVecIpDestino(){
+    return vecIpDestino;
+}
+
+vector<string> ConexionesSalientes::getIPOrigen(){
+        return ipOrigen;
     }
 int ConexionesSalientes::size(){
-    return ipDestino.size();
+    return ipOrigen.size();
 }

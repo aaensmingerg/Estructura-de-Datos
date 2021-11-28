@@ -64,6 +64,9 @@ class File{
     /* Getter de puertoOrigen */
     vector<string> getPuertoOrigen();
     
+    /* Getter de puertoDestino */
+    vector<string> getPuertoDestino();
+
     /* La función "buscarSegundaFecha" busca todas las fechas correspondientes a
     la segunda fecha */
     Fecha buscarSegundaFecha();
@@ -95,4 +98,6 @@ class File{
 
     /* La función "printPuertos" imprime los puertos destino debajo del 1000 */
     void printPuertos(vector<int>);
+
+    
 };

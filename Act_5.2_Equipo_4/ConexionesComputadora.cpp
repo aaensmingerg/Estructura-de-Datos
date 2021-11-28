@@ -5,6 +5,10 @@ ConexionesEntrantes* ConexionesComputadora::getConexionesEntrantes(){
     return ConexionEntrante;
 }
 
+ConexionesSalientes* ConexionesComputadora::getConexionesSalientes(){
+    return ConexionSaliente;
+}
+
 void ConexionesComputadora::isInterna(string IP_){
     string dummyIp;
     string dummyIp2;
@@ -38,14 +42,18 @@ void ConexionesComputadora::isInterna(string IP_){
 void ConexionesComputadora::printIp(){
     cout << "IP: " << IP << endl;;
 }
+/*
 string ConexionesComputadora::entrante(){
-    string IpDestino = ConexionEntrante->getIpOrigen().top();
+    string IpDestino = ConexionEntrante->getIpDestino().top();
     return IpDestino;
 }
+*/
+/*
 string ConexionesComputadora::saliente(){
     string IpOrigen = ConexionSaliente->getIPOrigen().front();
     return IpOrigen;
 }
+*/
 int ConexionesComputadora::entrantesTotales(){
     return ConexionEntrante->size();         
 }
