@@ -99,5 +99,7 @@ class File{
     /* La función "printPuertos" imprime los puertos destino debajo del 1000 */
     void printPuertos(vector<int>);
 
+    /* Imprime la primera fecha de conexion al sitio raro */
+    void cuandoSeConecto(string,string,string);
     
 };

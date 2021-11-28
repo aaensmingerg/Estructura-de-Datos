@@ -104,40 +104,33 @@ int main(){
     ipBuscar.push_back("172.17.230.100");
     ipBuscar.push_back("172.17.230.101");
     ipBuscar.push_back("172.17.230.103");
-    ipBuscar.push_back("172.17.230.150");
+    ipBuscar.push_back("172.17.230.49");
     
+    std::cout << std::endl <<  "--- Obten las IPs unicas de las conexiones entrantes.  ---  " << std::endl;
     for (auto ip : ipBuscar){
+        std::cout << "--- " <<  ip << " ---" << std::endl;
         std::vector<pair<string,string>> aux = mapConexiones[ip]->getConexionesSalientes()->getVecIpDestino();
         std::set<pair<string,string>> auxSet;
         for (auto par : aux){
             if (par.second != "67"){
                 auxSet.insert(pair<string,string>(par.first,par.second));
-                std::cout << par.first << std::endl;
             }
         }
         unicasEntrantes.push_back(pair<string,set<pair<string,string>>>(ip,auxSet));
-        auxSet.clear();
-        std::cout<<std::endl;
-    }
-    
-
-    /*
-    for (int i=0; i < ipBuscar.size(); i++){
-        std::cout << i << ". " << ipBuscar[i] << std::endl;
-        conexionesC.push_back(new ConexionesComputadora(ipBuscar[i],f1));
-    }
-
-    std::cout << std::endl <<  "--- Obten las IPs únicas de las conexiones entrantes.  ---  " << std::endl;
-    
-    for (int i=0; i < conexionesC.size(); i++){
-        std::cout << "---- " << ipBuscar[i] << ": " << std::endl;
-        std::vector<string> unicos = conexionesC[i]->getConexionesEntrantes()->getEntrantesUnicas();
-        for (auto valor : unicos){
-            std::cout << valor << std::endl;
+        for (auto a : auxSet){
+            std::cout << a.first << ", " << a.second << std::endl;
         }
+        auxSet.clear();
+        std::cout << std::endl;
     }
+    
+    std::cout << "Las ip tienen muchas conexiones salientes y muy pocas entrates, excepto en un caso raro, donde hay muchas conexiones entrantes" << std::endl;
 
-    */
+
+    std::cout << std::endl <<  "--- Determina en que fecha ocurre la primera comunicacion entre estas dos ---  " << std::endl;
+    for(auto ip : ipBuscar){
+        f1.cuandoSeConecto(ip,mapDominios[domAnomalo1],mapDominios[domAnomalo2]);
+    }
     
     return 0;
 }

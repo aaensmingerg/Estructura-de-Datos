@@ -139,3 +139,21 @@ void File::printPuertos(vector<int> puertos){
         }  
     }
 }
+
+void File::cuandoSeConecto(string ip1, string ip2, string ip3){
+    for (int i=0; i < ipOrigen.size(); i++){
+        if (ipOrigen[i] == ip1){
+            if (ipDestino[i] == ip2){
+                cout << " La ip: " << ip1 << " se conecto a " << ip2 << " en la fecha: " << fecha[i]; 
+                cout << " por el puerto: " << puertoDestino[i] << endl;
+                break;
+            }
+            else if (ipDestino[i] == ip3){
+                cout << " La ip: " << ip1 << " se conecto a " << ip3 << " en la fecha: " << fecha[i];
+                cout << " por el puerto: " << puertoDestino[i] << endl;
+                break;
+            }
+        }
+    }
+
+}
