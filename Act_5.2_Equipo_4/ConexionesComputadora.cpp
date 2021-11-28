@@ -1,6 +1,10 @@
 #include "ConexionesComputadora.hpp"
 using namespace std;
 
+ConexionesEntrantes* ConexionesComputadora::getConexionesEntrantes(){
+    return ConexionEntrante;
+}
+
 void ConexionesComputadora::isInterna(string IP_){
     string dummyIp;
     string dummyIp2;
@@ -35,7 +39,7 @@ void ConexionesComputadora::printIp(){
     cout << "IP: " << IP << endl;;
 }
 string ConexionesComputadora::entrante(){
-    string IpDestino = ConexionEntrante->getIPDestino().top();
+    string IpDestino = ConexionEntrante->getIpOrigen().top();
     return IpDestino;
 }
 string ConexionesComputadora::saliente(){

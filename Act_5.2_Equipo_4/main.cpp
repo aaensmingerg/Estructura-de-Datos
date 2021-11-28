@@ -95,6 +95,32 @@ int main(){
         }
 
     }
+
+    std::cout << std::endl <<  "--- Toma algunas computadoras que no sean server.reto.com. ---  " << std::endl;
+    std::vector<string> ipBuscar;
+    std::vector<ConexionesComputadora*> conexionesC;
+    ipBuscar.push_back("23.207.91.19");
+    ipBuscar.push_back("73.55.40.231");
+    ipBuscar.push_back("125.231.107.126");
+    ipBuscar.push_back("130.117.115.251");
+    ipBuscar.push_back("181.148.9.123");
+    
+    for (int i=0; i < ipBuscar.size(); i++){
+        std::cout << i << ". " << ipBuscar[i] << std::endl;
+        conexionesC.push_back(new ConexionesComputadora(ipBuscar[i],f1));
+    }
+
+    std::cout << std::endl <<  "--- Obten las IPs únicas de las conexiones entrantes.  ---  " << std::endl;
+    
+    for (int i=0; i < conexionesC.size(); i++){
+        std::cout << "---- " << ipBuscar[i] << ": " << std::endl;
+        std::vector<string> unicos = conexionesC[i]->getConexionesEntrantes()->getEntrantesUnicas();
+        for (auto valor : unicos){
+            std::cout << valor << std::endl;
+        }
+    }
+
+
     
     return 0;
 }
